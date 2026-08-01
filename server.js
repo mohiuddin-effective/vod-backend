@@ -231,3 +231,61 @@ app.post('/api/videos/upload-url', async (req, res) => {
     res.status(500).json({ error: 'Failed to generate upload URL' });
   }
 });
+// Cloudflare Stream Signed Playback URL Generator
+app.get('/api/videos/playback-url', async (req, res) => {
+  try {
+    const { videoId } = req.query;
+
+    if (!videoId) {
+      return res.status(400).json({ error: 'Video ID is required' });
+    }
+
+    const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+    const apiToken = process.env.CLOUDFLARE_API_TOKEN;
+
+    if (!accountId || !apiToken) {
+      return res.status(500).json({ error: 'Cloudflare credentials not configured in environment variables.' });
+    }
+
+    // ১. Cloudflare API-তে Signed Token-এর জন্য Request পাঠানো
+    // exp: ৪ ঘণ্টা (4 * 3600 seconds) মেয়াদের Signed Token জেনারেট হবে
+    const response = await fetch(
+      `https://api.cloudflare.com/client/v4/accounts/${accountId}/stream/${videoId}/token`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          exp: Math.floor(Date.now() / 1000) + (4 * 3600) // ৪ ঘণ্টার জন্য মেয়াদী
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.success) {
+      const signedToken = data.result.token;
+
+      // ২. সুরক্ষিত Playback URLs রেসপন্স করা
+      res.json({
+        success: true,
+        videoId: videoId,
+        signedToken: signedToken,
+        // HLS Manifest URL (মোবাইল ও কাস্টম প্লেয়ারের জন্য)
+        hlsUrl: `https://videodelivery.net/${signedToken}/manifest/video.m3u8`,
+        // Direct Cloudflare Iframe Player (ওয়েব প্লেয়ার বা মোবাইল অ্যাপের WebView-র জন্য)
+        iframeUrl: `https://iframe.videodelivery.net/${signedToken}`
+      });
+    } else {
+      res.status(400).json({
+        error: 'Failed to generate signed token from Cloudflare',
+        details: data.errors
+      });
+    }
+  } catch (error) {
+    console.error('Error generating playback token:', error);
+    res.status(500).json({ error: 'Internal server error while generating video playback URL' });
+  }
+});
