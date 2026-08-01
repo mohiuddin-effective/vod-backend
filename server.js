@@ -192,3 +192,42 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`VOD Access Control API running on http://localhost:${PORT}`);
 });
+// Cloudflare Stream Direct Upload URL Endpoint
+app.post('/api/videos/upload-url', async (req, res) => {
+  try {
+    const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+    const apiToken = process.env.CLOUDFLARE_API_TOKEN;
+
+    if (!accountId || !apiToken) {
+      return res.status(500).json({ error: 'Cloudflare credentials not configured in environment variables.' });
+    }
+
+    // Direct Upload URL চাওয়ার জন্য Cloudflare API-তে Request
+    const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${accountId}/stream/direct_upload`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        maxDurationSeconds: 3600, // সর্বোচ্চ ১ ঘণ্টার ভিডিও (প্রয়োজনমতো বাড়াতে পারেন)
+        creator: 'admin'
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      // Cloudflare থেকে পাওয়া Upload URL এবং Video ID ব্যাকএন্ড থেকে রেসপন্স করা
+      res.json({
+        uploadURL: data.result.uploadURL,
+        videoId: data.result.uid
+      });
+    } else {
+      res.status(400).json({ error: 'Cloudflare API Error', details: data.errors });
+    }
+  } catch (error) {
+    console.error('Error generating upload URL:', error);
+    res.status(500).json({ error: 'Failed to generate upload URL' });
+  }
+});
