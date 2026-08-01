@@ -1,3 +1,7 @@
+// Root Route / Health Check
+app.get('/', (req, res) => {
+  res.send('VOD Access Control API is running live!');
+});
 // ══════════════════════════════════════════════════════════════
 // Effective Education Hub — Recorded Class Access Control API
 // Implements the endpoints from the design doc's §2 Admin Panel API
