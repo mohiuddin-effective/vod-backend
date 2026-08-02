@@ -1,36 +1,20 @@
-// Root Route / Health Check
-app.get('/', (req, res) => {
-  res.send('VOD Access Control API is running live!');
-});
-// ══════════════════════════════════════════════════════════════
-// Effective Education Hub — Recorded Class Access Control API
-// Implements the endpoints from the design doc's §2 Admin Panel API
-// and §3 Re-engagement Engine trigger.
-//
-// STORAGE: in-memory (arrays), matching the Postgres schema in the
-// design doc exactly (videos / video_access_rules / user_video_access).
-// This makes it deployable in minutes with zero DB setup for a first
-// pass. Swap the marked sections for real Postgres queries (e.g. via
-// `pg` or an ORM) when you're ready — the function signatures and
-// return shapes are written so that swap doesn't change the API.
-//
-// NOT INCLUDED (needs real provider credentials you'll add):
-//  - Actual video transcoding / Cloudflare Stream / Mux integration
-//  - Actual signed HLS URL generation (playback-url returns a
-//    placeholder shaped like the real thing)
-//  - Actual FCM/SMS/WhatsApp/Email dispatch (schedule-promo logs
-//    what WOULD be sent — wire in real provider SDKs where marked)
-// ══════════════════════════════════════════════════════════════
-
 const express = require('express');
 const cors = require('cors');
 
 const app = express();
-app.use(cors()); // TODO: restrict to your real domain(s) in production:
-                  // cors({ origin: ['https://effectiveeducationhub.com','https://effectiveeduhub.com'] })
+
+// Middleware Setup
+app.use(cors()); // TODO: Production-এ Domain restrict করতে পারেন: cors({ origin: ['https://effectiveeducationhub.com','https://effectiveeduhub.com'] })
 app.use(express.json());
 
-// ── In-memory "tables" (swap for Postgres later) ──────────────
+// ── Root Route / Health Check ─────────────────────────────────
+app.get('/', (req, res) => {
+  res.send('VOD Access Control API is running live!');
+});
+
+app.get('/health', (req, res) => res.json({ ok: true }));
+
+// ── In-memory "tables" (Postgres Swap-able) ───────────────────
 const videos = [
   { id: 'v1', course_id: 'bcs-batch', title: 'BCS প্রিলি — অধ্যায় ১: বাংলা ব্যাকরণ', duration_sec: 2700, status: 'ready', created_at: new Date().toISOString() },
   { id: 'v2', course_id: 'bank-course', title: 'ব্যাংক রিটেন — গণিত শর্টকাট মডিউল', duration_sec: 1800, status: 'ready', created_at: new Date().toISOString() },
@@ -43,18 +27,18 @@ const video_access_rules = [
   { id: 'r3', video_id: 'v3', access_tier: 'promo_unlock', is_locked: false, batch_id: null, unlock_start: null, unlock_end: null, updated_at: new Date().toISOString() },
 ];
 
-const user_video_access = []; // { user_id, video_id, granted_via, expires_at }
-const notification_log = [];  // dedup/suppression ledger
+const user_video_access = [];
+const notification_log = [];
 
 function findRule(videoId) {
   return video_access_rules.find(r => r.video_id === videoId);
 }
 
-// ── canAccess() — direct implementation of the design doc's pseudocode ──
+// ── canAccess() Helper Function ───────────────────────────────
 function canAccess(user, videoId) {
   const rule = findRule(videoId);
   if (!rule) return { allow: false, reason: 'no_rule' };
-  if (rule.is_locked) return { allow: false, reason: 'locked' }; // admin kill switch overrides everything
+  if (rule.is_locked) return { allow: false, reason: 'locked' };
 
   if (rule.access_tier === 'public') return { allow: true };
 
@@ -84,11 +68,8 @@ function canAccess(user, videoId) {
   return { allow: false, reason: 'unknown_tier' };
 }
 
-// ── §3 Re-engagement job (stub — wire real providers where marked) ──
 function enqueueReEngagementJob(videoId, unlockStart, unlockEnd) {
-  // Segment builder: users inactive 14+ days who don't already have access.
-  // In a real deployment this queries your `users` table; here it's illustrative.
-  const dormantUserCount = 0; // TODO: replace with real query against your users table
+  const dormantUserCount = 0;
 
   const job = {
     video_id: videoId,
@@ -99,26 +80,17 @@ function enqueueReEngagementJob(videoId, unlockStart, unlockEnd) {
     segment_size: dormantUserCount,
   };
   notification_log.push(job);
-
-  // TODO: fan out for real —
-  //   Push:     admin.messaging().sendMulticast(...)        (Firebase Admin SDK)
-  //   SMS:      sslWirelessClient.sendBulk(...)              (SSL Wireless / Banglalink API)
-  //   WhatsApp: fetch to Meta's WhatsApp Business Cloud API
-  //   Email:    ses.sendEmail(...) / SendGrid
   console.log('[re-engagement] queued job:', job);
   return job;
 }
 
-// ══════════════════════════════════════════════════════════════
-// Admin Panel API (matches the design doc's endpoint table)
-// ══════════════════════════════════════════════════════════════
+// ── Admin Panel API Endpoints ─────────────────────────────────
 
 app.post('/admin/videos/:id/lock', (req, res) => {
   const rule = findRule(req.params.id);
   if (!rule) return res.status(404).json({ error: 'video_not_found' });
   rule.is_locked = true;
   rule.updated_at = new Date().toISOString();
-  // TODO: push a websocket event here to invalidate any active player session immediately
   res.json({ ok: true, video_id: req.params.id, is_locked: true });
 });
 
@@ -161,13 +133,13 @@ app.post('/admin/videos/:id/schedule-promo', (req, res) => {
   res.json({ ok: true, video_id: req.params.id, unlock_start: start, unlock_end: end, reengagement_job: job });
 });
 
-// ══════════════════════════════════════════════════════════════
-// Student-facing endpoint
-// ══════════════════════════════════════════════════════════════
+app.get('/admin/videos', (req, res) => {
+  const merged = videos.map(v => ({ ...v, rule: findRule(v.id) }));
+  res.json({ videos: merged });
+});
 
+// ── Student-facing Local Playback URL Check ───────────────────
 app.get('/videos/:id/playback-url', (req, res) => {
-  // In production: pull `user` from your auth middleware / session / JWT.
-  // Demo: accept it via query params so this is testable without auth wired up yet.
   const user = {
     user_id: req.query.user_id || null,
     batch_id: req.query.batch_id || null,
@@ -178,25 +150,11 @@ app.get('/videos/:id/playback-url', (req, res) => {
     return res.status(403).json({ error: 'access_denied', reason: result.reason, unlock_end: result.unlock_end });
   }
 
-  // TODO: replace with a real signed URL from Cloudflare Stream / Mux / MediaConvert output,
-  // short-lived (5–15 min) and tied to user_id + video_id + expiry per the design doc.
   const signedUrl = `https://cdn.effectiveeducationhub.com/hls/${req.params.id}/master.m3u8?token=DEMO-${Date.now()}`;
   res.json({ ok: true, playback_url: signedUrl, expires_in_sec: 900, unlock_end: result.unlock_end || null });
 });
 
-// ── Read-only listing endpoint (handy for the admin UI to sync state) ──
-app.get('/admin/videos', (req, res) => {
-  const merged = videos.map(v => ({ ...v, rule: findRule(v.id) }));
-  res.json({ videos: merged });
-});
-
-app.get('/health', (req, res) => res.json({ ok: true }));
-
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`VOD Access Control API running on http://localhost:${PORT}`);
-});
-// Cloudflare Stream Direct Upload URL Endpoint
+// ── Cloudflare Stream Direct Upload URL Endpoint ──────────────
 app.post('/api/videos/upload-url', async (req, res) => {
   try {
     const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
@@ -206,7 +164,6 @@ app.post('/api/videos/upload-url', async (req, res) => {
       return res.status(500).json({ error: 'Cloudflare credentials not configured in environment variables.' });
     }
 
-    // Direct Upload URL চাওয়ার জন্য Cloudflare API-তে Request
     const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${accountId}/stream/direct_upload`, {
       method: 'POST',
       headers: {
@@ -214,7 +171,7 @@ app.post('/api/videos/upload-url', async (req, res) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        maxDurationSeconds: 3600, // সর্বোচ্চ ১ ঘণ্টার ভিডিও (প্রয়োজনমতো বাড়াতে পারেন)
+        maxDurationSeconds: 3600,
         creator: 'admin'
       })
     });
@@ -222,7 +179,6 @@ app.post('/api/videos/upload-url', async (req, res) => {
     const data = await response.json();
 
     if (data.success) {
-      // Cloudflare থেকে পাওয়া Upload URL এবং Video ID ব্যাকএন্ড থেকে রেসপন্স করা
       res.json({
         uploadURL: data.result.uploadURL,
         videoId: data.result.uid
@@ -235,7 +191,8 @@ app.post('/api/videos/upload-url', async (req, res) => {
     res.status(500).json({ error: 'Failed to generate upload URL' });
   }
 });
-// Cloudflare Stream Signed Playback URL Generator
+
+// ── Cloudflare Stream Signed Playback URL Generator ───────────
 app.get('/api/videos/playback-url', async (req, res) => {
   try {
     const { videoId } = req.query;
@@ -251,8 +208,6 @@ app.get('/api/videos/playback-url', async (req, res) => {
       return res.status(500).json({ error: 'Cloudflare credentials not configured in environment variables.' });
     }
 
-    // ১. Cloudflare API-তে Signed Token-এর জন্য Request পাঠানো
-    // exp: ৪ ঘণ্টা (4 * 3600 seconds) মেয়াদের Signed Token জেনারেট হবে
     const response = await fetch(
       `https://api.cloudflare.com/client/v4/accounts/${accountId}/stream/${videoId}/token`,
       {
@@ -262,7 +217,7 @@ app.get('/api/videos/playback-url', async (req, res) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          exp: Math.floor(Date.now() / 1000) + (4 * 3600) // ৪ ঘণ্টার জন্য মেয়াদী
+          exp: Math.floor(Date.now() / 1000) + (4 * 3600)
         })
       }
     );
@@ -271,15 +226,11 @@ app.get('/api/videos/playback-url', async (req, res) => {
 
     if (data.success) {
       const signedToken = data.result.token;
-
-      // ২. সুরক্ষিত Playback URLs রেসপন্স করা
       res.json({
         success: true,
         videoId: videoId,
         signedToken: signedToken,
-        // HLS Manifest URL (মোবাইল ও কাস্টম প্লেয়ারের জন্য)
         hlsUrl: `https://videodelivery.net/${signedToken}/manifest/video.m3u8`,
-        // Direct Cloudflare Iframe Player (ওয়েব প্লেয়ার বা মোবাইল অ্যাপের WebView-র জন্য)
         iframeUrl: `https://iframe.videodelivery.net/${signedToken}`
       });
     } else {
@@ -292,4 +243,10 @@ app.get('/api/videos/playback-url', async (req, res) => {
     console.error('Error generating playback token:', error);
     res.status(500).json({ error: 'Internal server error while generating video playback URL' });
   }
+});
+
+// ── Server Start (একদম শেষে থাকবে) ───────────────────────────
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => {
+  console.log(`VOD Access Control API running on port ${PORT}`);
 });
