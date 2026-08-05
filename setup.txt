@@ -1,0 +1,9 @@
+@echo off
+echo Database Setup Shuru Hochhe...
+set DATABASE_URL=postgresql://my_db_ld32_user:59ZXC3SMISLjJrxkThNiZzjtS996AOSb@dpg-d9pcfp0ae00c73eoiaa0-a.singapore-postgres.render.com/my_db_ld32?sslmode=require
+
+call npm run migrate
+call npm run seed
+
+echo Setup Sampanna Hyeongche!
+pause
