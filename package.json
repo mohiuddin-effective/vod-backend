@@ -1,15 +1,21 @@
 {
-  "name": "effective-eduhub-vod-access-api",
-  "version": "1.0.0",
-  "description": "Recorded Class Access Control API for Effective Education Hub — implements the endpoints from the VOD Access Control design doc.",
+  "name": "effective-eduhub-api",
+  "version": "2.0.0",
+  "description": "Effective Education Hub API — VOD access control + real database-backed Admin API (auth, users, courses, payouts, reports).",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "migrate": "node db/migrate.js",
+    "seed": "node db/seed.js"
   },
   "dependencies": {
     "express": "^4.19.2",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "pg": "^8.11.5",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "dotenv": "^16.4.5"
   }
 }

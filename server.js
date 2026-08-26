@@ -1,18 +1,60 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const { requireAuth } = require('./middleware/auth');
+const authRoutes = require('./routes/auth');
+const adminApiRoutes = require('./routes/admin');
+const teacherRoutes = require('./routes/teacher');
+const vendorRouter = require('./routes/vendor');
+const aiRoutes = require('./routes/ai');
+const kidsRoutes = require('./routes/kids');
+const feedRoutes = require('./routes/feed');
 
 const app = express();
 
 // Middleware Setup
-app.use(cors()); // TODO: Production-এ Domain restrict করতে পারেন: cors({ origin: ['https://effectiveeducationhub.com','https://effectiveeduhub.com'] })
+// Production domains only — no wildcard CORS on an API that has admin routes.
+const allowedOrigins = (process.env.CORS_ORIGINS || 'https://effectiveeducationhub.com,https://effectiveeduhub.com')
+  .split(',').map(s => s.trim());
+app.use(cors({
+  origin(origin, callback) {
+    // allow same-origin/non-browser requests (no Origin header) and configured domains
+    if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error('Not allowed by CORS'));
+  }
+}));
 app.use(express.json());
 
 // ── Root Route / Health Check ─────────────────────────────────
 app.get('/', (req, res) => {
-  res.send('VOD Access Control API is running live!');
+  res.send('Effective Education Hub API is running live!');
 });
 
 app.get('/health', (req, res) => res.json({ ok: true }));
+
+// ── Auth (login/register) ──────────────────────────────────────
+app.use('/auth', authRoutes);
+
+// ── Database-backed Admin API (overview, approvals, payouts, reports) ──
+// All routes inside routes/admin.js require a valid admin JWT.
+app.use('/admin', adminApiRoutes);
+
+// ── Teacher dashboard API (own courses, students, earnings) ────
+app.use('/teacher', teacherRoutes);
+
+// ── Publisher (books) and Seller (mart) dashboard APIs — same shape ──
+app.use('/publisher', vendorRouter('publisher', 'book'));
+app.use('/seller', vendorRouter('seller', 'mart'));
+
+// ── AI proxy (AI Tutor, News Brief, Study Plan, Fact Check, Evaluator, etc.) ──
+// Public (no login) but rate-limited per IP — see routes/ai.js.
+app.use('/ai', aiRoutes);
+
+// ── Kids Learning Wing content (public, read-only) ──
+app.use('/kids', kidsRoutes);
+
+// ── Multi-wing content feed (wing-isolated listing + personalized home feed) ──
+app.use('/', feedRoutes);
 
 // ── In-memory "tables" (Postgres Swap-able) ───────────────────
 const videos = [
@@ -84,9 +126,11 @@ function enqueueReEngagementJob(videoId, unlockStart, unlockEnd) {
   return job;
 }
 
-// ── Admin Panel API Endpoints ─────────────────────────────────
+// ── Admin Panel API Endpoints (VOD access control) ─────────────
+// These were previously open to anyone — now gated behind an admin JWT,
+// same as everything mounted under routes/admin.js.
 
-app.post('/admin/videos/:id/lock', (req, res) => {
+app.post('/admin/videos/:id/lock', requireAuth('admin'), (req, res) => {
   const rule = findRule(req.params.id);
   if (!rule) return res.status(404).json({ error: 'video_not_found' });
   rule.is_locked = true;
@@ -94,7 +138,7 @@ app.post('/admin/videos/:id/lock', (req, res) => {
   res.json({ ok: true, video_id: req.params.id, is_locked: true });
 });
 
-app.post('/admin/videos/:id/unlock', (req, res) => {
+app.post('/admin/videos/:id/unlock', requireAuth('admin'), (req, res) => {
   const rule = findRule(req.params.id);
   if (!rule) return res.status(404).json({ error: 'video_not_found' });
   rule.is_locked = false;
@@ -102,7 +146,7 @@ app.post('/admin/videos/:id/unlock', (req, res) => {
   res.json({ ok: true, video_id: req.params.id, is_locked: false });
 });
 
-app.put('/admin/videos/:id/access-rule', (req, res) => {
+app.put('/admin/videos/:id/access-rule', requireAuth('admin'), (req, res) => {
   const rule = findRule(req.params.id);
   if (!rule) return res.status(404).json({ error: 'video_not_found' });
   const { access_tier, batch_id, unlock_start, unlock_end } = req.body || {};
@@ -114,7 +158,7 @@ app.put('/admin/videos/:id/access-rule', (req, res) => {
   res.json({ ok: true, rule });
 });
 
-app.post('/admin/videos/:id/schedule-promo', (req, res) => {
+app.post('/admin/videos/:id/schedule-promo', requireAuth('admin'), (req, res) => {
   const rule = findRule(req.params.id);
   if (!rule) return res.status(404).json({ error: 'video_not_found' });
   const { hours } = req.body || {};
@@ -133,7 +177,7 @@ app.post('/admin/videos/:id/schedule-promo', (req, res) => {
   res.json({ ok: true, video_id: req.params.id, unlock_start: start, unlock_end: end, reengagement_job: job });
 });
 
-app.get('/admin/videos', (req, res) => {
+app.get('/admin/videos', requireAuth('admin'), (req, res) => {
   const merged = videos.map(v => ({ ...v, rule: findRule(v.id) }));
   res.json({ videos: merged });
 });
@@ -155,7 +199,9 @@ app.get('/videos/:id/playback-url', (req, res) => {
 });
 
 // ── Cloudflare Stream Direct Upload URL Endpoint ──────────────
-app.post('/api/videos/upload-url', async (req, res) => {
+// Requires admin or teacher login — this mints Cloudflare Stream upload URLs,
+// which cost money and were previously callable by anyone with the URL.
+app.post('/api/videos/upload-url', requireAuth('admin', 'teacher'), async (req, res) => {
   try {
     const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
     const apiToken = process.env.CLOUDFLARE_API_TOKEN;
@@ -248,5 +294,7 @@ app.get('/api/videos/playback-url', async (req, res) => {
 // ── Server Start (একদম শেষে থাকবে) ───────────────────────────
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
-  console.log(`VOD Access Control API running on port ${PORT}`);
+  console.log(`Effective Education Hub API running on port ${PORT}`);
+  if (!process.env.DATABASE_URL) console.warn('[startup] WARNING: DATABASE_URL not set — /admin, /auth routes will fail on any DB query.');
+  if (!process.env.JWT_SECRET) console.warn('[startup] WARNING: JWT_SECRET not set — /admin, /auth routes will refuse all requests.');
 });
