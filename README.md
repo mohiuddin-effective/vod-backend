@@ -207,6 +207,30 @@ want the rest of the Admin Dashboard (and Teacher/Publisher/Seller
 dashboards) wired the same way in *this* file, say so and I'll redo that
 work here.
 
+### 12. Aligned to your architecture doc (v2.7)
+Per your "স্বতন্ত্র উইংস / হোম পেজ সারাংশ / ফিড উইং" document:
+
+- **`/feed` scoring formula replaced** to match your spec exactly:
+  `(wing ∈ preferred_wings ? 5.0 : 0) + (category ∈ interests ? 3.0 : 0) +
+  GREATEST(0, 5.0 − days_since_published)`. Dropped the previous
+  tag-overlap/engagement terms. Verified against seeded data — a post
+  matching both wing and category scored 13.00 (5+3+5), wing-only scored
+  10.00, no match scored 5.00 (pure recency), all exactly as designed.
+- **`GET /contents` now accepts `?limit=` (1–20, default 10)** — the
+  homepage's per-wing previews need 3 items, not the feed's fixed 10.
+- **Kept `interests`/`preferred_wings` as free-text `TEXT[]`, not your
+  doc's rigid `module_category` ENUM** — new categories don't need a
+  migration this way. Functionally identical match logic either way
+  (`category_key = ANY(interests)`); say the word if you want the ENUM
+  version instead for stricter validation.
+- **Homepage now has live per-wing preview sections** (`index.html`, new
+  "🔥 সাম্প্রতিক কার্যক্রম" section, right below the hero) — exactly your
+  `home-wing-section` / `summary-grid` / `view-more-link` pattern: 5 wings
+  (Academy, Kids, News, Community, AI), each fetching its 3 latest items via
+  `GET /contents?wing=X&limit=3` and linking to that wing's own page. Home
+  stays a static summary, not a scroll feed — `/feed` remains the only
+  infinite-scroll page, exactly as your doc separates them.
+
 ### What's still missing (real, but out of scope for this pass)
 - **Course submission / enrollment / order-creation endpoints** — right now
   rows only get into `courses`/`orders`/`enrollments` via `npm run seed` or
