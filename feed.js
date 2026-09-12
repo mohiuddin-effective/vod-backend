@@ -9,11 +9,14 @@ const PAGE_SIZE = 10; // "১০টি করে কন্টেন্ট" — m
 
 function parsePage(req) {
   const page = Math.max(1, parseInt(req.query.page, 10) || 1);
-  return { limit: PAGE_SIZE, offset: (page - 1) * PAGE_SIZE, page };
+  // Optional ?limit= override (capped 1-20) — used by the homepage's small
+  // per-wing preview sections; /feed doesn't pass this, so it keeps PAGE_SIZE.
+  const limit = req.query.limit ? Math.min(20, Math.max(1, parseInt(req.query.limit, 10) || PAGE_SIZE)) : PAGE_SIZE;
+  return { limit, offset: (page - 1) * limit, page };
 }
 
 // ══════════════════════════════════════════════════════
-// GET /contents?wing=kids&category=phonics&page=1
+// GET /contents?wing=kids&category=phonics&page=1&limit=3
 // Wing-isolated content list — Kids Wing only ever sees wing_type='kids'
 // rows, no cross-wing leakage. Public, no login required.
 // ══════════════════════════════════════════════════════
@@ -23,13 +26,13 @@ router.get('/contents', async (req, res) => {
     if (!wing) return res.status(400).json({ error: 'wing_required' });
     const { limit, offset, page } = parsePage(req);
 
-    const cacheKey = `contents:${wing}:${category || ''}:${page}`;
+    const cacheKey = `contents:${wing}:${category || ''}:${page}:${limit}`;
     const cached = cache.get(cacheKey);
     if (cached) return res.json({ ...cached, cached: true });
 
     const params = [wing];
     let sql = `
-      SELECT id, wing_type, category_key, content_kind, title, thumbnail_url, media_url,
+      SELECT id, wing_type, category_key, content_kind, title, body, thumbnail_url, media_url,
              like_count, view_count, published_at
       FROM contents
       WHERE is_published = TRUE AND wing_type = $1`; // ← data isolation: hard-scoped to this wing, always
@@ -62,8 +65,11 @@ router.get('/feed', optionalAuth, async (req, res) => {
     const cached = cache.get(cacheKey);
     if (cached) return res.json({ ...cached, cached: true });
 
-    // Relevance score = interest-tag overlap + preferred-wing match
-    //                  + recency decay + log-dampened engagement.
+    // Relevance score — aligned to your doc's formula: wing match (×5.0)
+    // + category match (×3.0) + linear recency decay over 5 days. No
+    // engagement term in this version (your spec doesn't score by
+    // likes/views) — see routes/feed.js's module comment if you want that
+    // back in later.
     // COALESCE($1::int, 0) lets this run for anonymous users too — the
     // LEFT JOIN then finds no user row, interests/preferred_wings fall
     // back to '{}', and those two score terms simply contribute 0.
@@ -75,17 +81,15 @@ router.get('/feed', optionalAuth, async (req, res) => {
         FROM me LEFT JOIN users u ON u.id = me.uid
       )
       SELECT
-        c.id, c.wing_type, c.category_key, c.content_kind, c.title,
+        c.id, c.wing_type, c.category_key, c.content_kind, c.title, c.body,
         c.thumbnail_url, c.media_url, c.like_count, c.view_count, c.published_at,
         (
-          -- 1) ইউজারের ইন্টারেস্ট ট্যাগের সাথে মিল — প্রতিটি মিলে ১৫ পয়েন্ট
-          (SELECT count(*) FROM unnest(c.tags) t WHERE t = ANY(p.interests)) * 15
-          -- 2) পছন্দের উইং হলে ফ্ল্যাট ২০ পয়েন্ট বোনাস
-          + (CASE WHEN c.wing_type = ANY(p.preferred_wings) THEN 20 ELSE 0 END)
-          -- 3) Recency boost — exponential time decay, ~48h হাফ-লাইফ, নতুন কন্টেন্ট উপরে থাকবে
-          + 30 * exp(-EXTRACT(EPOCH FROM (now() - c.published_at)) / 172800.0)
-          -- 4) Engagement — log-dampened যাতে একটামাত্র viral পোস্ট পুরো ফিড দখল না করে
-          + ln(1 + c.like_count * 3 + c.view_count)
+          -- ১. উইং পছন্দ (multiplier: 5.0)
+          (CASE WHEN c.wing_type = ANY(p.preferred_wings) THEN 5.0 ELSE 0.0 END)
+          -- ২. ক্যাটাগরি পছন্দ (multiplier: 3.0)
+          + (CASE WHEN c.category_key = ANY(p.interests) THEN 3.0 ELSE 0.0 END)
+          -- ৩. কন্টেন্টের নতুনত্ব (Recency boost: decays linearly over 5 days)
+          + GREATEST(0, 5.0 - (EXTRACT(EPOCH FROM (now() - c.published_at)) / 86400.0))
         )::numeric(10,2) AS relevance_score
       FROM contents c, my_prefs p
       WHERE c.is_published = TRUE
@@ -180,6 +184,111 @@ router.delete('/contents/:id/like', requireAuth(), async (req, res) => {
     res.status(500).json({ error: 'internal_error' });
   } finally {
     client.release();
+  }
+});
+
+// ══════════════════════════════════════════════════════
+// GET /recommendations?wings=kids,news&interests=bcs,physics
+// Public. Returns a handful of approved courses + active mart/book
+// products to push in the Feed — "relevant courses, books, or
+// instruments" per the person's checked interests. Falls back to
+// newest/highest-rated when no wings/interests are given (e.g. an
+// anonymous visitor).
+// ══════════════════════════════════════════════════════
+router.get('/recommendations', async (req, res) => {
+  try {
+    const wings = (req.query.wings || '').split(',').map(s=>s.trim()).filter(Boolean);
+    const interests = (req.query.interests || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
+
+    const cacheKey = `recs:${wings.join('|')}:${interests.join('|')}`;
+    const cached = cache.get(cacheKey);
+    if (cached) return res.json({ ...cached, cached: true });
+
+    // Courses: prefer ones whose category matches an interest tag; a
+    // course has no `wing` column (courses are always the Academy wing),
+    // so wings only affects whether we bother querying at all.
+    const courseParams = [];
+    let courseSql = `SELECT id, title, category, price, rating, ai_quality_score
+                      FROM courses WHERE status = 'approved'`;
+    if (interests.length) {
+      courseParams.push(interests);
+      courseSql += ` AND lower(category) = ANY($${courseParams.length})`;
+    }
+    courseSql += ` ORDER BY rating DESC NULLS LAST, submitted_at DESC LIMIT 3`;
+
+    // Products: books (Publications wing) and mart items — same idea,
+    // category match first, else newest.
+    const productParams = [];
+    let productSql = `SELECT id, type, title, category, price, stock
+                       FROM products WHERE status = 'active'`;
+    if (interests.length) {
+      productParams.push(interests);
+      productSql += ` AND lower(category) = ANY($${productParams.length})`;
+    }
+    productSql += ` ORDER BY created_at DESC LIMIT 3`;
+
+    const [courses, products] = await Promise.all([
+      pool.query(courseSql, courseParams),
+      pool.query(productSql, productParams)
+    ]);
+
+    const payload = {
+      success: true,
+      courses: courses.rows,
+      products: products.rows
+    };
+    cache.set(cacheKey, payload, 60_000);
+    res.json(payload);
+  } catch (err) {
+    console.error('[feed/recommendations] error:', err);
+    res.status(500).json({ error: 'internal_error' });
+  }
+});
+
+// ══════════════════════════════════════════════════════
+// POST /contents — any logged-in user creates a post in a wing of their
+// choice. This is what turns the Feed composer into a real cross-wing
+// "post to Academy / Kids / Community / anywhere" feature — distinct from
+// admin's /admin/contents (which is for official/curated publishing and
+// has no rate limit or ownership check). User posts here are always
+// content_kind='post', capped, and tied to author_id so they can be
+// identified/removed later if needed.
+// ══════════════════════════════════════════════════════
+const USER_POST_RATE = { windowMs: 60 * 60 * 1000, max: 20 }; // 20 posts/hour/user
+const userPostHits = new Map();
+function isUserPostRateLimited(userId) {
+  const now = Date.now();
+  const arr = (userPostHits.get(userId) || []).filter(t => now - t < USER_POST_RATE.windowMs);
+  arr.push(now);
+  userPostHits.set(userId, arr);
+  return arr.length > USER_POST_RATE.max;
+}
+
+router.post('/contents', requireAuth(), async (req, res) => {
+  if (isUserPostRateLimited(req.user.id)) {
+    return res.status(429).json({ error: 'rate_limited', message: 'অনেকবার পোস্ট করা হয়েছে, কিছুক্ষণ পর আবার চেষ্টা করুন' });
+  }
+  const { wing_type, title, body } = req.body || {};
+  if (!wing_type || !title) return res.status(400).json({ error: 'wing_type_and_title_required' });
+  if (String(title).length > 300) return res.status(400).json({ error: 'title_too_long' });
+  if (body && String(body).length > 8000) return res.status(400).json({ error: 'body_too_long' });
+
+  try {
+    const wingExists = await pool.query(`SELECT 1 FROM wings WHERE wing_key = $1`, [wing_type]);
+    if (!wingExists.rowCount) return res.status(400).json({ error: 'unknown_wing_type' });
+
+    const { rows } = await pool.query(
+      `INSERT INTO contents (wing_type, category_key, content_kind, title, body, author_id)
+       VALUES ($1,'community-post','post',$2,$3,$4)
+       RETURNING id, title, wing_type, published_at`,
+      [wing_type, String(title).slice(0, 300), body ? String(body).slice(0, 8000) : null, req.user.id]
+    );
+    cache.invalidatePrefix('feed:');
+    cache.invalidatePrefix('contents:');
+    res.status(201).json({ ok: true, content: rows[0] });
+  } catch (err) {
+    console.error('[feed/contents POST] error:', err);
+    res.status(500).json({ error: 'internal_error' });
   }
 });
 
