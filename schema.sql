@@ -4,7 +4,7 @@
 CREATE TABLE IF NOT EXISTS users (
   id              SERIAL PRIMARY KEY,
   name            TEXT NOT NULL,
-  email           TEXT UNIQUE NOT NULL,
+  email           TEXT UNIQUE,
   password_hash   TEXT NOT NULL,
   role            TEXT NOT NULL CHECK (role IN ('student','teacher','publisher','seller','admin')),
   batch_id        TEXT,
@@ -92,6 +92,13 @@ CREATE INDEX IF NOT EXISTS idx_orders_product ON orders(product_id);
 ALTER TABLE courses ADD COLUMN IF NOT EXISTS rating NUMERIC(2,1);
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS course_id INTEGER REFERENCES courses(id) ON DELETE SET NULL;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS product_id INTEGER REFERENCES products(id) ON DELETE SET NULL;
+-- Quick sign-up (name + phone-or-email, no password step) needs email to
+-- be optional and a phone column to exist.
+ALTER TABLE users ALTER COLUMN email DROP NOT NULL;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS phone TEXT UNIQUE;
+DO $$ BEGIN
+  ALTER TABLE users ADD CONSTRAINT users_email_or_phone CHECK (email IS NOT NULL OR phone IS NOT NULL);
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 
 -- ══════════════════════════════════════════════════════
 -- 🧸 KIDS LEARNING WING — trilingual module content
