@@ -9,6 +9,7 @@ const vendorRouter = require('./routes/vendor');
 const aiRoutes = require('./routes/ai');
 const kidsRoutes = require('./routes/kids');
 const feedRoutes = require('./routes/feed');
+const marketplaceRoutes = require('./routes/marketplace');
 
 const app = express();
 
@@ -55,6 +56,9 @@ app.use('/kids', kidsRoutes);
 
 // ── Multi-wing content feed (wing-isolated listing + personalized home feed) ──
 app.use('/', feedRoutes);
+
+// ── Course browsing/enrollment + book/mart product browsing/purchase ──
+app.use('/', marketplaceRoutes);
 
 // ── In-memory "tables" (Postgres Swap-able) ───────────────────
 const videos = [

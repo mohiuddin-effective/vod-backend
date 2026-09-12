@@ -231,28 +231,124 @@ Per your "স্বতন্ত্র উইংস / হোম পেজ সা�
   stays a static summary, not a scroll feed — `/feed` remains the only
   infinite-scroll page, exactly as your doc separates them.
 
+### 13. cPanel-style homepage, quick sign-up, feed as default landing (v2.8)
+- **Homepage preview grid expanded from 5 to all 17 wings**, and every
+  wing card now has an **"আগ্রহী" checkbox** — checking it calls
+  `PUT /auth/me/preferences` immediately, adding that wing to
+  `preferred_wings` (which is exactly what `/feed`'s scoring reads). This is
+  the "cPanel-style, everything in one page, tick what you're interested
+  in" homepage you asked for.
+- **`POST /auth/quick-register`** (new) — name + phone *or* email, no
+  password step. Generates a random password server-side (bcrypt-hashed,
+  never exposed) and logs the person straight in via the returned token.
+  `users.email` is now nullable and `users.phone` was added (unique,
+  `email IS NOT NULL OR phone IS NOT NULL` constraint) — tested phone-only,
+  email-only, missing-both (400), and duplicate-contact (409) registration,
+  plus logging in with a phone number in `/auth/login`.
+- **First-visit flow**: a brand-new visitor (no `eeh_visited` flag in
+  localStorage) sees a quick sign-up modal over the homepage automatically.
+  "এখন না, পরে করবো" or clicking outside always dismisses it — never a hard
+  block. On success, the person is auto-logged-in and taken straight to
+  `/feed`.
+- **Feed is now the default landing page for anyone already logged in** —
+  every homepage load checks for a session and redirects to `/feed`
+  immediately if one exists, skipping the wing-preview fetches entirely in
+  that case.
+- **`GET /recommendations?wings=&interests=`** (new, public) — returns
+  matching approved courses + active products (books/mart items), interest-
+  matched by category when possible. The Feed page fetches this once per
+  session and interleaves a "🎯 আপনার জন্য প্রস্তাবিত" push card (course/
+  book/instrument, styled distinctly, links to Academy/Publications/Mart)
+  every 5 real feed cards. Tested both the filtered and generic-fallback
+  cases against seeded data.
+- **Arabic voice preference for religious content** — `speakBn()` now
+  tries to select a male-sounding Arabic voice (matched against known male
+  voice names) specifically for the Kids Wing's Hijaiyah-letters/Dua
+  module. This is a best-effort browser-side preference, not a guarantee —
+  the Web Speech API doesn't expose voice gender, and which voices exist at
+  all depends entirely on the visitor's device/OS, not anything this app
+  controls.
+
+### 14. Mobile horizontal-overflow bug fixed + cross-wing post composer (v2.9)
+- **Real mobile bug found and fixed** — tested `index.html` in a real
+  headless Chrome at a 390px mobile viewport (not guesswork). Found two
+  compounding issues: (1) the splash screen logo ("Effective EduHub") had
+  no responsive sizing and rendered as one unwrapped ~485px-wide line,
+  and (2) `<html>` was missing `overflow-x:hidden` (only `<body>` had it,
+  which doesn't contain `position:fixed` descendants). Together these let
+  the layout viewport expand to 528px on load, dragging the fixed header
+  bar and bottom tab bar 138px wider than the actual screen. Fixed both;
+  re-tested in the same headless browser — `document.documentElement.
+  scrollWidth` now exactly matches `clientWidth` (390=390) with zero
+  elements wider than the viewport.
+- **Facebook-style composer extended to every wing** — the rich composer
+  (photo/video/music/feeling/event/live/location/GIF/tag) now also lives
+  on the **Feed page**, with a wing selector, so a post can go to Academy,
+  Kids, Teachers, Publications, Mart, Blog, AI, Higher Study, Institutional,
+  Certificates, Community, Media, Creator, Research, Careers, or News —
+  not just Community. New endpoint: `POST /contents` (any logged-in user,
+  20 posts/hour rate limit, wing validated against the `wings` table).
+  Reuses the exact same `commParseAttachments`/`commRenderAttachments`
+  marker-parsing functions as the Community composer — same XSS
+  protections apply everywhere a post can appear, verified by re-running
+  all 10 security tests after this change (still all passing).
+
+### 15. Course enrollment + book/mart purchasing — `routes/marketplace.js` (v3.0)
+The biggest concrete gap from the "still missing" list below, closed:
+there was previously no way for a real visitor to browse a course/book/
+product catalog or actually enroll/buy anything.
+
+```
+GET  /academy/courses           GET  /academy/courses/:id      (public)
+GET  /publications/books        GET  /mart/products             (public)
+POST /academy/courses/:id/enroll   (login required)
+POST /products/:id/buy  { quantity }   (login required)
+GET  /me/enrollments            GET  /me/orders                (login required)
+```
+Both write endpoints run inside a DB transaction with `SELECT ... FOR
+UPDATE` row locking — an enrollment and its order either both succeed or
+neither does, and concurrent stock-decrementing purchases can't oversell.
+
+**A real bug found and fixed while testing this**: the buy endpoint
+originally silently clamped an out-of-range `quantity` (e.g. `9999`) down
+to `20` and placed the order anyway, returning `200 ok` — a buyer asking
+for 9999 units would be charged for 20 with nothing telling them their
+request was altered. Fixed to reject anything outside 1–50 with a clear
+`400 invalid_quantity` instead of silently substituting a different
+number. Re-tested: excessive quantity → 400, reasonable quantity → still
+works, genuinely-insufficient stock → still correctly 409.
+
+Tested end-to-end against real Postgres: browse all three catalogs,
+enroll (and get correctly blocked on a duplicate enroll), buy a book,
+list "my enrollments"/"my orders", buying without login → 401, enrolling
+in a nonexistent course → 404.
+
 ### What's still missing (real, but out of scope for this pass)
-- **Course submission / enrollment / order-creation endpoints** — right now
-  rows only get into `courses`/`orders`/`enrollments` via `npm run seed` or
-  direct SQL. The public-facing "submit a course", "buy a book", "enroll"
-  flows need their own routes before the numbers move on their own.
 - **Student dashboard** — Admin, Teacher, Publisher, and Seller are all
   wired to live data now; Student is the one role left on static mock HTML.
+  (Now that enroll/buy exist, a "my courses / my orders" student dashboard
+  tab using `GET /me/enrollments` + `GET /me/orders` is a natural next step.)
 - **Registration UI** — `POST /auth/register` exists and works, but nothing
   in `index.html` calls it yet (teachers/publishers/sellers currently only
   get in via `db/seed.js` or direct SQL).
 - **Gold Coin discount caps & teacher-payout SMS** — from your correction
   guidelines doc: no code currently enforces the 50%/30% coin-discount caps
-  (there's no checkout/redeem flow yet to enforce them in), and payout
-  notifications have no SMS provider wired up. Both need a decision from you
-  — see my message for the questions.
+  (there's now a real checkout path — `/products/:id/buy` — to enforce them
+  in, if you want that built), and payout notifications have no SMS
+  provider wired up. Both need a decision from you — see my message for
+  the questions.
 - **Kids Wing content is still frontend-only** — `/kids/*` above exists and
   is tested working, but `index.html`'s Kids Wing doesn't call it yet (it
   doesn't need to — its content is already real and interactive). Wire it up
   later only if you want content editable without redeploying the frontend.
-- **The Feed only has 5 seeded content items** — real content needs to be
-  inserted into the `contents` table (via `db/seed.js`, or a future
-  admin-facing "publish to feed" route) before it feels like a real feed.
+- **The Feed only has a handful of seeded content items** — real content
+  needs to be inserted into the `contents` table (via `db/seed.js`, the
+  admin "📰 ফিড কনটেন্ট" tab, or real users posting) before it feels like a
+  full feed.
+- **`index.html` doesn't call any of `routes/marketplace.js` yet** — the
+  API is real, tested, and ready; the Academy/Publications/Mart pages still
+  show static course/product cards. Say the word and I'll wire "ভর্তি হন" /
+  "কিনুন" buttons into the real pages next.
 
 ---
 
