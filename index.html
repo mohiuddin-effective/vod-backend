@@ -559,6 +559,39 @@ body{overflow-x:hidden;}
 .hs-blog{background:linear-gradient(125deg,#EAF0FC 0%,#C4D4F4 60%,#A0B8EE 100%);}
 .hs-ai{background:linear-gradient(125deg,#F0ECF8 0%,#DDD0F4 50%,#C8B8F0 100%);}
 .hs-research{background:linear-gradient(125deg,#FCE8F0 0%,#F0C4D8 60%,#E8A4C0 100%);}
+.hs-tuition{background:linear-gradient(125deg,#E6F4EA 0%,#C9E8D4 55%,#A9DCC0 100%);}
+.tuh-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
+.tuh-tab{border:1px solid var(--border2);background:var(--card);color:var(--text2);border-radius:999px;padding:9px 16px;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;}
+.tuh-tab.on{background:linear-gradient(135deg,var(--green),var(--teal));color:#fff;border-color:transparent;}
+.tuh-user{margin-left:auto;display:flex;gap:8px;align-items:center;font-size:.76rem;color:var(--text2);}
+.tuh-banner{background:var(--amber-dim);border:1px solid rgba(217,119,6,.3);border-radius:var(--r);padding:12px 16px;font-size:.8rem;color:var(--text);margin-bottom:14px;line-height:1.6;}
+.tuh-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:16px;margin-bottom:16px;}
+.tuh-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:10px;}
+.tuh-row label,.tuh-lbl{display:block;font-size:.68rem;font-weight:700;color:var(--text3);margin-bottom:4px;letter-spacing:.04em;}
+.tuh-in{width:100%;border:1px solid var(--border2);background:var(--card2);color:var(--text);border-radius:8px;padding:9px 11px;font-size:.84rem;font-family:inherit;}
+textarea.tuh-in{min-height:76px;resize:vertical;}
+.tuh-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.tuh-chip{border:1px solid var(--border2);background:var(--card2);color:var(--text2);border-radius:999px;padding:5px 12px;font-size:.74rem;cursor:pointer;user-select:none;}
+.tuh-chip.on{background:var(--green-dim);border-color:var(--green);color:var(--green);font-weight:700;}
+.tuh-btn{border:none;border-radius:8px;padding:10px 18px;font-size:.82rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--green),var(--teal));color:#fff;}
+.tuh-btn.alt{background:var(--card2);color:var(--text);border:1px solid var(--border2);}
+.tuh-btn.sm{padding:6px 12px;font-size:.74rem;}
+.tuh-btn[disabled]{opacity:.55;cursor:not-allowed;}
+.tuh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px;}
+.tuh-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-sm);}
+.tuh-card h4{font-size:.98rem;line-height:1.35;margin:0;}
+.tuh-meta{font-size:.74rem;color:var(--text2);display:flex;flex-wrap:wrap;gap:4px 12px;}
+.tuh-tag{display:inline-block;background:var(--teal-dim);color:var(--teal);border-radius:6px;padding:2px 8px;font-size:.68rem;font-weight:700;margin:0 4px 4px 0;}
+.tuh-price{font-weight:800;color:var(--gold);font-size:.92rem;}
+.tuh-empty{text-align:center;color:var(--text3);padding:34px 10px;font-size:.86rem;grid-column:1/-1;}
+.tuh-modal{position:fixed;inset:0;background:rgba(10,8,4,.55);z-index:9500;display:none;align-items:center;justify-content:center;padding:16px;}
+.tuh-modal.open{display:flex;}
+.tuh-box{background:var(--card);border-radius:var(--r2);max-width:520px;width:100%;max-height:88vh;overflow:auto;padding:22px;position:relative;}
+.tuh-x{position:absolute;top:10px;right:12px;border:none;background:none;font-size:1.3rem;cursor:pointer;color:var(--text2);}
+.tuh-msg{font-size:.78rem;margin-top:8px;color:var(--red);}
+.tuh-msg.ok{color:var(--green);}
+.tuh-area{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:6px;margin-bottom:6px;}
+@media(max-width:640px){.tuh-area{grid-template-columns:1fr 1fr;}.tuh-user{margin-left:0;width:100%;}}
 .hs-careers{background:linear-gradient(125deg,#E8F8F8 0%,#C0E8E8 60%,#98D4D4 100%);}
 .hs-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) min(360px,40%);gap:clamp(24px,4vw,56px);align-items:center;position:relative;z-index:2;}
 .hs-title{font-family:'Cormorant Garamond',serif;font-size:2.9rem;font-weight:700;line-height:1.05;margin-bottom:14px;}
@@ -1529,6 +1562,24 @@ footer ul li a:hover{color:var(--gold);}
 .comm-yt-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
 .comm-gif-sticker{font-size:1.8rem;margin:8px 16px 0;}
 .comm-feeling-inline{font-weight:400;color:var(--text2);font-size:.8rem;}
+/* ── Rich Composer (Facebook-style attachments) ── */
+.comm-attach-panel{display:none;margin-top:10px;padding:12px;background:var(--deep);border-radius:10px;border:1px solid var(--border);}
+.comm-attach-panel.open{display:block;}
+.comm-attach-close{float:right;cursor:pointer;color:var(--text3);font-size:.9rem;}
+.comm-media-preview{position:relative;margin-top:8px;border-radius:8px;overflow:hidden;max-height:280px;}
+.comm-media-preview img,.comm-media-preview video{width:100%;max-height:280px;object-fit:cover;display:block;}
+.comm-media-remove{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:.85rem;}
+.comm-feeling-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.comm-feeling-chip{display:flex;align-items:center;gap:5px;padding:6px 8px;border-radius:7px;font-size:.72rem;cursor:pointer;background:var(--card);border:1px solid var(--border);}
+.comm-feeling-chip:hover,.comm-feeling-chip.on{background:rgba(192,48,106,.12);border-color:var(--rose);color:var(--rose);}
+.comm-mini-input{width:100%;background:var(--card);border:1.5px solid var(--border);border-radius:7px;padding:7px 10px;font-size:.76rem;color:var(--text);outline:none;margin-bottom:6px;box-sizing:border-box;font-family:'Noto Serif Bengali',serif;}
+.comm-attach-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.comm-attach-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(192,48,106,.1);color:var(--rose);border-radius:14px;padding:3px 10px;font-size:.7rem;font-weight:600;}
+.comm-attach-tag button{background:none;border:none;color:var(--rose);cursor:pointer;font-size:.75rem;padding:0;}
+.comm-live-badge{display:inline-flex;align-items:center;gap:4px;background:var(--red);color:#fff;border-radius:5px;padding:2px 8px;font-size:.66rem;font-weight:700;letter-spacing:.05em;animation:pulse 1.6s infinite;}
+.comm-post-feeling{font-size:.72rem;color:var(--text3);margin-top:2px;}
+.comm-post-event{background:var(--deep);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-top:8px;display:flex;align-items:center;gap:10px;}
+.comm-post-event-date{background:var(--rose);color:#fff;border-radius:6px;padding:4px 8px;font-size:.7rem;font-weight:700;text-align:center;min-width:44px;}
 .comm-post{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:12px;box-shadow:var(--shadow-sm);overflow:hidden;}
 .comm-post-hd{display:flex;align-items:center;gap:10px;padding:14px 16px 10px;}
 .comm-post-name{font-weight:700;font-size:.82rem;color:var(--text);line-height:1.2;}
@@ -2559,7 +2610,7 @@ select.jni,select.jf-select{-webkit-appearance:none;background-image:url("data:i
    Priority: Mobile → Tablet → Laptop → Desktop
    Breakpoints:
      xs  : < 480px   (small phones)
-     sm  : < 640px   (phones)
+     sm  : < 640px   (phones)  
      md  : < 768px   (large phones / app chrome cutoff)
      lg  : < 1024px  (tablets)
      xl  : < 1280px  (small laptops)
@@ -2757,12 +2808,12 @@ button, .btn-gold, .btn-outline, .btn-teal, .btn-sm,
   .ex-hero-title           { font-size: 1.5rem !important; }
   .ex-stat-row             { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .ex-stat-div             { display: none; }
-
+  
   /* Books/courses → single column */
   .book-grid, .course-grid,
   [style*="grid-template-columns:repeat(3,1fr)"],
   [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
-
+  
   .ex-card-grid            { grid-template-columns: 1fr !important; }
   .mcq-premium-grid        { grid-template-columns: 1fr !important; }
   .perf-summary-grid       { grid-template-columns: 1fr 1fr !important; }
@@ -2770,7 +2821,7 @@ button, .btn-gold, .btn-outline, .btn-teal, .btn-sm,
   /* Typography */
   .aw-panel-title          { font-size: 1rem; }
   .mcq-q-text              { font-size: .88rem; }
-
+  
   /* History table → 2 visible cols */
   .eht-row                 { grid-template-columns: 1.5fr 1fr !important; }
   .eht-row span:nth-child(3),
@@ -2870,7 +2921,7 @@ button, .btn-gold, .btn-outline, .btn-teal, .btn-sm,
   .app-header-bar  { padding-top: max(env(safe-area-inset-top, 0px), 8px); }
   .app-tab-bar     { padding-bottom: max(env(safe-area-inset-bottom, 0px), 4px); }
   body             { padding-top: calc(56px + env(safe-area-inset-top, 0px)); padding-bottom: calc(64px + max(10px,env(safe-area-inset-bottom, 0px))); }
-
+  
   /* ── Improve scrollable tab bars ── */
   .aw-tabs, .ex-type-bar, .cross-link-bar, #martTabs, #exCatTabs {
     -webkit-overflow-scrolling: touch;
@@ -3471,6 +3522,15 @@ textarea.jni{min-height:80px;resize:vertical;}
 .fd-list{display:flex;flex-direction:column;gap:14px;}
 .fd-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:18px 18px 14px;box-shadow:var(--shadow-sm);opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;}
 .fd-push-card{background:var(--gold-dim);border:1.5px solid rgba(184,109,5,.25);}
+
+.live-catalog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+.lc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:18px;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);}
+.lc-card-title{font-family:'Noto Serif Bengali',serif;font-weight:700;font-size:.92rem;color:var(--text);margin-bottom:6px;line-height:1.4;}
+.lc-card-meta{font-size:.76rem;color:var(--text3);margin-bottom:10px;}
+.lc-card-price{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--gold);font-size:1rem;margin-bottom:12px;}
+.lc-card-btn{margin-top:auto;width:100%;padding:9px;border:none;border-radius:8px;background:var(--teal);color:#fff;font-weight:700;font-size:.8rem;cursor:pointer;min-height:40px;}
+.lc-card-btn:disabled{background:var(--border2);cursor:default;}
+.lc-empty{grid-column:1/-1;text-align:center;padding:24px;color:var(--text3);font-size:.82rem;}
 .fd-card.in{opacity:1;transform:translateY(0);}
 .fd-card-hd{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
 .fd-wing-badge{font-size:.66rem;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--indigo-dim);color:var(--indigo);text-transform:capitalize;}
@@ -3504,6 +3564,32 @@ textarea.jni{min-height:80px;resize:vertical;}
 .eco-tax-item-label{cursor:pointer;flex:1;line-height:1.4;}
 .eco-tax-item-label:hover{color:var(--gold);}
 .eco-tax-item input{cursor:pointer;width:14px;height:14px;flex-shrink:0;}
+.hwp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;}
+.hwp-section{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:16px 18px;}
+/* ── Sector & Sub-sector Taxonomy Tree ── */
+.sect-tree{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+@media(max-width:1024px){.sect-tree{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.sect-tree{grid-template-columns:1fr;}}
+.sect-col{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:14px 16px;}
+.sect-col-hd{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;gap:6px;}
+.sect-item{display:flex;align-items:center;gap:8px;padding:5px 2px;border-radius:6px;transition:background .15s;}
+.sect-item:hover{background:var(--deep);}
+.sect-check{width:16px;height:16px;flex-shrink:0;cursor:pointer;accent-color:var(--gold);}
+.sect-link{flex:1;font-size:.78rem;color:var(--text2);cursor:pointer;font-family:'Noto Serif Bengali',serif;text-decoration:none;}
+.sect-link:hover{color:var(--gold);text-decoration:underline;}
+.sect-save-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);flex-wrap:wrap;}
+.hwp-hd{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+.hwp-icon{font-size:1.15rem;}
+.hwp-hd h3{font-family:'Cormorant Garamond',serif;font-size:1.02rem;font-weight:700;flex:1;}
+.hwp-interest-check{display:flex;align-items:center;gap:4px;font-size:.68rem;color:var(--text3);cursor:pointer;white-space:nowrap;}
+.hwp-interest-check input{cursor:pointer;width:14px;height:14px;}
+.hwp-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;min-height:24px;}
+.hwp-item{font-family:'Noto Serif Bengali',serif;font-size:.8rem;color:var(--text2);line-height:1.5;padding-bottom:8px;border-bottom:1px solid var(--border);cursor:pointer;}
+.hwp-item:last-child{border-bottom:none;padding-bottom:0;}
+.hwp-item:hover{color:var(--gold);}
+.hwp-empty{font-size:.76rem;color:var(--text3);font-style:italic;}
+.hwp-more{font-size:.76rem;font-weight:700;color:var(--gold);cursor:pointer;display:inline-block;}
+.hwp-more:hover{text-decoration:underline;}
 
 </style>
 </head>
@@ -3544,6 +3630,7 @@ textarea.jni{min-height:80px;resize:vertical;}
     <div class="drawer-item" onclick="go('community');closeDrawer()"><span class="drawer-item-ico">👥</span>Community</div>
     <div class="drawer-item" onclick="go('blog');closeDrawer()"><span class="drawer-item-ico">✍️</span>Blogs</div>
     <div class="drawer-item" onclick="go('research');closeDrawer()"><span class="drawer-item-ico">🔬</span>Research</div>
+    <div class="drawer-item" onclick="go('tuition');closeDrawer()"><span class="drawer-item-ico">🎓</span>Tuition Hub</div>
     <div class="drawer-item" onclick="go('publications');closeDrawer()"><span class="drawer-item-ico">📚</span>Publications</div>
     <div class="drawer-item" onclick="go('media');closeDrawer()"><span class="drawer-item-ico">📺</span>Media</div>
   </div>
@@ -3608,6 +3695,8 @@ textarea.jni{min-height:80px;resize:vertical;}
     <button class="btn-outline" style="width:100%;font-size:.77rem;" onclick="document.getElementById('notifDot').style.display='none';showToast('সব পড়া হয়েছে ✓');closeNotif()">সব পড়া হয়েছে ✓</button>
   </div>
 </div>
+<!-- Universal "New Post" Floating Action Button — single instance, wing-aware -->
+<button id="composerFab" onclick="openComposer(_composerCurrentWing())" style="display:none;position:fixed;right:18px;bottom:78px;z-index:950;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--rose));color:#fff;border:none;box-shadow:0 6px 18px rgba(192,48,106,.35);font-size:1.4rem;cursor:pointer;">✍️</button>
 <!-- BOTTOM TAB BAR -->
 <nav class="app-tab-bar" id="appTabBar">
   <button class="app-tab active" id="tab-home" onclick="appTab('home')"><span class="app-tab-ico">🏠</span><span class="app-tab-lbl">হোম</span></button>
@@ -3689,6 +3778,7 @@ textarea.jni{min-height:80px;resize:vertical;}
     <div class="ef-item" onclick="go('blog')">✍ ব্লগ পড়ুন</div>
     <div class="ef-item" onclick="go('mart')">🛒 Mart ঘুরুন</div>
     <div class="ef-item" onclick="go('research')">🔬 Research</div>
+    <div class="ef-item" onclick="go('tuition')">🎓 Tuition Hub</div>
   </div>
   <button class="ef-main" onclick="toggleEfMenu()">
     <div class="ef-pulse"></div>
@@ -3734,6 +3824,7 @@ textarea.jni{min-height:80px;resize:vertical;}
           <a class="nv" id="nv-creator" onclick="go('creator')"><span class="nvdot nd-creator"></span>Creator</a>
           <a class="nv" id="nv-news" onclick="go('news')" style="background:rgba(196,32,32,.06);border:1px solid rgba(196,32,32,.15);color:var(--red);">📰 News</a>
           <a class="nv" id="nv-research" onclick="go('research')">🔬 Research</a>
+          <a class="nv" id="nv-tuition" onclick="go('tuition')">🎓 Tuition Hub</a>
           <a class="nv" id="nv-careers" onclick="go('careers')">💼 Careers</a>
           <a class="nv" id="nv-join" onclick="go('join')" style="background:linear-gradient(135deg,rgba(26,138,82,.12),rgba(11,69,168,.08));border:1px solid rgba(26,138,82,.25);color:var(--green);font-weight:700;">✦ Join</a>
           <a class="nv" id="nv-blueprint" onclick="go('blueprint')" style="background:rgba(124,58,237,.07);border:1px solid rgba(124,58,237,.18);color:var(--violet);">🛠️ Blueprint</a>
@@ -3759,6 +3850,7 @@ textarea.jni{min-height:80px;resize:vertical;}
           <a class="nv" onclick="go('creator')"><span class="nvdot nd-creator"></span>Creator</a>
           <a class="nv" onclick="go('news')" style="background:rgba(196,32,32,.06);border:1px solid rgba(196,32,32,.15);color:var(--red);">📰 News</a>
           <a class="nv" onclick="go('research')">🔬 Research</a>
+          <a class="nv" onclick="go('tuition')">🎓 Tuition Hub</a>
           <a class="nv" onclick="go('careers')">💼 Careers</a>
           <a class="nv" onclick="go('join')" style="background:linear-gradient(135deg,rgba(26,138,82,.12),rgba(11,69,168,.08));border:1px solid rgba(26,138,82,.25);color:var(--green);font-weight:700;">✦ Join</a>
           <a class="nv" onclick="go('blueprint')" style="background:rgba(124,58,237,.07);border:1px solid rgba(124,58,237,.18);color:var(--violet);">🛠️ Blueprint</a>
@@ -3799,6 +3891,7 @@ textarea.jni{min-height:80px;resize:vertical;}
       <div class="eco-item" onclick="go('media')">📺 Media</div>
       <div class="eco-item" onclick="go('creator')">🎨 Creator</div>
       <div class="eco-item" onclick="go('research')">🔬 Research</div>
+      <div class="eco-item" onclick="go('tuition')">🎓 Tuition Hub</div>
       <div class="eco-item" onclick="go('careers')">💼 Careers</div>
       <div class="eco-item" onclick="go('news')">📰 News</div>
       <div class="eco-item" onclick="go('blueprint')">🛠️ Blueprint</div>
@@ -3824,6 +3917,7 @@ textarea.jni{min-height:80px;resize:vertical;}
       <div class="eco-item" onclick="go('media')">📺 Media</div>
       <div class="eco-item" onclick="go('creator')">🎨 Creator</div>
       <div class="eco-item" onclick="go('research')">🔬 Research</div>
+      <div class="eco-item" onclick="go('tuition')">🎓 Tuition Hub</div>
       <div class="eco-item" onclick="go('careers')">💼 Careers</div>
       <div class="eco-item" onclick="go('news')">📰 News</div>
       <div class="eco-item" onclick="go('blueprint')">🛠️ Blueprint</div>
@@ -3902,6 +3996,14 @@ textarea.jni{min-height:80px;resize:vertical;}
     </div>
   </div>
 </section>
+<section style="padding-top:32px;padding-bottom:8px;">
+  <div class="wrap">
+    <div class="sec-hd"><div><div class="sec-lbl">লাইভ কার্যক্রম</div><div class="sec-ttl">প্রতিটি শাখা থেকে <span class="bn">সাম্প্রতিক কনটেন্ট</span></div></div></div>
+    <div class="hwp-grid" id="hwpGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--text3);font-size:.82rem;">লোড হচ্ছে…</div>
+    </div>
+  </div>
+</section>
 <section style="background:var(--deep);">
   <div class="wrap">
     <div class="sec-hd"><div><div class="sec-lbl">সম্পূর্ণ ইকোসিস্টেম</div><div class="sec-ttl">দশটি শাখায় <span class="bn">সম্পূর্ণ সেবা</span></div></div></div>
@@ -3914,9 +4016,21 @@ textarea.jni{min-height:80px;resize:vertical;}
       <div class="pillar" onclick="go('blog')"><div class="pillar-top"><div class="p-icon pi-bl">✍</div><h3>Effective Blogs</h3><p>একাডেমিক আর্টিকেল, পডকাস্ট ও বিশেষজ্ঞ পরামর্শ।</p></div><div class="pillar-bot"><span class="pillar-stat">২৫+ আর্টিকেল</span><button class="btn-teal btn-sm">পড়ুন</button></div></div>
       <div class="pillar" onclick="go('ai')"><div class="pillar-top"><div class="p-icon pi-ai">🤖</div><h3>Effective AI</h3><p>AI Tutor, স্মার্ট প্ল্যানার, কুইজ জেনারেটর।</p></div><div class="pillar-bot"><span class="pillar-stat">১২+ AI টুলস</span><button class="btn-purple btn-sm">ব্যবহার করুন</button></div></div>
       <div class="pillar" onclick="go('research')"><div class="pillar-top"><div class="p-icon pi-r">🔬</div><h3>Effective Research</h3><p>পিয়ার-রিভিউড জার্নাল, DOI ও একাডেমিক কোলাবোরেশন।</p></div><div class="pillar-bot"><span class="pillar-stat">১৫+ জার্নাল</span><button class="btn-teal btn-sm">দেখুন</button></div></div>
+      <div class="pillar" onclick="go('tuition')"><div class="pillar-top"><div class="p-icon pi-r">🎓</div><h3>Effective Tuition Hub</h3><p>এলাকাভিত্তিক টিউটর ও টিউশন খোঁজা, বাজেট ও সময় অনুযায়ী ম্যাচিং।</p></div><div class="pillar-bot"><span class="pillar-stat">নতুন উইং</span><button class="btn-teal btn-sm">খুঁজুন</button></div></div>
       <div class="pillar" onclick="go('careers')"><div class="pillar-top"><div class="p-icon pi-c">💼</div><h3>Effective Careers</h3><p>Resume Builder, Internship Board ও রিক্রুটমেন্ট।</p></div><div class="pillar-bot"><span class="pillar-stat">৫০+ চাকরি</span><button class="btn-teal btn-sm">আবেদন করুন</button></div></div>
       <div class="pillar"><div class="pillar-top"><div class="p-icon" style="background:rgba(200,200,255,.08);border:1px solid rgba(200,200,255,.1);">🏛️</div><h3>Effective Education Hub Global</h3><p>আন্তর্জাতিক কার্যক্রম ও বৈশ্বিক সম্প্রসারণ।</p></div><div class="pillar-bot"><span class="pillar-stat">শীঘ্রই আসছে</span><button class="btn-sm" style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:7px;color:var(--text3);" onclick="window.open('https://wa.me/message/YHR4BBJUX7DQK1','_blank')">আগ্রহ জানান</button></div></div>
       <div class="pillar"><div class="pillar-top"><div class="p-icon" style="background:rgba(150,255,200,.06);border:1px solid rgba(150,255,200,.1);">🏅</div><h3>Effective Education Hub Certification</h3><p>ভেরিফাইড সার্টিফিকেট ও ব্লকচেইন ক্রেডেনশিয়াল।</p></div><div class="pillar-bot"><span class="pillar-stat">শীঘ্রই আসছে</span><button class="btn-sm" style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:7px;color:var(--text3);" onclick="go('certifications')">Exams & Certificates</button></div></div>
+    </div>
+  </div>
+</section>
+<section style="background:var(--deep);">
+  <div class="wrap">
+    <div class="sec-hd"><div><div class="sec-lbl">সেক্টর ও উপ-সেক্টর</div><div class="sec-ttl">আপনার <span class="bn">শিক্ষা ও ক্যারিয়ার পথ বেছে নিন</span></div></div></div>
+    <p style="font-family:'Noto Serif Bengali',serif;font-size:.8rem;color:var(--text3);margin-bottom:16px;">☑ বক্সে টিক দিন আপনার আগ্রহ জানাতে (ফিডে সংশ্লিষ্ট কনটেন্ট আসবে) — নামে ক্লিক করলে সরাসরি সেই সেকশনে চলে যাবেন।</p>
+    <div class="sect-tree" id="sectTree"></div>
+    <div class="sect-save-bar">
+      <span style="font-size:.72rem;color:var(--text3);">নির্বাচন স্বয়ংক্রিয়ভাবে সংরক্ষিত হয়</span>
+      <button class="btn-gold btn-sm" onclick="go('feed')">🎯 আমার ফিড দেখুন →</button>
     </div>
   </div>
 </section>
@@ -5907,7 +6021,7 @@ textarea.jni{min-height:80px;resize:vertical;}
       <p style="font-family:'Noto Serif Bengali',serif;font-size:.94rem;color:var(--text2);line-height:1.85;margin-bottom:26px;">Study Rooms, Q&A Forum, সাপ্তাহিক Events, Mentorship Matching এবং Success Stories — সম্পূর্ণ একটি প্রাণবন্ত শিক্ষা কমিউনিটি।</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;">
         <button class="btn-gold" onclick="showToast('Community-তে যোগ দেওয়া হচ্ছে...')">কমিউনিটিতে যোগ দিন →</button>
-        <button class="btn-outline">কমিউনিটি গাইডলাইন</button>
+        <button class="btn-outline" onclick="showToast('📋 নিয়ম: ১) সম্মানজনক আচরণ ২) স্প্যাম/বিজ্ঞাপন নিষিদ্ধ ৩) সঠিক তথ্য শেয়ার করুন ৪) অন্যকে সাহায্য করুন')">কমিউনিটি গাইডলাইন</button>
       </div>
       <div style="display:flex;gap:24px;flex-wrap:wrap;">
         <div><div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--rose);">৫০,০০০+</div><div style="font-size:.68rem;color:var(--text3);">সক্রিয় সদস্য</div></div>
@@ -6001,6 +6115,7 @@ textarea.jni{min-height:80px;resize:vertical;}
             <button class="comm-compose-btn" onclick="commAddTag()">🏷️ ট্যাগ</button>
             <button class="comm-compose-btn" onclick="commCompose('question')">❓ প্রশ্ন</button>
             <button class="comm-compose-btn" onclick="commCompose('poll')">📊 পোল</button>
+            <button class="comm-compose-btn" onclick="openComposer('community')">✍️ রিচ কম্পোজার</button>
             <button class="comm-compose-btn" style="margin-left:auto;background:var(--rose);color:#fff;" onclick="commSubmitPost()">পোস্ট করুন →</button>
           </div>
         </div>
@@ -6120,7 +6235,7 @@ textarea.jni{min-height:80px;resize:vertical;}
       <p style="font-family:'Noto Serif Bengali',serif;font-size:.94rem;color:var(--text2);line-height:1.85;margin-bottom:26px;">কোর্স তৈরি, বই প্রকাশ, ব্লগ লেখা, লাইভ মেন্টরিং, মার্চেন্ডাইজ বিক্রি — Effective Creator Hub দিয়ে আপনার জ্ঞান থেকে আয়ের সব পথ খোলা।</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px;">
         <button class="btn-gold" onclick="showToast('Creator Onboarding শুরু হচ্ছে...')">Creator হিসেবে যোগ দিন →</button>
-        <button class="btn-outline">Creator Handbook</button>
+        <button class="btn-outline" onclick="showToast('📖 Handbook: রেভিনিউ শেয়ার ৮০%, মাসিক পেআউট, AI কনটেন্ট রিভিউ ৪৮ ঘণ্টায়। বিস্তারিত জানতে যোগ দিন।')">Creator Handbook</button>
       </div>
       <div style="display:flex;gap:24px;flex-wrap:wrap;">
         <div><div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--orange);">৫,০০০+</div><div style="font-size:.68rem;color:var(--text3);">সক্রিয় Creator</div></div>
@@ -6203,7 +6318,7 @@ textarea.jni{min-height:80px;resize:vertical;}
       <div class="gs-item"><div class="gs-n">AI-First</div><div class="gs-l">শিক্ষার ভবিষ্যৎ</div></div>
       <div class="gs-item"><div class="gs-n">$100M</div><div class="gs-l">Revenue Target 2030</div></div>
     </div>
-
+  
 <div class="cross-link-bar">
   <span class="cl-label">Creator →</span>
   <div class="cl-chip" onclick="go('teachers')">👩‍🏫 Teacher হিসেবে শেখান</div>
@@ -6531,7 +6646,7 @@ textarea.jni{min-height:80px;resize:vertical;}
         <div style="display:inline-flex;align-items:center;gap:7px;background:var(--teal-dim);border:1px solid rgba(0,175,200,.3);border-radius:20px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:18px;">🎓 Effective Academy</div>
         <div class="hs-title">কঠিন পাঠ,<br><em>সহজ সমাধান</em></div>
         <div class="hs-desc">SSC, HSC, BCS, ব্যাংক, বিশ্ববিদ্যালয় ভর্তি — সকল পরীক্ষার জন্য লাইভ ও রেকর্ডেড কোর্স।</div>
-        <div class="hs-btns"><button class="btn-gold">সকল কোর্স দেখুন</button><button class="btn-outline" onclick="go('ai')">🤖 AI Tutor</button></div>
+        <div class="hs-btns"><button class="btn-gold" onclick="document.querySelector('#page-academy .course-grid')?.scrollIntoView({behavior:'smooth',block:'start'})">সকল কোর্স দেখুন</button><button class="btn-outline" onclick="go('ai')">🤖 AI Tutor</button></div>
       </div>
       <div class="hs-stat-grid">
         <div class="hs-stat-box"><div class="hs-stat-n">৮০+</div><div class="hs-stat-l">কোর্স</div></div>
@@ -6542,12 +6657,25 @@ textarea.jni{min-height:80px;resize:vertical;}
     </div>
   </div>
   <!-- ══════════════════════════════════════════════════
+       🔴 LIVE COURSE CATALOG — real courses from the database,
+       real "ভর্তি হন" enrollment (routes/marketplace.js)
+  ══════════════════════════════════════════════════ -->
+  <section style="padding-top:32px;">
+    <div class="wrap">
+      <div class="sec-hd"><div><div class="sec-lbl">🔴 লাইভ</div><div class="sec-ttl">সাম্প্রতিক <span class="bn">কোর্স</span></div></div></div>
+      <div class="live-catalog-grid" id="academyLiveCourses">
+        <div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--text3);font-size:.82rem;">লোড হচ্ছে…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
        12 ACADEMY WINGS — Full Curriculum Explorer
   ══════════════════════════════════════════════════ -->
   <section style="background:var(--card);border-bottom:1px solid var(--border);padding-top:36px;">
     <div class="wrap">
       <div class="sec-hd">
-        <div><div class="sec-lbl">সম্পূর্ণ ইকোসিস্টেম</div><div class="sec-ttl">১২টি <span class="bn">Academy Wing</span></div></div>
+        <div><div class="sec-lbl">সাবজেক্ট এক্সপ্লোরার</div><div class="sec-ttl">১২টি <span class="bn">Academy Wing</span></div></div>
         <div style="font-family:'Noto Serif Bengali',serif;font-size:.78rem;color:var(--text3);max-width:340px;text-align:right;">Class 6 থেকে BCS, IELTS ও Higher Study পর্যন্ত — একটি মাত্র ইকোসিস্টেমে।</div>
       </div>
 
@@ -6740,7 +6868,7 @@ textarea.jni{min-height:80px;resize:vertical;}
           <div class="qt-title">আজকের ফ্রি মক টেস্ট দিন <span class="qt-badge">নতুন</span></div>
           <div class="qt-sub">AI-generated প্রশ্নপত্র · তাৎক্ষণিক ফলাফল · বিস্তারিত ব্যাখ্যা — বিনামূল্যে!</div>
         </div>
-        <button class="btn-gold">টেস্ট দিন →</button>
+        <button class="btn-gold" onclick="event.stopPropagation();go('ai')">টেস্ট দিন →</button>
       </div>
     </div>
   </section>
@@ -6850,7 +6978,7 @@ textarea.jni{min-height:80px;resize:vertical;}
         <div style="display:inline-flex;align-items:center;gap:7px;background:var(--purple-dim);border:1px solid rgba(124,77,219,.3);border-radius:20px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:18px;">👩‍🏫 Effective Teachers</div>
         <div class="hs-title">আপনার জ্ঞান দিয়ে<br><em>আয় করুন</em></div>
         <div class="hs-desc">বিশ্বের যেকোনো প্রান্ত থেকে কোর্স তৈরি করুন। AI-powered কোর্স ক্রিয়েটর, DRM সুরক্ষা, স্বয়ংক্রিয় পেমেন্ট।</div>
-        <div class="hs-btns"><button class="btn-gold">এখনই রেজিস্ট্রেশন করুন</button><button class="btn-outline" onclick="go('academy')">কোর্স দেখুন</button></div>
+        <div class="hs-btns"><button class="btn-gold" onclick="document.querySelector('#page-teachers .form-card')?.scrollIntoView({behavior:'smooth',block:'start'})">এখনই রেজিস্ট্রেশন করুন</button><button class="btn-outline" onclick="go('academy')">কোর্স দেখুন</button><button class="btn-outline" onclick="showDash('teacher')">📊 টিচারের ড্যাশবোর্ড</button></div>
       </div>
       <div class="hs-stat-grid">
         <div class="hs-stat-box"><div class="hs-stat-n">৮০%</div><div class="hs-stat-l">কমিশন</div></div>
@@ -6873,7 +7001,7 @@ textarea.jni{min-height:80px;resize:vertical;}
   </section>
   <section>
     <div class="wrap">
-      <div class="sec-hd"><div><div class="sec-lbl">শীর্ষ টিচারগণ</div><div class="sec-ttl">আমাদের <span class="bn">সেরা শিক্ষকরা</span></div></div></div>
+      <div class="sec-hd"><div><div class="sec-lbl">শীর্ষ টিচারগণ</div><div class="sec-ttl">দেশ সেরা শিক্ষকদের <span class="bn">কোর্স সমূহ</span></div></div></div>
       <div class="teacher-list-grid">
         <div class="tc-card"><div class="tc-av" style="background:var(--teal-dim);color:var(--teal);">ম</div><div class="tc-badge">🏆 Top Rated</div><div class="tc-name">মোহাম্মদ আলী</div><div class="tc-subject">BCS · গণিত</div><div class="tc-stats"><span>⭐ 4.9</span><span>১,২৫০ শিক্ষার্থী</span></div><div class="tc-earn">এ মাসে: ৳৪৫,০০০</div><button class="btn-teal btn-sm" style="width:100%">প্রোফাইল দেখুন</button></div>
         <div class="tc-card"><div class="tc-av" style="background:var(--purple-dim);color:var(--purple);">ফ</div><div class="tc-badge">⭐ Expert</div><div class="tc-name">ফারহানা বেগম</div><div class="tc-subject">ইংরেজি · IELTS</div><div class="tc-stats"><span>⭐ 4.8</span><span>৯৮০ শিক্ষার্থী</span></div><div class="tc-earn">এ মাসে: ৳৩২,০০০</div><button class="btn-purple btn-sm" style="width:100%">প্রোফাইল দেখুন</button></div>
@@ -6977,7 +7105,7 @@ textarea.jni{min-height:80px;resize:vertical;}
         <div style="display:inline-flex;align-items:center;gap:7px;background:var(--gold-dim);border:1px solid rgba(200,152,30,.3);border-radius:20px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;">📚 Effective Publications</div>
         <div class="hs-title">অক্ষরে অক্ষরে<br><em>জ্ঞান ছড়িয়ে দিন</em></div>
         <div class="hs-desc">SSC, HSC, BCS, ব্যাংক, বিশ্ববিদ্যালয় ভর্তি — সকল পরীক্ষার জন্য মানসম্পন্ন বই, গাইড ও ই-বুক।</div>
-        <div class="hs-btns"><button class="btn-gold">সব বই দেখুন</button><button class="btn-outline">ই-বুক ডাউনলোড</button></div>
+        <div class="hs-btns"><button class="btn-gold" onclick="document.querySelector('#page-publications .pub-grid5')?.scrollIntoView({behavior:'smooth',block:'start'})">সব বই দেখুন</button><button class="btn-outline" onclick="showToast('📥 ই-বুক ফিল্টার প্রয়োগ হচ্ছে...');document.querySelector('#page-publications .pub-grid5')?.scrollIntoView({behavior:'smooth',block:'start'})">ই-বুক ডাউনলোড</button></div>
       </div>
       <div class="hs-stat-grid">
         <div class="hs-stat-box"><div class="hs-stat-n">৩০০+</div><div class="hs-stat-l">প্রকাশিত বই</div></div>
@@ -6987,12 +7115,25 @@ textarea.jni{min-height:80px;resize:vertical;}
       </div>
     </div>
   </div>
+  <div class="wrap" style="padding-top:20px;padding-bottom:0;">
+    <div class="sec-hd" style="margin-bottom:8px;"><div><div class="sec-lbl">আমাদের বই সমূহ</div><div class="sec-ttl">আপনার <span class="bn">কোন বইটি দরকার?</span></div></div></div>
+  </div>
   <div class="fr-bar"><div class="fr-inner"><span class="fr-lbl">ক্যাটাগরি:</span>
     <div class="fpill on" onclick="fp(this)">সব বই</div>
     <div class="fpill" onclick="fp(this)">🏛️ BCS</div><div class="fpill" onclick="fp(this)">📖 HSC</div>
     <div class="fpill" onclick="fp(this)">🏫 SSC</div><div class="fpill" onclick="fp(this)">🏦 ব্যাংক</div>
     <div class="fpill" onclick="fp(this)">🎓 ভর্তি পরীক্ষা</div><div class="fpill" onclick="fp(this)">📱 ই-বুক</div>
   </div></div>
+
+  <!-- 🔴 LIVE BOOK CATALOG — real books, real "কিনুন" purchase -->
+  <section style="padding-top:24px;">
+    <div class="wrap">
+      <div class="sec-hd"><div><div class="sec-lbl">🔴 লাইভ</div><div class="sec-ttl">সাম্প্রতিক <span class="bn">বই</span></div></div></div>
+      <div class="live-catalog-grid" id="publicationsLiveBooks">
+        <div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--text3);font-size:.82rem;">লোড হচ্ছে…</div>
+      </div>
+    </div>
+  </section>
 
   <!-- PUBLICATION SERIES EXPLORER -->
   <section style="background:var(--deep);">
@@ -7071,7 +7212,7 @@ textarea.jni{min-height:80px;resize:vertical;}
         <div style="display:inline-flex;align-items:center;gap:7px;background:var(--green-dim);border:1px solid rgba(30,170,106,.3);border-radius:20px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:18px;">🛒 Effective Mart</div>
         <div class="hs-title">আপনার প্রয়োজনীয়<br><em>সবকিছু এক ঠিকানায়</em></div>
         <div class="hs-desc">স্টেশনারি, গ্যাজেট, ল্যাব কিট — সব শিক্ষাসামগ্রী। দ্রুত ডেলিভারি, সহজ রিটার্ন।</div>
-        <div class="hs-btns"><button class="btn-gold">সব পণ্য দেখুন</button><button class="btn-outline">সেলার হিসেবে যোগ দিন</button></div>
+        <div class="hs-btns"><button class="btn-gold" onclick="document.querySelector('#page-mart .mart-grid')?.scrollIntoView({behavior:'smooth',block:'start'})">সব পণ্য দেখুন</button><button class="btn-outline" onclick="go('join');setTimeout(()=>jnRole('seller'),150)">সেলার হিসেবে যোগ দিন</button></div>
       </div>
       <div class="hs-stat-grid">
         <div class="hs-stat-box"><div class="hs-stat-n">২,০০০+</div><div class="hs-stat-l">পণ্য</div></div>
@@ -7083,6 +7224,12 @@ textarea.jni{min-height:80px;resize:vertical;}
   </div>
   <section>
     <div class="wrap">
+
+      <!-- 🔴 LIVE PRODUCT CATALOG — real products, real "কিনুন" purchase -->
+      <div class="sec-hd"><div><div class="sec-lbl">🔴 লাইভ</div><div class="sec-ttl">সাম্প্রতিক <span class="bn">পণ্য</span></div></div></div>
+      <div class="live-catalog-grid" id="martLiveProducts" style="margin-bottom:32px;">
+        <div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--text3);font-size:.82rem;">লোড হচ্ছে…</div>
+      </div>
 
       <!-- FULL MART CATEGORY EXPLORER -->
       <div class="sec-hd"><div><div class="sec-lbl">ক্যাটাগরি অনুযায়ী খুঁজুন</div><div class="sec-ttl">Mart <span class="bn">বিভাগসমূহ</span></div></div></div>
@@ -7203,10 +7350,10 @@ textarea.jni{min-height:80px;resize:vertical;}
   <div class="subpage-hero hs-blog">
     <div class="hs-inner">
       <div>
-        <div style="display:inline-flex;align-items:center;gap:7px;background:var(--blue-dim);border:1px solid rgba(34,102,221,.3);border-radius:20px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6699ff;margin-bottom:18px;">✍ Effective Blogs</div>
-        <div class="hs-title">জ্ঞান ভাগ করুন,<br><em>বিশ্বকে আলোকিত করুন</em></div>
+        <div style="display:inline-flex;align-items:center;gap:7px;background:var(--blue-dim);border:1px solid rgba(34,102,221,.3);border-radius:20px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6699ff;margin-bottom:18px;">✍ পড়ুন ও বিনামূল্যে শিখুন</div>
+        <div class="hs-title">ভাগ করুন এবং<br><em>বিশ্বকে আলোকিত করুন</em></div>
         <div class="hs-desc">একাডেমিক আর্টিকেল, শিক্ষার খবর, ক্যারিয়ার পরামর্শ ও রিসার্চ ইনসাইট। বিনামূল্যে পড়ুন।</div>
-        <div class="hs-btns"><button class="btn-gold">সব আর্টিকেল</button><button class="btn-outline">লেখক হিসেবে যোগ দিন</button></div>
+        <div class="hs-btns"><button class="btn-gold" onclick="document.querySelector('#page-blog .blog-grid')?.scrollIntoView({behavior:'smooth',block:'start'})">সব আর্টিকেল</button><button class="btn-outline" onclick="go('join');setTimeout(()=>jnRole('author'),150)">লেখক হিসেবে যোগ দিন</button></div>
       </div>
       <div class="hs-stat-grid">
         <div class="hs-stat-box"><div class="hs-stat-n">২৫+</div><div class="hs-stat-l">আর্টিকেল</div></div>
@@ -7276,7 +7423,7 @@ textarea.jni{min-height:80px;resize:vertical;}
         <div style="display:inline-flex;align-items:center;gap:7px;background:linear-gradient(90deg,rgba(91,53,181,.15),rgba(0,122,148,.12));border:1px solid rgba(91,53,181,.25);border-radius:20px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:18px;">🤖 AI-First Education Platform</div>
         <div class="hs-title">১১টি AI টুল,<br><em>এক ইকোসিস্টেম</em></div>
         <div class="hs-desc">Effective AI — বাংলাদেশের প্রথম সম্পূর্ণ AI-powered শিক্ষা ইন্টেলিজেন্স স্তর। Academy থেকে Research, Institutional Analytics থেকে Creator Tools — সর্বত্র AI।</div>
-        <div class="hs-btns"><button class="btn-gold" onclick="showToast('AI Tutor চালু হচ্ছে...')">AI Tutor ব্যবহার করুন →</button><button class="btn-outline">AI রোডম্যাপ দেখুন</button></div>
+        <div class="hs-btns"><button class="btn-gold" onclick="go('ai')">AI Tutor ব্যবহার করুন →</button><button class="btn-outline" onclick="go('blueprint')">AI রোডম্যাপ দেখুন</button></div>
       </div>
       <div class="hs-stat-grid">
         <div class="hs-stat-box"><div class="hs-stat-n">১১</div><div class="hs-stat-l">AI টুলস</div></div>
@@ -7366,7 +7513,7 @@ textarea.jni{min-height:80px;resize:vertical;}
         <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,120,50,.1);border:1px solid rgba(255,120,50,.25);border-radius:20px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,160,90,.9);margin-bottom:18px;">🔬 Effective Research</div>
         <div class="hs-title">গবেষণা করুন,<br><em>জ্ঞান তৈরি করুন</em></div>
         <div class="hs-desc">পিয়ার-রিভিউড জার্নাল, DOI জেনারেশন, Citation ট্র্যাকিং ও একাডেমিক কোলাবোরেশন প্ল্যাটফর্ম।</div>
-        <div class="hs-btns"><button class="btn-gold">রিসার্চ জমা দিন</button><button class="btn-outline">জার্নাল দেখুন</button></div>
+        <div class="hs-btns"><button class="btn-gold" onclick="go('join');setTimeout(()=>jnRole('researcher'),150)">রিসার্চ জমা দিন</button><button class="btn-outline" onclick="document.querySelector('#page-research .research-grid')?.scrollIntoView({behavior:'smooth',block:'start'})">জার্নাল দেখুন</button></div>
       </div>
       <div class="hs-stat-grid">
         <div class="hs-stat-box"><div class="hs-stat-n">১৫+</div><div class="hs-stat-l">জার্নাল</div></div>
@@ -7409,6 +7556,145 @@ textarea.jni{min-height:80px;resize:vertical;}
   <div class="cl-chip" onclick="go('publications')">📚 রিসার্চ বই দেখুন</div>
 </div>
 </div><!-- /research -->
+<!-- ████ TUITION HUB PAGE ████ -->
+
+<div class="page" id="page-tuition">
+  <div class="breadcrumb"><a onclick="go('home')">হোম</a><span>›</span><span>Effective Tuition Hub</span></div>
+  <div class="subpage-hero hs-tuition">
+    <div class="hs-inner">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(26,138,82,.1);border:1px solid rgba(26,138,82,.25);border-radius:20px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:14px;">🎓 Tuition Wing</div>
+        <div class="hs-title">আপনার এলাকায়,<br><em>সঠিক টিউটর ও টিউশন</em></div>
+        <div class="hs-desc">অভিভাবক ও শিক্ষার্থীরা টিউটর খুঁজুন, টিউটররা টিউশন খুঁজুন। বাজেট, দিন, সময়, বিষয় ও লোকেশন রেডিয়াস দিয়ে ফিল্টার করুন।</div>
+        <div class="hs-btns"><button class="btn-gold" onclick="tuhTab('tuition');document.getElementById('tuhWorkspace').scrollIntoView({behavior:'smooth'})">টিউশন খুঁজুন</button><button class="btn-outline" onclick="tuhTab('tutors');document.getElementById('tuhWorkspace').scrollIntoView({behavior:'smooth'})">টিউটর খুঁজুন</button></div>
+      </div>
+      <div class="hs-stat-grid">
+        <div class="hs-stat-box"><div class="hs-stat-n">৩০ দিন</div><div class="hs-stat-l">টিউশন পোস্টের মেয়াদ</div></div>
+        <div class="hs-stat-box"><div class="hs-stat-n">৯০ দিন</div><div class="hs-stat-l">টিউটর পোস্টের মেয়াদ</div></div>
+        <div class="hs-stat-box"><div class="hs-stat-n">৫ এলাকা</div><div class="hs-stat-l">টিউটর প্রতি পর্যন্ত</div></div>
+        <div class="hs-stat-box"><div class="hs-stat-n">🔒</div><div class="hs-stat-l">সঠিক ঠিকানা গোপন</div></div>
+      </div>
+    </div>
+  </div>
+  <section id="tuhWorkspace">
+    <div class="wrap">
+      <div id="tuhBanner"></div>
+      <div class="tuh-bar">
+        <button class="tuh-tab on" data-tab="tuition" onclick="tuhTab('tuition')">🔎 টিউশন খুঁজুন</button>
+        <button class="tuh-tab" data-tab="tutors" onclick="tuhTab('tutors')">👩‍🏫 টিউটর খুঁজুন</button>
+        <button class="tuh-tab" data-tab="feed" onclick="tuhTab('feed')">🌐 গ্লোবাল ফিড</button>
+        <button class="tuh-tab" data-tab="post" onclick="tuhTab('post')">✍️ পোস্ট করুন</button>
+        <button class="tuh-tab" data-tab="mine" onclick="tuhTab('mine')">📋 আমার পোস্ট</button>
+        <div class="tuh-user" id="tuhUserBar"></div>
+      </div>
+
+      <div id="tuhPaneSearch">
+        <div class="tuh-panel">
+          <div class="tuh-row">
+            <div><label id="tuhQLbl">কীওয়ার্ড</label><input class="tuh-in" id="tuhQ" placeholder="বিষয়, এলাকা, নাম…" onkeydown="if(event.key==='Enter')tuhSearch(true)"></div>
+            <div class="tuh-f-only"><label>রেট টাইপ</label><select class="tuh-in" id="tuhRate"><option value="">সব</option><option value="hourly">ঘণ্টা প্রতি</option><option value="weekly">সপ্তাহ প্রতি</option><option value="monthly">মাস প্রতি</option></select></div>
+            <div class="tuh-f-only"><label>বাজেট (মাসিক ৳) সর্বনিম্ন</label><input class="tuh-in" id="tuhBMin" type="number" min="0" placeholder="3000"></div>
+            <div class="tuh-f-only"><label>বাজেট (মাসিক ৳) সর্বোচ্চ</label><input class="tuh-in" id="tuhBMax" type="number" min="0" placeholder="8000"></div>
+            <div class="tuh-f-only"><label>দিন/সপ্তাহ (ন্যূনতম)</label><input class="tuh-in" id="tuhDMin" type="number" min="1" max="7"></div>
+            <div class="tuh-f-only"><label>দিন/সপ্তাহ (সর্বোচ্চ)</label><input class="tuh-in" id="tuhDMax" type="number" min="1" max="7"></div>
+            <div class="tuh-f-only"><label>ঘণ্টা/সেশন (ন্যূনতম)</label><input class="tuh-in" id="tuhHMin" type="number" min="0.5" max="12" step="0.5"></div>
+            <div class="tuh-f-only"><label>ঘণ্টা/সেশন (সর্বোচ্চ)</label><input class="tuh-in" id="tuhHMax" type="number" min="0.5" max="12" step="0.5"></div>
+            <div class="tuh-f-only"><label id="tuhGenderLbl">জেন্ডার</label><select class="tuh-in" id="tuhGender"><option value="">যেকোনো</option><option value="male">পুরুষ</option><option value="female">মহিলা</option></select></div>
+            <div class="tuh-f-only"><label>সাজান</label><select class="tuh-in" id="tuhSort"><option value="newest">নতুন আগে</option><option value="distance">কাছের আগে</option><option value="budget_low">বাজেট কম→বেশি</option><option value="budget_high">বাজেট বেশি→কম</option></select></div>
+            <div><label>রেডিয়াস (কি.মি.)</label><input class="tuh-in" id="tuhRadius" type="number" min="0.5" max="50" step="0.5" value="5"></div>
+          </div>
+          <div class="tuh-f-only"><div class="tuh-lbl">বিষয়</div><div class="tuh-chips" id="tuhFSubj"></div>
+          <div class="tuh-lbl">শ্রেণি</div><div class="tuh-chips" id="tuhFLvl"></div></div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+            <button class="tuh-btn alt sm" id="tuhGeoBtn" onclick="tuhSetGeo()">📍 আমার লোকেশন</button>
+            <button class="tuh-btn" onclick="tuhSearch(true)">🔎 খুঁজুন</button>
+            <button class="tuh-btn alt sm" onclick="tuhReset()">রিসেট</button>
+            <span style="font-size:.7rem;color:var(--text3);" id="tuhFeedHint"></span>
+          </div>
+        </div>
+        <div class="tuh-grid" id="tuhList"></div>
+        <div style="text-align:center;margin-top:16px;" id="tuhMore"></div>
+        <div style="font-size:.7rem;color:var(--text3);margin-top:14px;text-align:center;">🔒 গোপনীয়তা: প্রকাশ্য লোকেশন ১৫০–৪০০ মিটার সরানো থাকে; সঠিক পিন ও ঠিকানা শুধু পোস্টদাতা দেখেন।</div>
+      </div>
+
+      <div id="tuhPanePost" style="display:none;">
+        <div class="tuh-panel">
+          <div class="tuh-bar" style="margin-bottom:6px;">
+            <button class="tuh-tab on" id="tuhKReq" onclick="tuhPostKind('requirement')">📌 আমি টিউটর চাই (অভিভাবক/শিক্ষার্থী)</button>
+            <button class="tuh-tab" id="tuhKAv" onclick="tuhPostKind('availability')">🎓 আমি পড়াতে চাই (টিউটর)</button>
+          </div>
+          <div id="tuhPostGate"></div>
+          <div id="tuhFormReq">
+            <div class="tuh-row"><div style="grid-column:1/-1"><label>শিরোনাম *</label><input class="tuh-in" id="rqTitle" maxlength="200" placeholder="যেমন: Class 9 এর জন্য Physics ও Math টিউটর প্রয়োজন"></div></div>
+            <div class="tuh-lbl">বিষয় * (সর্বোচ্চ ৮টি)</div><div class="tuh-chips" id="rqSubj"></div>
+            <div class="tuh-row">
+              <div><label>শ্রেণি *</label><select class="tuh-in" id="rqLevel"></select></div>
+              <div><label>মাধ্যম</label><select class="tuh-in" id="rqMedium"></select></div>
+              <div><label>এলাকার নাম</label><input class="tuh-in" id="rqArea" maxlength="120" placeholder="যেমন: আগ্রাবাদ"></div>
+              <div><label>পুরো ঠিকানা (শুধু আপনি দেখবেন)</label><input class="tuh-in" id="rqAddr" maxlength="500"></div>
+            </div>
+            <div class="tuh-row">
+              <div><label>Latitude *</label><input class="tuh-in" id="rqLat" type="number" step="any"></div>
+              <div><label>Longitude *</label><input class="tuh-in" id="rqLng" type="number" step="any"></div>
+              <div style="display:flex;align-items:flex-end;"><button class="tuh-btn alt sm" onclick="tuhLocateInto('rqLat','rqLng')">📍 বর্তমান লোকেশন</button></div>
+            </div>
+            <div class="tuh-row">
+              <div><label>দিন/সপ্তাহ *</label><input class="tuh-in" id="rqDays" type="number" min="1" max="7" value="3"></div>
+              <div><label>ঘণ্টা/সেশন *</label><input class="tuh-in" id="rqHours" type="number" min="0.5" max="12" step="0.5" value="1"></div>
+              <div><label>পছন্দের সময়</label><select class="tuh-in" id="rqTime"></select></div>
+              <div><label>শুরুর তারিখ</label><input class="tuh-in" id="rqStart" type="date"></div>
+            </div>
+            <div class="tuh-row">
+              <div><label>রেট টাইপ *</label><select class="tuh-in" id="rqRate"><option value="monthly">মাসিক</option><option value="weekly">সাপ্তাহিক</option><option value="hourly">ঘণ্টা প্রতি</option></select></div>
+              <div><label>বাজেট সর্বনিম্ন (৳) *</label><input class="tuh-in" id="rqBMin" type="number" min="0"></div>
+              <div><label>বাজেট সর্বোচ্চ (৳) *</label><input class="tuh-in" id="rqBMax" type="number" min="0"></div>
+              <div><label>টিউটরের জেন্ডার</label><select class="tuh-in" id="rqGender"><option value="any">যেকোনো</option><option value="male">পুরুষ</option><option value="female">মহিলা</option></select></div>
+            </div>
+            <div class="tuh-row"><div style="grid-column:1/-1"><label>বিবরণ</label><textarea class="tuh-in" id="rqDesc" maxlength="2000"></textarea></div></div>
+            <button class="tuh-btn" id="rqSubmit" onclick="tuhSubmitReq()">পোস্ট প্রকাশ করুন</button>
+            <div class="tuh-msg" id="rqMsg"></div>
+          </div>
+          <div id="tuhFormAv" style="display:none;">
+            <div class="tuh-row"><div style="grid-column:1/-1"><label>হেডলাইন *</label><input class="tuh-in" id="avHead" maxlength="200" placeholder="যেমন: BUET ছাত্র — HSC Physics ও Math পড়াই"></div></div>
+            <div class="tuh-lbl">বিষয় * (সর্বোচ্চ ১২টি)</div><div class="tuh-chips" id="avSubj"></div>
+            <div class="tuh-lbl">শ্রেণি * (সর্বোচ্চ ১০টি)</div><div class="tuh-chips" id="avLvl"></div>
+            <div class="tuh-lbl">মাধ্যম *</div><div class="tuh-chips" id="avMed"></div>
+            <div class="tuh-row"><div><label><input type="checkbox" id="avOnline"> অনলাইনেও পড়াই</label></div></div>
+            <div class="tuh-row">
+              <div><label>দিন/সপ্তাহ (ন্যূনতম) *</label><input class="tuh-in" id="avDMin" type="number" min="1" max="7" value="2"></div>
+              <div><label>দিন/সপ্তাহ (সর্বোচ্চ) *</label><input class="tuh-in" id="avDMax" type="number" min="1" max="7" value="5"></div>
+              <div><label>ঘণ্টা/সেশন (ন্যূনতম) *</label><input class="tuh-in" id="avHMin" type="number" min="0.5" max="12" step="0.5" value="1"></div>
+              <div><label>ঘণ্টা/সেশন (সর্বোচ্চ) *</label><input class="tuh-in" id="avHMax" type="number" min="0.5" max="12" step="0.5" value="2"></div>
+            </div>
+            <div class="tuh-row">
+              <div><label>রেট টাইপ *</label><select class="tuh-in" id="avRate"><option value="monthly">মাসিক</option><option value="weekly">সাপ্তাহিক</option><option value="hourly">ঘণ্টা প্রতি</option></select></div>
+              <div><label>রেট সর্বনিম্ন (৳) *</label><input class="tuh-in" id="avRMin" type="number" min="0"></div>
+              <div><label>রেট সর্বোচ্চ (৳) *</label><input class="tuh-in" id="avRMax" type="number" min="0"></div>
+            </div>
+            <div class="tuh-lbl">যে এলাকায় পড়াতে যাবেন * (১–৫টি; লোকেশন + রেডিয়াস)</div>
+            <div id="avAreas"></div>
+            <button class="tuh-btn alt sm" onclick="tuhAddArea()">+ এলাকা যোগ করুন</button>
+            <div class="tuh-row" style="margin-top:12px;"><div style="grid-column:1/-1"><label>বিবরণ</label><textarea class="tuh-in" id="avDesc" maxlength="2000"></textarea></div></div>
+            <button class="tuh-btn" id="avSubmit" onclick="tuhSubmitAv()">পোস্ট প্রকাশ করুন</button>
+            <div class="tuh-msg" id="avMsg"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tuhPaneMine" style="display:none;"><div id="tuhMineBody"></div></div>
+    </div>
+  </section>
+
+<div class="cross-link-bar">
+  <span class="cl-label">সংশ্লিষ্ট →</span>
+  <div class="cl-chip" onclick="go('teachers')">👩‍🏫 শিক্ষক / কোর্স</div>
+  <div class="cl-chip" onclick="go('academy')">🎓 Academy</div>
+  <div class="cl-chip" onclick="go('ai')">🤖 AI Tutor</div>
+  <div class="cl-chip" onclick="go('community')">👥 Study Community</div>
+</div>
+</div><!-- /tuition -->
+
+<div class="tuh-modal" id="tuhModal" onclick="if(event.target===this)tuhCloseModal()"><div class="tuh-box"><button class="tuh-x" onclick="tuhCloseModal()" aria-label="Close">×</button><div id="tuhModalBody"></div></div></div>
 <!-- ████ CAREERS PAGE ████ -->
 
 <div class="page" id="page-careers">
@@ -7419,7 +7705,7 @@ textarea.jni{min-height:80px;resize:vertical;}
         <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(100,200,255,.1);border:1px solid rgba(100,200,255,.25);border-radius:20px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(100,220,255,.9);margin-bottom:18px;">💼 Effective Careers</div>
         <div class="hs-title">আপনার স্বপ্নের<br><em>ক্যারিয়ার গড়ুন</em></div>
         <div class="hs-desc">Resume Builder, Portfolio System, Skill Verification, Internship Board ও রিক্রুটমেন্ট ইকোসিস্টেম — সব এক জায়গায়।</div>
-        <div class="hs-btns"><button class="btn-gold">চাকরি খুঁজুন</button><button class="btn-outline">Resume তৈরি করুন</button></div>
+        <div class="hs-btns"><button class="btn-gold" onclick="document.querySelector('#page-careers .careers-grid')?.scrollIntoView({behavior:'smooth',block:'start'})">চাকরি খুঁজুন</button><button class="btn-outline" onclick="document.querySelector('#page-careers .careers-grid').closest('section').previousElementSibling?.scrollIntoView({behavior:'smooth',block:'start'});showToast('AI Resume Builder শীঘ্রই আসছে — এখন ম্যানুয়াল টেমপ্লেট ব্যবহার করুন')">Resume তৈরি করুন</button></div>
       </div>
       <div class="hs-stat-grid">
         <div class="hs-stat-box"><div class="hs-stat-n">৫০+</div><div class="hs-stat-l">চাকরির বিজ্ঞপ্তি</div></div>
@@ -7499,7 +7785,7 @@ textarea.jni{min-height:80px;resize:vertical;}
           <div style="font-size:1.8rem;margin-bottom:10px;">📄</div>
           <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;margin-bottom:6px;color:var(--text);">AI Resume Builder</div>
           <div style="font-family:'Noto Serif Bengali',serif;font-size:.77rem;color:var(--text3);line-height:1.6;margin-bottom:14px;">AI-চালিত স্মার্ট রিজুমে তৈরি করুন। ATS-friendly ফরম্যাট।</div>
-          <button class="btn-teal btn-sm" style="width:100%">তৈরি করুন</button>
+          <button class="btn-teal btn-sm" style="width:100%" onclick="showToast('🚧 AI Resume Builder শীঘ্রই আসছে — এখন AI Tutor থেকে সাহায্য নিন')">তৈরি করুন</button>
         </div>
         <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:22px 18px;text-align:center;cursor:pointer;transition:all .22s;" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'">
           <div style="font-size:1.8rem;margin-bottom:10px;">🌐</div>
@@ -8191,6 +8477,87 @@ textarea.jni{min-height:80px;resize:vertical;}
 
   <!-- Article Reader Modal -->
   <!-- Share Modal -->
+  <!-- ═══ Universal Post Composer (single instance, reusable across all wings) ═══ -->
+  <div id="composerModal" onclick="if(event.target===this)closeComposer()" style="display:none;position:fixed;inset:0;z-index:9600;background:rgba(10,8,4,.65);backdrop-filter:blur(10px);align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;">
+    <div style="background:var(--card);border-radius:16px;width:100%;max-width:540px;box-shadow:var(--shadow-lg);">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);">
+        <div style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.05rem;color:var(--text);">✍️ নতুন পোস্ট <span id="composerWingLabel" style="color:var(--rose);font-size:.75rem;font-weight:600;"></span></div>
+        <button onclick="closeComposer()" style="background:none;border:none;color:var(--text3);font-size:1.2rem;cursor:pointer;">✕</button>
+      </div>
+      <div style="padding:18px 20px;">
+        <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:4px;">
+          <div class="comm-av">আ</div>
+          <textarea id="composerInput" placeholder="কী মনে হচ্ছে?" rows="4" style="flex:1;background:var(--deep);border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;font-family:'Noto Serif Bengali',serif;font-size:.85rem;color:var(--text);outline:none;resize:vertical;box-sizing:border-box;"></textarea>
+        </div>
+
+        <!-- Attached content preview -->
+        <div id="composerAttachPreview"></div>
+
+        <!-- Attachment toolbar -->
+        <div class="comm-compose-actions" style="margin-top:10px;">
+          <button class="comm-compose-btn" onclick="composerTogglePanel('media')">📷 ছবি/ভিডিও</button>
+          <button class="comm-compose-btn" onclick="composerTogglePanel('music')">🎵 মিউজিক</button>
+          <button class="comm-compose-btn" onclick="composerTogglePanel('feeling')">😊 অনুভূতি</button>
+          <button class="comm-compose-btn" onclick="composerTogglePanel('event')">📅 ইভেন্ট</button>
+          <button class="comm-compose-btn" id="composerLiveBtn" onclick="composerToggleLive()">🔴 লাইভ</button>
+          <button class="comm-compose-btn" onclick="composerTogglePanel('location')">📍 লোকেশন</button>
+          <button class="comm-compose-btn" onclick="composerTogglePanel('tag')">🏷️ ট্যাগ</button>
+        </div>
+
+        <!-- Photo/Video panel -->
+        <div class="comm-attach-panel" id="composerPanel-media">
+          <span class="comm-attach-close" onclick="composerTogglePanel('media')">✕</span>
+          <div style="font-size:.78rem;font-weight:700;margin-bottom:8px;">📷 ছবি বা ভিডিও যোগ করুন</div>
+          <input type="file" accept="image/*,video/*" id="composerMediaInput" onchange="composerHandleMediaSelect(event)" style="font-size:.74rem;">
+          <div style="font-size:.66rem;color:var(--text3);margin-top:6px;">সর্বোচ্চ ৫MB</div>
+        </div>
+
+        <!-- Music panel -->
+        <div class="comm-attach-panel" id="composerPanel-music">
+          <span class="comm-attach-close" onclick="composerTogglePanel('music')">✕</span>
+          <div style="font-size:.78rem;font-weight:700;margin-bottom:8px;">🎵 কী শুনছেন?</div>
+          <input class="comm-mini-input" id="composerMusicInput" placeholder="গানের নাম / শিল্পী লিখুন…" style="margin-bottom:0;">
+          <button class="comm-compose-btn" style="margin-top:8px;background:var(--rose);color:#fff;" onclick="composerAttachMusic()">যোগ করুন</button>
+        </div>
+
+        <!-- Feeling/Activity panel -->
+        <div class="comm-attach-panel" id="composerPanel-feeling">
+          <span class="comm-attach-close" onclick="composerTogglePanel('feeling')">✕</span>
+          <div style="font-size:.78rem;font-weight:700;margin-bottom:8px;">😊 আপনি কেমন অনুভব করছেন?</div>
+          <div class="comm-feeling-grid" id="composerFeelingGrid"></div>
+        </div>
+
+        <!-- Event panel -->
+        <div class="comm-attach-panel" id="composerPanel-event">
+          <span class="comm-attach-close" onclick="composerTogglePanel('event')">✕</span>
+          <div style="font-size:.78rem;font-weight:700;margin-bottom:8px;">📅 ইভেন্ট তৈরি করুন</div>
+          <input class="comm-mini-input" id="composerEventTitle" placeholder="ইভেন্টের নাম (যেমন: BCS Mock Test)">
+          <input class="comm-mini-input" id="composerEventDate" type="datetime-local">
+          <input class="comm-mini-input" id="composerEventPlace" placeholder="স্থান (অনলাইন / ঠিকানা)" style="margin-bottom:0;">
+          <button class="comm-compose-btn" style="margin-top:8px;background:var(--rose);color:#fff;" onclick="composerAttachEvent()">ইভেন্ট যোগ করুন</button>
+        </div>
+
+        <!-- Location panel -->
+        <div class="comm-attach-panel" id="composerPanel-location">
+          <span class="comm-attach-close" onclick="composerTogglePanel('location')">✕</span>
+          <div style="font-size:.78rem;font-weight:700;margin-bottom:8px;">📍 আপনি কোথায় আছেন?</div>
+          <input class="comm-mini-input" id="composerLocationInput" placeholder="স্থানের নাম লিখুন…" style="margin-bottom:0;">
+          <button class="comm-compose-btn" style="margin-top:8px;background:var(--rose);color:#fff;" onclick="composerAttachLocation()">যোগ করুন</button>
+        </div>
+
+        <!-- Tag people panel -->
+        <div class="comm-attach-panel" id="composerPanel-tag">
+          <span class="comm-attach-close" onclick="composerTogglePanel('tag')">✕</span>
+          <div style="font-size:.78rem;font-weight:700;margin-bottom:8px;">🏷️ কাদের ট্যাগ করবেন? (তারা নোটিফিকেশন পাবে)</div>
+          <input class="comm-mini-input" id="composerTagInput" placeholder="নাম লিখুন, কমা দিয়ে আলাদা করুন…" style="margin-bottom:0;">
+          <button class="comm-compose-btn" style="margin-top:8px;background:var(--rose);color:#fff;" onclick="composerAttachTags()">ট্যাগ করুন</button>
+        </div>
+
+        <button class="btn-gold" id="composerSubmitBtn" style="width:100%;margin-top:14px;" onclick="composerSubmit()">পোস্ট করুন →</button>
+      </div>
+    </div>
+  </div>
+
   <div id="shareModal" onclick="if(event.target===this)closeShareModal()">
     <div class="share-sheet">
       <div class="share-sheet-hd">
@@ -8408,9 +8775,9 @@ textarea.jni{min-height:80px;resize:vertical;}
   <span class="bp-kw">const</span> today     = <span class="bp-kw">new</span> Date().toISOString().split(<span class="bp-str">'T'</span>)[<span class="bp-num">0</span>];
   <span class="bp-kw">const</span> yesterday = <span class="bp-kw">new</span> Date(Date.now() - <span class="bp-num">86400000</span>)
                       .toISOString().split(<span class="bp-str">'T'</span>)[<span class="bp-num">0</span>];
-
+  
   <span class="bp-kw">const</span> lastActive = <span class="bp-kw">await</span> redis.<span class="bp-fn">get</span>(<span class="bp-str">`user:<span class="bp-tpl">${userId}</span>:last_active`</span>);
-
+  
   <span class="bp-kw">if</span> (lastActive === yesterday) {
     <span class="bp-cm">// Streak continues — award streak XP</span>
     <span class="bp-kw">await</span> redis.<span class="bp-fn">incr</span>(<span class="bp-str">`user:<span class="bp-tpl">${userId}</span>:streak`</span>);
@@ -8503,7 +8870,7 @@ io.<span class="bp-fn">on</span>(<span class="bp-str">"connection"</span>, (sock
   socket.<span class="bp-fn">on</span>(<span class="bp-str">"join-room"</span>, (roomId, userId) => {
     socket.<span class="bp-fn">join</span>(roomId);
     socket.<span class="bp-fn">to</span>(roomId).<span class="bp-fn">emit</span>(<span class="bp-str">"user-connected"</span>, userId);
-
+    
     socket.<span class="bp-fn">on</span>(<span class="bp-str">"disconnect"</span>, () => {
       socket.<span class="bp-fn">to</span>(roomId).<span class="bp-fn">emit</span>(<span class="bp-str">"user-disconnected"</span>, userId);
     });
@@ -9544,45 +9911,45 @@ app = <span class="bp-fn">FastAPI</span>()
           </div>
         </div>
         <div class="dash-main">
+          <!-- Single shared login gate for the entire Admin panel — one login unlocks all tabs -->
+          <div id="admLoginGate" style="max-width:360px;margin:20px auto;padding:24px 22px;background:var(--card);border:1px solid var(--border);border-radius:var(--r2);">
+            <div style="text-align:center;margin-bottom:14px;"><div style="font-size:1.8rem;">🔑</div><div style="font-weight:700;font-family:'Cormorant Garamond',serif;font-size:1.15rem;">Admin লগইন</div></div>
+            <div id="fcLoginError" style="display:none;color:var(--red);font-size:.75rem;margin-bottom:8px;text-align:center;"></div>
+            <input id="fcEmailInput" type="email" placeholder="Email" style="width:100%;padding:9px 12px;margin-bottom:8px;border:1.5px solid var(--border2);border-radius:8px;font-size:.82rem;background:var(--void);color:var(--text);box-sizing:border-box;">
+            <input id="fcPassInput" type="password" placeholder="Password" style="width:100%;padding:9px 12px;margin-bottom:10px;border:1.5px solid var(--border2);border-radius:8px;font-size:.82rem;background:var(--void);color:var(--text);box-sizing:border-box;" onkeydown="if(event.key==='Enter')fcLogin()">
+            <button class="btn-gold btn-sm" style="width:100%;" onclick="fcLogin()" id="fcLoginBtn">লগইন করুন</button>
+          </div>
+
+          <div id="admDashContent" style="display:none;">
           <div class="dtab-row">
             <div class="dtab on" onclick="dt(this,'adm-ov')">📊 ওভারভিউ</div>
             <div class="dtab" onclick="dt(this,'adm-approve')">✅ AI অ্যাপ্রুভাল</div>
             <div class="dtab" onclick="dt(this,'adm-payout')">💰 পেআউট</div>
             <div class="dtab" onclick="dt(this,'adm-report')">📈 রিপোর্ট</div>
             <div class="dtab" onclick="dt(this,'adm-vod')">🎬 রেকর্ডেড ক্লাস</div>
-            <div class="dtab" onclick="dt(this,'adm-content');fcInit()">📰 ফিড কনটেন্ট</div>
+            <div class="dtab" onclick="dt(this,'adm-content')">📰 ফিড কনটেন্ট</div>
           </div>
           <div class="dtab-panel on" id="adm-ov">
             <div class="metric-row" style="margin-bottom:16px;">
-              <div class="metric"><div class="metric-top"><span class="metric-icon">💰</span><span class="metric-badge mb-up">+২৮%</span></div><div class="metric-num">৳৩.৮লাখ</div><div class="metric-lbl">এ মাসে মোট আয়</div></div>
-              <div class="metric"><div class="metric-top"><span class="metric-icon">👤</span><span class="metric-badge mb-up">+৮৪০</span></div><div class="metric-num">৫০,২৮০</div><div class="metric-lbl">মোট ব্যবহারকারী</div></div>
-              <div class="metric"><div class="metric-top"><span class="metric-icon">📹</span><span class="metric-badge mb-dn" style="background:rgba(224,48,48,.15);color:var(--red);">৫ পেন্ডিং</span></div><div class="metric-num">৮০</div><div class="metric-lbl">মোট কোর্স</div></div>
-              <div class="metric"><div class="metric-top"><span class="metric-icon">🤖</span></div><div class="metric-num">৯২%</div><div class="metric-lbl">AI কোয়ালিটি গড়</div></div>
+              <div class="metric"><div class="metric-top"><span class="metric-icon">💰</span></div><div class="metric-num" id="admMetricRevenue">…</div><div class="metric-lbl">এ মাসে মোট আয়</div></div>
+              <div class="metric"><div class="metric-top"><span class="metric-icon">👤</span></div><div class="metric-num" id="admMetricUsers">…</div><div class="metric-lbl">মোট ব্যবহারকারী</div></div>
+              <div class="metric"><div class="metric-top"><span class="metric-icon">📹</span><span class="metric-badge mb-dn" style="background:rgba(224,48,48,.15);color:var(--red);"><span id="admMetricPending">…</span> পেন্ডিং</span></div><div class="metric-num" id="admMetricCourses">…</div><div class="metric-lbl">মোট কোর্স</div></div>
+              <div class="metric"><div class="metric-top"><span class="metric-icon">🤖</span></div><div class="metric-num" id="admMetricAiQuality">…</div><div class="metric-lbl">AI কোয়ালিটি গড়</div></div>
             </div>
-            <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:14px;">
-              <div class="card-panel"><div class="card-panel-hd"><h4>প্ল্যাটফর্ম আয় (২০২৫)</h4></div><div class="card-panel-body"><div class="mini-bars" style="height:60px;"><div class="mb-bar" style="height:40%;background:var(--red)"></div><div class="mb-bar" style="height:55%;background:var(--red)"></div><div class="mb-bar" style="height:48%;background:var(--red)"></div><div class="mb-bar" style="height:72%;background:var(--red)"></div><div class="mb-bar" style="height:62%;background:var(--red)"></div><div class="mb-bar" style="height:100%;background:var(--gold)"></div></div><div class="chart-labels"><span class="cl">জান</span><span class="cl">ফেব</span><span class="cl">মার্চ</span><span class="cl">এপ্রিল</span><span class="cl">মে</span><span class="cl">জুন</span></div></div></div>
-              <div class="card-panel"><div class="card-panel-hd"><h4>সাম্প্রতিক কার্যক্রম</h4></div><div class="card-panel-body">
-                <div class="activity-item"><div class="ac-dot" style="background:var(--teal)"></div><div><div class="ac-text">টিচার ভেরিফাইড: কামরুল হাসান</div><div class="ac-time">আজ</div></div></div>
-                <div class="activity-item"><div class="ac-dot" style="background:var(--gold)"></div><div><div class="ac-text">কোর্স অ্যাপ্রুভড: IELTS Writing</div><div class="ac-time">আজ</div></div></div>
-                <div class="activity-item"><div class="ac-dot" style="background:var(--red)"></div><div><div class="ac-text">পেআউট সম্পন্ন: ৫ টিচার</div><div class="ac-time">গতকাল</div></div></div>
-                <div class="activity-item"><div class="ac-dot" style="background:var(--purple)"></div><div><div class="ac-text">নতুন বই প্রকাশ: Medical Guide</div><div class="ac-time">২ দিন আগে</div></div></div>
-              </div></div>
-            </div>
+            <div class="card-panel"><div class="card-panel-hd"><h4>সাম্প্রতিক কার্যক্রম</h4></div><div class="card-panel-body" id="admActivityFeed">
+              <div style="text-align:center;color:var(--text3);padding:12px;">লোড হচ্ছে…</div>
+            </div></div>
           </div>
           <div class="dtab-panel" id="adm-approve">
             <div style="font-family:'Noto Serif Bengali',serif;font-size:.84rem;color:var(--text3);margin-bottom:14px;">AI কোয়ালিটি স্কোর সহ পেন্ডিং কোর্স ও টিচার অ্যাপ্রুভাল:</div>
-            <table class="data-table"><thead><tr><th>নাম</th><th>ধরন</th><th>জমার তারিখ</th><th>AI Quality Score</th><th>অ্যাকশন</th></tr></thead><tbody>
-              <tr><td><strong>IELTS Writing Master</strong></td><td><span class="status-chip sc-blue">কোর্স</span></td><td>৮ মে</td><td><span style="color:var(--green);font-weight:700;font-family:'JetBrains Mono',monospace;">৯২/১০০ ✓</span></td><td><button class="btn-teal btn-sm" onclick="showToast('কোর্স অ্যাপ্রুভড!')">✅ অ্যাপ্রুভ</button></td></tr>
-              <tr><td><strong>কামরুল হাসান</strong></td><td><span class="status-chip sc-yellow">টিচার</span></td><td>৭ মে</td><td><span style="color:var(--teal);font-weight:700;font-family:'JetBrains Mono',monospace;">NID ✓ Bank ✓</span></td><td><button class="btn-teal btn-sm" onclick="showToast('টিচার অ্যাপ্রুভড!')">✅ অ্যাপ্রুভ</button></td></tr>
-              <tr><td><strong>SSC Bangla Course</strong></td><td><span class="status-chip sc-blue">কোর্স</span></td><td>৬ মে</td><td><span style="color:var(--gold);font-weight:700;font-family:'JetBrains Mono',monospace;">৭৮/১০০ ⚠</span></td><td><button class="btn-sm" style="background:var(--gold-dim);border:1px solid rgba(200,152,30,.3);border-radius:6px;color:var(--gold);padding:6px 12px;font-size:.74rem;font-weight:600;">🔍 রিভিউ</button></td></tr>
+            <table class="data-table"><thead><tr><th>নাম</th><th>ধরন</th><th>জমার তারিখ</th><th>AI Quality Score</th><th>অ্যাকশন</th></tr></thead><tbody id="admApprovalTbody">
+              <tr><td colspan="5" style="text-align:center;color:var(--text3);">লোড হচ্ছে…</td></tr>
             </tbody></table>
           </div>
           <div class="dtab-panel" id="adm-payout">
-            <div style="display:flex;justify-content:flex-end;margin-bottom:12px;"><button class="btn-teal btn-sm">সব টিচারকে পেআউট করুন</button></div>
-            <table class="data-table"><thead><tr><th>টিচার</th><th>মোট বিক্রয়</th><th>প্ল্যাটফর্ম ২০%</th><th>টিচার ৮০%</th><th>স্ট্যাটাস</th></tr></thead><tbody>
-              <tr><td>ফারহানা বেগম</td><td>৳৪০,০০০</td><td>৳৮,০০০</td><td style="color:var(--green);font-weight:600;">৳৩২,০০০</td><td><span class="status-chip sc-green">পেআউট দেওয়া হয়েছে</span></td></tr>
-              <tr><td>মোহাম্মদ আলী</td><td>৳৫৬,২৫০</td><td>৳১১,২৫০</td><td style="color:var(--green);font-weight:600;">৳৪৫,০০০</td><td><span class="status-chip sc-yellow">পেন্ডিং</span></td></tr>
-              <tr><td>সাবিনা ইসলাম</td><td>৳৪৭,৫০০</td><td>৳৯,৫০০</td><td style="color:var(--green);font-weight:600;">৳৩৮,০০০</td><td><span class="status-chip sc-green">পেআউট দেওয়া হয়েছে</span></td></tr>
+            <div style="display:flex;justify-content:flex-end;margin-bottom:12px;"><button class="btn-teal btn-sm" onclick="admPayAll()" id="admPayAllBtn">সব টিচারকে পেআউট করুন</button></div>
+            <table class="data-table"><thead><tr><th>টিচার</th><th>মোট বিক্রয়</th><th>প্ল্যাটফর্ম কাট</th><th>টিচার শেয়ার</th><th>স্ট্যাটাস</th></tr></thead><tbody id="admPayoutTbody">
+              <tr><td colspan="5" style="text-align:center;color:var(--text3);">লোড হচ্ছে…</td></tr>
             </tbody></table>
           </div>
           <div class="dtab-panel" id="adm-vod">
@@ -9608,33 +9975,15 @@ app = <span class="bp-fn">FastAPI</span>()
           </div>
           <div class="dtab-panel" id="adm-report">
             <div class="metric-row" style="margin-bottom:16px;">
-              <div class="metric"><div class="metric-top"><span class="metric-icon">📚</span></div><div class="metric-num">৩০০+</div><div class="metric-lbl">মোট বই বিক্রয়</div></div>
-              <div class="metric"><div class="metric-top"><span class="metric-icon">🎓</span></div><div class="metric-num">৮০+</div><div class="metric-lbl">কোর্স এনরোলমেন্ট</div></div>
-              <div class="metric"><div class="metric-top"><span class="metric-icon">🛒</span></div><div class="metric-num">২,০০০+</div><div class="metric-lbl">মার্ট অর্ডার</div></div>
-              <div class="metric"><div class="metric-top"><span class="metric-icon">✍</span></div><div class="metric-num">২৫</div><div class="metric-lbl">ব্লগ আর্টিকেল</div></div>
+              <div class="metric"><div class="metric-top"><span class="metric-icon">📚</span></div><div class="metric-num" id="admRepBooks">…</div><div class="metric-lbl">মোট বই বিক্রয়</div></div>
+              <div class="metric"><div class="metric-top"><span class="metric-icon">🎓</span></div><div class="metric-num" id="admRepCourses">…</div><div class="metric-lbl">কোর্স এনরোলমেন্ট</div></div>
+              <div class="metric"><div class="metric-top"><span class="metric-icon">🛒</span></div><div class="metric-num" id="admRepMart">…</div><div class="metric-lbl">মার্ট অর্ডার</div></div>
             </div>
-            <div class="card-panel"><div class="card-panel-hd"><h4>আয়ের উৎস বিশ্লেষণ</h4></div><div class="card-panel-body">
-              <div style="display:flex;flex-direction:column;gap:12px;">
-                <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:.8rem;width:130px;color:var(--text2);">কোর্স বিক্রয়</span><div class="prog-bar" style="flex:1"><div class="prog-fill pf-teal" style="width:55%"></div></div><span style="font-size:.78rem;font-weight:700;color:var(--teal);">৫৫%</span></div>
-                <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:.8rem;width:130px;color:var(--text2);">বই বিক্রয়</span><div class="prog-bar" style="flex:1"><div class="prog-fill pf-gold" style="width:28%"></div></div><span style="font-size:.78rem;font-weight:700;color:var(--gold);">২৮%</span></div>
-                <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:.8rem;width:130px;color:var(--text2);">মার্ট বিক্রয়</span><div class="prog-bar" style="flex:1"><div class="prog-fill pf-purple" style="width:17%"></div></div><span style="font-size:.78rem;font-weight:700;color:var(--purple);">১৭%</span></div>
-              </div>
+            <div class="card-panel"><div class="card-panel-hd"><h4>আয়ের উৎস বিশ্লেষণ</h4></div><div class="card-panel-body" id="admRevenueBreakdown">
+              <div style="text-align:center;color:var(--text3);padding:12px;">লোড হচ্ছে…</div>
             </div></div>
           </div>
           <div class="dtab-panel" id="adm-content">
-            <!-- This tab is separately authenticated (its own admin login) —
-                 the rest of this dashboard (ওভারভিউ/AI অ্যাপ্রুভাল/পেআউট/রিপোর্ট/
-                 রেকর্ডেড ক্লাস) is still static demo data; only this tab talks
-                 to a real backend (routes/admin.js contents endpoints). -->
-            <div id="fcLoginGate" style="max-width:360px;margin:20px auto;padding:24px 22px;background:var(--card);border:1px solid var(--border);border-radius:var(--r2);">
-              <div style="text-align:center;margin-bottom:14px;"><div style="font-size:1.8rem;">🔑</div><div style="font-weight:700;font-family:'Cormorant Garamond',serif;font-size:1.15rem;">Admin লগইন — ফিড কনটেন্ট</div></div>
-              <div id="fcLoginError" style="display:none;color:var(--red);font-size:.75rem;margin-bottom:8px;text-align:center;"></div>
-              <input id="fcEmailInput" type="email" placeholder="Email" style="width:100%;padding:9px 12px;margin-bottom:8px;border:1.5px solid var(--border2);border-radius:8px;font-size:.82rem;background:var(--void);color:var(--text);">
-              <input id="fcPassInput" type="password" placeholder="Password" style="width:100%;padding:9px 12px;margin-bottom:10px;border:1.5px solid var(--border2);border-radius:8px;font-size:.82rem;background:var(--void);color:var(--text);" onkeydown="if(event.key==='Enter')fcLogin()">
-              <button class="btn-gold btn-sm" style="width:100%;" onclick="fcLogin()" id="fcLoginBtn">লগইন করুন</button>
-            </div>
-
-            <div id="fcContent" style="display:none;">
               <div class="card-panel" style="margin-bottom:16px;">
                 <div class="card-panel-hd"><h4>➕ নতুন কনটেন্ট পাবলিশ করুন</h4></div>
                 <div class="card-panel-body">
@@ -9660,8 +10009,8 @@ app = <span class="bp-fn">FastAPI</span>()
               <table class="data-table"><thead><tr><th>শিরোনাম</th><th>উইং</th><th>ধরন</th><th>লাইক/ভিউ</th><th>স্ট্যাটাস</th><th>অ্যাকশন</th></tr></thead>
                 <tbody id="fcContentTbody"><tr><td colspan="6" style="text-align:center;color:var(--text3);">লোড হচ্ছে…</td></tr></tbody>
               </table>
-            </div>
           </div>
+          </div><!-- /admDashContent -->
         </div>
       </div>
     </div>
@@ -9727,6 +10076,7 @@ app = <span class="bp-fn">FastAPI</span>()
           <li><a onclick="go('ai')">AI Tutor</a></li>
           <li><a onclick="go('ai')">AI Study Planner</a></li>
           <li><a onclick="go('research')">Research Journal</a></li>
+          <li><a onclick="go('tuition')">Tuition Hub</a></li>
         </ul>
       </div>
       <div>
@@ -9754,7 +10104,7 @@ app = <span class="bp-fn">FastAPI</span>()
 
 <!-- ════ JAVASCRIPT ════ -->
 <script>
-const pages=['home','academy','teachers','publications','mart','blog','ai','higherstudy','coins','institutional','certifications','community','media','creator','research','careers','news','blueprint','join','dashboard','kids','feed','bcs-prelim','bank-jobs','hsc-prep','ssc-prep','class8-jsc','class7-prep','class6-prep','class5-psc'];
+const pages=['home','academy','teachers','publications','mart','blog','ai','higherstudy','coins','institutional','certifications','community','media','creator','research','tuition','careers','news','blueprint','join','dashboard','kids','feed','bcs-prelim','bank-jobs','hsc-prep','ssc-prep','class8-jsc','class7-prep','class6-prep','class5-psc'];
 // ══════════════════════════════════════════════════════
 // 🏦 APP STATE — coins, cart, streak (localStorage-backed,
 //    cross-tab synced via storage event)
@@ -10975,7 +11325,85 @@ async function ecoToggleInterest(slug, isChecked){
     showToast(isChecked ? '✅ আপনার ফিডে যোগ হলো' : 'ফিড থেকে সরানো হলো');
   } catch(err){ showToast('সংরক্ষণ ব্যর্থ হয়েছে'); }
 }
+
+const HWP_WINGS = [
+  {key:'academy', label:'Effective Academy', icon:'🎓'},
+  {key:'kids', label:'Kids & Baby World', icon:'🧸'},
+  {key:'teachers', label:'Teachers', icon:'👩‍🏫'},
+  {key:'publications', label:'Publications', icon:'📚'},
+  {key:'mart', label:'Mart', icon:'🛒'},
+  {key:'blog', label:'Blog', icon:'✍️'},
+  {key:'ai', label:'Effective AI', icon:'🤖'},
+  {key:'higherstudy', label:'Higher Study', icon:'🌍'},
+  {key:'coins', label:'Gold Coin', icon:'🪙'},
+  {key:'institutional', label:'Institutional', icon:'🏛️'},
+  {key:'certifications', label:'Exams & Certificates', icon:'🏅'},
+  {key:'community', label:'Community', icon:'👥'},
+  {key:'media', label:'Media', icon:'📺'},
+  {key:'creator', label:'Creator', icon:'🎨'},
+  {key:'research', label:'Research', icon:'🔬'},
+  {key:'careers', label:'Careers', icon:'💼'},
+  {key:'news', label:'News', icon:'📰'}
+];
+const HWP_KIND_ICON = {video:'🎬', game:'🕹️', article:'📄', post:'💬', audio:'🎧', worksheet:'📝'};
+let hwpMyWings = []; // preferred_wings currently checked (loaded from /auth/me if logged in)
+
+async function loadHomeWingPreviews(){
+  const grid = document.getElementById('hwpGrid');
+  if(!grid || grid.dataset.loaded) return; // load once — homepage content doesn't need to refetch on every nav back to home
+
+  // Pull the logged-in user's current preferred_wings so checkboxes start
+  // correctly checked (uses the shared site-wide session — see FEED_TOKEN_KEY).
+  if(fdToken()){
+    try{ const me = await fdApiFetch('/auth/me'); hwpMyWings = me.user.preferred_wings || []; }
+    catch(e){ hwpMyWings = []; }
+  }
+
+  try{
+    const base = window.VOD_API_BASE || '';
+    const results = await Promise.all(HWP_WINGS.map(w=>
+      fetch(`${base}/contents?wing=${w.key}&limit=3`).then(r=>r.json()).catch(()=>({data:[]}))
+    ));
+    grid.innerHTML = HWP_WINGS.map((w,i)=>{
+      const items = (results[i] && results[i].data) || [];
+      const itemsHtml = items.length
+        ? items.map(c=>`<div class="hwp-item" onclick="go('${w.key}')">${HWP_KIND_ICON[c.content_kind]||'📄'} ${escapeHtml(c.title)}</div>`).join('')
+        : '<div class="hwp-empty">এখনো কোনো কনটেন্ট নেই</div>';
+      const checked = hwpMyWings.includes(w.key) ? 'checked' : '';
+      return `<div class="hwp-section">
+        <div class="hwp-hd">
+          <span class="hwp-icon">${w.icon}</span><h3>${escapeHtml(w.label)}</h3>
+          <label class="hwp-interest-check" title="আমার ফিডে এই বিষয় দেখাও">
+            <input type="checkbox" ${checked} onchange="hwpToggleInterest('${w.key}',this.checked)"> আগ্রহী
+          </label>
+        </div>
+        <div class="hwp-list">${itemsHtml}</div>
+        <a class="hwp-more" onclick="go('${w.key}')">আরো দেখুন ➔</a>
+      </div>`;
+    }).join('');
+    grid.dataset.loaded = '1';
+  } catch(err){
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--text3);font-size:.8rem;">লোড করা যায়নি</div>';
+  }
+}
+
+async function hwpToggleInterest(wingKey, isChecked){
+  if(!fdToken()){
+    showToast('আগ্রহ সেভ করতে আগে রেজিস্ট্রেশন/লগইন করুন');
+    openFeedAuth();
+    return;
+  }
+  hwpMyWings = isChecked ? [...new Set([...hwpMyWings, wingKey])] : hwpMyWings.filter(w=>w!==wingKey);
+  try{
+    await fdApiFetch('/auth/me/preferences', {method:'PUT', body:JSON.stringify({preferred_wings: hwpMyWings})});
+    showToast(isChecked ? `✅ ${wingKey} আপনার ফিডে যোগ হলো` : `${wingKey} ফিড থেকে সরানো হলো`);
+  } catch(err){ showToast('সংরক্ষণ ব্যর্থ হয়েছে'); }
+}
 document.addEventListener('DOMContentLoaded', hwpAppInit);
+document.addEventListener('DOMContentLoaded', () => {
+  const active = document.querySelector('.page.active');
+  _composerUpdateFabVisibility(active ? active.id.replace('page-','') : 'home');
+});
 
 // ══════════════════════════════════════════════════════
 // 🚪 App entry: first-visit quick registration + default landing page
@@ -11019,7 +11447,114 @@ async function qrSubmit(){
   } finally { btn.disabled=false; btn.textContent='শুরু করুন 🚀'; }
 }
 
+// ══════════════════════════════════════════════════════
+// 🗂️ SECTOR & SUB-SECTOR TAXONOMY TREE (Home/Ecosystem page)
+// Single source of truth — each sub-sector appears exactly once,
+// with a checkbox (saves to users.interests) + hyperlink (go()).
+// Reuses the same fdApiFetch/fdToken auth pattern as hwpToggleInterest
+// so this is not a third, separate preference system.
+// ══════════════════════════════════════════════════════
+const SECT_TREE = [
+  { name:'Kids', icon:'🧸', items:[
+    {label:'Pre School', page:'kids', key:'kids-preschool'},
+    {label:'Play', page:'kids', key:'kids-play'},
+    {label:'Nursery', page:'kids', key:'kids-nursery'},
+    {label:'Class 1', page:'kids', key:'kids-class1'},
+    {label:'Class 2', page:'kids', key:'kids-class2'},
+    {label:'Class 3', page:'kids', key:'kids-class3'},
+    {label:'Class 4', page:'kids', key:'kids-class4'},
+    {label:'Class 5', page:'kids', key:'kids-class5'},
+  ]},
+  { name:'Academic', icon:'📖', items:[
+    {label:'Class 5', page:'class5-psc', key:'class5'},
+    {label:'Class 6', page:'class6-prep', key:'class6'},
+    {label:'Class 7', page:'class7-prep', key:'class7'},
+    {label:'Class 8 and JSC', page:'class8-jsc', key:'class8-jsc'},
+    {label:'Class 9,10 and SSC', page:'ssc-prep', key:'ssc'},
+    {label:'Class 11,12,HSC', page:'hsc-prep', key:'hsc'},
+    {label:'Admission', page:'academy', key:'academic-admission'},
+  ]},
+  { name:'Admission', icon:'🎓', items:[
+    {label:'College Admission', page:'academy', key:'college-admission'},
+    {label:'University Admission', page:'academy', key:'university-admission'},
+    {label:'Engineering', page:'academy', key:'engineering-admission'},
+    {label:'Medical', page:'academy', key:'medical-admission'},
+    {label:'IBA (BBA, MBA, EMBA)', page:'academy', key:'iba-admission'},
+  ]},
+  { name:'Jobs', icon:'💼', items:[
+    {label:'Govt Jobs', page:'careers', key:'govt-jobs'},
+    {label:'BCS', page:'bcs-prelim', key:'bcs'},
+    {label:'Govt Bank', page:'bank-jobs', key:'govt-bank'},
+    {label:'Non Cadre Jobs', page:'careers', key:'non-cadre'},
+    {label:'Job Circular', page:'careers', key:'job-circular'},
+    {label:'Private Jobs', page:'careers', key:'private-jobs'},
+    {label:'Banks', page:'bank-jobs', key:'banks'},
+    {label:'Multi National', page:'careers', key:'multinational-jobs'},
+    {label:'Jobs Circulars', page:'careers', key:'jobs-circulars'},
+    {label:'CV', page:'careers', key:'cv'},
+    {label:'1st Class', page:'careers', key:'1st-class'},
+    {label:'2nd Class', page:'careers', key:'2nd-class'},
+    {label:'3rd Class', page:'careers', key:'3rd-class'},
+    {label:'4th Class', page:'careers', key:'4th-class'},
+    {label:'Departmental Exam', page:'careers', key:'departmental-exam'},
+    {label:'ONE CLICK APPLY', page:'careers', key:'one-click-apply'},
+    {label:'JOB Fair', page:'careers', key:'job-fair'},
+  ]},
+  { name:'Study Abroad', icon:'🌐', items:[
+    {label:'Under Graduate', page:'higherstudy', key:'sa-undergrad'},
+    {label:'Masters/MBA', page:'higherstudy', key:'sa-masters'},
+    {label:'MPhil', page:'higherstudy', key:'sa-mphil'},
+    {label:'PhD', page:'higherstudy', key:'sa-phd'},
+    {label:'Post Doctoral', page:'higherstudy', key:'sa-postdoc'},
+    {label:'IELTS', page:'higherstudy', key:'ielts'},
+    {label:'TOEFL', page:'higherstudy', key:'toefl'},
+    {label:'SAT', page:'higherstudy', key:'sat'},
+    {label:'GRE', page:'higherstudy', key:'gre'},
+    {label:'GMAT', page:'higherstudy', key:'gmat'},
+    {label:'PTE', page:'higherstudy', key:'pte'},
+    {label:'DET', page:'higherstudy', key:'det'},
+    {label:'MCAT', page:'higherstudy', key:'mcat'},
+    {label:'LSAT', page:'higherstudy', key:'lsat'},
+    {label:'USMLE', page:'higherstudy', key:'usmle'},
+    {label:'JLPT', page:'higherstudy', key:'jlpt'},
+    {label:'TOPIK', page:'higherstudy', key:'topik'},
+  ]},
+];
+
+let sectMyInterests = [];
+try{ sectMyInterests = JSON.parse(localStorage.getItem('eeh_sect_interests')||'[]'); }catch(e){ sectMyInterests=[]; }
+
+function sectRenderTree(){
+  const el = document.getElementById('sectTree');
+  if(!el) return;
+  el.innerHTML = SECT_TREE.map(sector => `
+    <div class="sect-col">
+      <div class="sect-col-hd">${sector.icon} ${sector.name}</div>
+      ${sector.items.map(it => `
+        <div class="sect-item">
+          <input type="checkbox" class="sect-check" id="sect-${it.key}" aria-label="${it.label} আগ্রহ হিসেবে চিহ্নিত করুন" ${sectMyInterests.includes(it.key)?'checked':''} onchange="sectToggleInterest('${it.key}', this.checked)">
+          <span class="sect-link" onclick="go('${it.page}')">${it.label}</span>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+async function sectToggleInterest(key, isChecked){
+  sectMyInterests = isChecked ? [...new Set([...sectMyInterests, key])] : sectMyInterests.filter(k=>k!==key);
+  try{ localStorage.setItem('eeh_sect_interests', JSON.stringify(sectMyInterests)); }catch(e){}
+  if(!fdToken()){
+    showToast(isChecked ? '✅ আগ্রহ সংরক্ষিত হয়েছে (লগইন করলে সব ডিভাইসে সিঙ্ক হবে)' : 'আগ্রহ সরানো হয়েছে');
+    return;
+  }
+  try{
+    await fdApiFetch('/auth/me/preferences', {method:'PUT', body:JSON.stringify({interests: sectMyInterests})});
+    showToast(isChecked ? '✅ আগ্রহ যোগ হলো — ফিডে সংশ্লিষ্ট কনটেন্ট আসবে' : 'আগ্রহ সরানো হলো');
+  } catch(err){ showToast('সংরক্ষণ ব্যর্থ হয়েছে'); }
+}
+
 function hwpAppInit(){
+  sectRenderTree(); // always render — must run before the login-redirect below returns early
   // Returning, logged-in visitor → Feed is the default landing page.
   // First-time visitor with no session → show the quick-registration modal.
   let visited = false;
@@ -11030,6 +11565,7 @@ function hwpAppInit(){
     return;
   }
   renderEcoTaxonomy();
+  loadHomeWingPreviews();
   if(!visited){
     const modal = document.getElementById('qrModal');
     if(modal){ modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
@@ -11110,10 +11646,22 @@ function awSwitch(el, wing){
 }
 
 function awGo(subject){
-  showToast(`🔍 "${subject}" বিষয়ের কোর্স খোঁজা হচ্ছে...`);
-  // Filter the course grid below by scrolling to it
+  showToast(`🔍 "${subject}" খোঁজা হচ্ছে...`);
+  // FIX: route to the correct grid on whichever page is currently active
+  // (previously always targeted #page-academy, breaking this on 4 other pages)
+  const gridByPage = {
+    'academy':      '.course-grid',
+    'publications': '.pub-grid5',
+    'mart':         '.mart-grid',
+    'community':    '.room-card',
+    'dashboard':    '.course-grid',
+  };
+  const activePage = document.querySelector('.page.active');
+  const pageId = activePage ? activePage.id.replace('page-','') : 'academy';
+  const gridSel = gridByPage[pageId] || '.course-grid';
   setTimeout(()=>{
-    document.querySelector('#page-academy .course-grid')?.scrollIntoView({behavior:'smooth', block:'start'});
+    const target = document.querySelector(`#page-${pageId} ${gridSel}`) || document.querySelector(gridSel);
+    target?.scrollIntoView({behavior:'smooth', block:'start'});
   }, 400);
 }
 
@@ -11171,7 +11719,111 @@ function go(id){
   if(id==='home'){
     renderEcoTaxonomy();
   }
+  // Live marketplace catalogs — Academy/Publications/Mart (loaded once, same guard pattern)
+  if(id==='academy') loadAcademyLiveCourses();
+  if(id==='publications') loadPublicationsLiveBooks();
+  if(id==='mart') loadMartLiveProducts();
+  // Tuition Hub wing: build filters/forms once, then (re)load results
+  if(id==='tuition') tuhInit();
 }
+
+// ══════════════════════════════════════════════════════
+// 🔴 Live marketplace catalogs (routes/marketplace.js) — real courses/
+// books/products from the database, with real enroll/buy actions.
+// ══════════════════════════════════════════════════════
+async function loadAcademyLiveCourses(){
+  const grid = document.getElementById('academyLiveCourses');
+  if(!grid || grid.dataset.loaded) return;
+  try{
+    const base = window.VOD_API_BASE || '';
+    const res = await fetch(`${base}/academy/courses`);
+    const data = await res.json();
+    if(!data.courses || !data.courses.length){
+      grid.innerHTML = '<div class="lc-empty">এখনো কোনো কোর্স নেই</div>';
+    } else {
+      grid.innerHTML = data.courses.map(c => `
+        <div class="lc-card">
+          <div class="lc-card-title">${escapeHtml(c.title)}</div>
+          <div class="lc-card-meta">${escapeHtml(c.category||'')}${c.teacher_name?' · '+escapeHtml(c.teacher_name):''}${c.rating?' · ⭐ '+c.rating:''}</div>
+          <div class="lc-card-price">৳${escapeHtml(String(c.price))}</div>
+          <button class="lc-card-btn" onclick="enrollInCourse(${c.id}, this)">ভর্তি হন</button>
+        </div>`).join('');
+    }
+    grid.dataset.loaded = '1';
+  } catch(err){ grid.innerHTML = '<div class="lc-empty">লোড করা যায়নি</div>'; }
+}
+
+async function loadPublicationsLiveBooks(){
+  const grid = document.getElementById('publicationsLiveBooks');
+  if(!grid || grid.dataset.loaded) return;
+  try{
+    const base = window.VOD_API_BASE || '';
+    const res = await fetch(`${base}/publications/books`);
+    const data = await res.json();
+    if(!data.products || !data.products.length){
+      grid.innerHTML = '<div class="lc-empty">এখনো কোনো বই নেই</div>';
+    } else {
+      grid.innerHTML = data.products.map(p => `
+        <div class="lc-card">
+          <div class="lc-card-title">${escapeHtml(p.title)}</div>
+          <div class="lc-card-meta">${escapeHtml(p.category||'')} · স্টক: ${escapeHtml(String(p.stock))}</div>
+          <div class="lc-card-price">৳${escapeHtml(String(p.price))}</div>
+          <button class="lc-card-btn" onclick="buyProduct(${p.id}, this, 'বই')" ${p.stock<1?'disabled':''}>${p.stock<1?'স্টক শেষ':'কিনুন'}</button>
+        </div>`).join('');
+    }
+    grid.dataset.loaded = '1';
+  } catch(err){ grid.innerHTML = '<div class="lc-empty">লোড করা যায়নি</div>'; }
+}
+
+async function loadMartLiveProducts(){
+  const grid = document.getElementById('martLiveProducts');
+  if(!grid || grid.dataset.loaded) return;
+  try{
+    const base = window.VOD_API_BASE || '';
+    const res = await fetch(`${base}/mart/products`);
+    const data = await res.json();
+    if(!data.products || !data.products.length){
+      grid.innerHTML = '<div class="lc-empty">এখনো কোনো পণ্য নেই</div>';
+    } else {
+      grid.innerHTML = data.products.map(p => `
+        <div class="lc-card">
+          <div class="lc-card-title">${escapeHtml(p.title)}</div>
+          <div class="lc-card-meta">${escapeHtml(p.category||'')} · স্টক: ${escapeHtml(String(p.stock))}</div>
+          <div class="lc-card-price">৳${escapeHtml(String(p.price))}</div>
+          <button class="lc-card-btn" onclick="buyProduct(${p.id}, this, 'পণ্য')" ${p.stock<1?'disabled':''}>${p.stock<1?'স্টক শেষ':'কিনুন'}</button>
+        </div>`).join('');
+    }
+    grid.dataset.loaded = '1';
+  } catch(err){ grid.innerHTML = '<div class="lc-empty">লোড করা যায়নি</div>'; }
+}
+
+async function enrollInCourse(id, btn){
+  if(!fdToken()){ showToast('ভর্তি হতে আগে লগইন করুন'); openFeedAuth(); return; }
+  btn.disabled = true; const original = btn.textContent; btn.textContent = 'অপেক্ষা করুন…';
+  try{
+    const data = await fdApiFetch(`/academy/courses/${id}/enroll`, {method:'POST'});
+    btn.textContent = '✓ ভর্তি হয়েছেন';
+    AppState.addCoin(20);
+    showToast(`🎉 "${data.course_title}"-এ ভর্তি সম্পন্ন! +20 🪙`);
+  } catch(err){
+    if(err.message === 'already_enrolled'){ btn.textContent = '✓ ইতিমধ্যে ভর্তি'; showToast('আপনি ইতিমধ্যে এই কোর্সে ভর্তি'); }
+    else { btn.disabled = false; btn.textContent = original; showToast('ভর্তি ব্যর্থ হয়েছে'); }
+  }
+}
+
+async function buyProduct(id, btn, label){
+  if(!fdToken()){ showToast('কিনতে আগে লগইন করুন'); openFeedAuth(); return; }
+  btn.disabled = true; const original = btn.textContent; btn.textContent = 'অপেক্ষা করুন…';
+  try{
+    const data = await fdApiFetch(`/products/${id}/buy`, {method:'POST', body: JSON.stringify({quantity:1})});
+    btn.textContent = '✓ কেনা হয়েছে';
+    showToast(`✅ "${data.product_title}" কেনা হয়েছে — ৳${data.amount}`);
+  } catch(err){
+    if(err.message === 'insufficient_stock'){ btn.disabled = false; btn.textContent = original; showToast('দুঃখিত, স্টক শেষ হয়ে গেছে'); }
+    else { btn.disabled = false; btn.textContent = original; showToast(label+' কেনা যায়নি'); }
+  }
+}
+
 
 function fp(el){
   const fr=el.closest('.fr-inner');
@@ -11216,13 +11868,17 @@ async function fcApiFetch(path, opts={}){
 }
 
 function fcInit(){
-  const gate = document.getElementById('fcLoginGate');
-  const content = document.getElementById('fcContent');
+  const gate = document.getElementById('admLoginGate');
+  const content = document.getElementById('admDashContent');
   if(!gate||!content) return;
   if(fcToken()){
     gate.style.display='none';
     content.style.display='block';
     fcLoadContents();
+    admLoadOverview();
+    admLoadApprovals();
+    admLoadPayouts();
+    admLoadReport();
   } else {
     gate.style.display='block';
     content.style.display='none';
@@ -11250,6 +11906,121 @@ async function fcLogin(){
     errEl.textContent = msgs[err.message] || 'লগইন ব্যর্থ হয়েছে';
     errEl.style.display='block';
   } finally { btn.disabled=false; btn.textContent='লগইন করুন'; }
+}
+
+// ══════════════════════════════════════════════════════
+// 📊 Admin: Overview, Approvals, Payouts, Report
+// All reuse fcApiFetch/fcToken (same login as ফিড কনটেন্ট tab)
+// ══════════════════════════════════════════════════════
+async function admLoadOverview(){
+  try{
+    const d = await fcApiFetch('/admin/overview');
+    const set = (id,v) => { const e=document.getElementById(id); if(e) e.textContent=v; };
+    set('admMetricRevenue', '৳'+Number(d.revenue_this_month||0).toLocaleString());
+    set('admMetricUsers', Number(d.total_users||0).toLocaleString());
+    set('admMetricCourses', Number(d.total_courses||0).toLocaleString());
+    set('admMetricPending', Number(d.pending_courses||0));
+    set('admMetricAiQuality', d.avg_ai_quality!=null ? Math.round(d.avg_ai_quality)+'%' : '—');
+    const feed = document.getElementById('admActivityFeed');
+    if(feed){
+      const items = d.recent_activity||[];
+      feed.innerHTML = items.length ? items.map(a=>`
+        <div class="activity-item"><div class="ac-dot" style="background:var(--teal)"></div><div><div class="ac-text">${escapeHtml(a.description||a.type||'কার্যক্রম')}</div><div class="ac-time">${timeAgo(a.created_at)}</div></div></div>
+      `).join('') : '<div style="text-align:center;color:var(--text3);padding:12px;">এখনো কোনো কার্যক্রম নেই</div>';
+    }
+  }catch(err){ console.warn('admLoadOverview failed:', err.message); }
+}
+
+async function admLoadApprovals(){
+  const tbody = document.getElementById('admApprovalTbody');
+  if(!tbody) return;
+  try{
+    const [c, t] = await Promise.all([fcApiFetch('/admin/courses/pending'), fcApiFetch('/admin/teachers/pending')]);
+    const rows = [
+      ...(c.courses||[]).map(x=>({name:x.title, type:'কোর্স', date:x.submitted_at, score:x.ai_quality_score, kind:'course', id:x.id})),
+      ...(t.teachers||[]).map(x=>({name:x.name, type:'টিচার', date:x.created_at, score:null, kind:'teacher', id:x.id})),
+    ];
+    tbody.innerHTML = rows.length ? rows.map(r=>{
+      const scoreHtml = r.kind==='course'
+        ? (r.score!=null ? `<span style="color:${r.score>=85?'var(--green)':r.score>=70?'var(--gold)':'var(--red)'};font-weight:700;font-family:'JetBrains Mono',monospace;">${r.score}/১০০</span>` : '—')
+        : `<span style="color:var(--teal);font-weight:700;">পর্যালোচনাধীন</span>`;
+      const actionHtml = r.kind==='course'
+        ? `<button class="btn-teal btn-sm" onclick="admApproveCourse('${r.id}',this)">✅ অ্যাপ্রুভ</button> <button class="btn-sm" style="background:var(--red-dim);color:var(--red);border:1px solid rgba(196,32,32,.25);border-radius:6px;padding:6px 10px;" onclick="admRejectCourse('${r.id}',this)">✕</button>`
+        : `<button class="btn-teal btn-sm" onclick="admVerifyTeacher('${r.id}',this)">✅ ভেরিফাই</button>`;
+      return `<tr><td><strong>${escapeHtml(r.name)}</strong></td><td><span class="status-chip ${r.kind==='course'?'sc-blue':'sc-yellow'}">${r.type}</span></td><td>${timeAgo(r.date)}</td><td>${scoreHtml}</td><td>${actionHtml}</td></tr>`;
+    }).join('') : '<tr><td colspan="5" style="text-align:center;color:var(--text3);">পেন্ডিং কিছু নেই ✨</td></tr>';
+  }catch(err){
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--red);">লোড ব্যর্থ হয়েছে</td></tr>';
+  }
+}
+
+async function admApproveCourse(id, btn){
+  if(btn){ btn.disabled=true; btn.textContent='...'; }
+  try{ await fcApiFetch(`/admin/courses/${id}/approve`, {method:'POST'}); showToast('✅ কোর্স অ্যাপ্রুভড!'); admLoadApprovals(); admLoadOverview(); }
+  catch(err){ showToast('ব্যর্থ হয়েছে'); if(btn){ btn.disabled=false; btn.textContent='✅ অ্যাপ্রুভ'; } }
+}
+async function admRejectCourse(id, btn){
+  if(!confirm('এই কোর্সটি প্রত্যাখ্যান করতে চান?')) return;
+  try{ await fcApiFetch(`/admin/courses/${id}/reject`, {method:'POST'}); showToast('কোর্স প্রত্যাখ্যাত হয়েছে'); admLoadApprovals(); }
+  catch(err){ showToast('ব্যর্থ হয়েছে'); }
+}
+async function admVerifyTeacher(id, btn){
+  if(btn){ btn.disabled=true; btn.textContent='...'; }
+  try{ await fcApiFetch(`/admin/teachers/${id}/verify`, {method:'POST'}); showToast('✅ টিচার ভেরিফাইড!'); admLoadApprovals(); }
+  catch(err){ showToast('ব্যর্থ হয়েছে'); if(btn){ btn.disabled=false; btn.textContent='✅ ভেরিফাই'; } }
+}
+
+async function admLoadPayouts(){
+  const tbody = document.getElementById('admPayoutTbody');
+  if(!tbody) return;
+  try{
+    const d = await fcApiFetch('/admin/payouts');
+    const rows = d.payouts||[];
+    tbody.innerHTML = rows.length ? rows.map(p=>`
+      <tr><td>${escapeHtml(p.teacher_name)}</td><td>৳${Number(p.total_sales).toLocaleString()}</td><td>৳${Number(p.platform_cut).toLocaleString()}</td>
+      <td style="color:var(--green);font-weight:600;">৳${Number(p.teacher_share).toLocaleString()}</td>
+      <td>${p.status==='paid'
+        ? '<span class="status-chip sc-green">পেআউট দেওয়া হয়েছে</span>'
+        : `<span class="status-chip sc-yellow">পেন্ডিং</span> <button class="btn-teal btn-sm" onclick="admPayOne('${p.id}',this)">পে করুন</button>`}</td></tr>
+    `).join('') : '<tr><td colspan="5" style="text-align:center;color:var(--text3);">কোনো পেআউট নেই</td></tr>';
+  }catch(err){
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--red);">লোড ব্যর্থ হয়েছে</td></tr>';
+  }
+}
+async function admPayOne(id, btn){
+  if(btn){ btn.disabled=true; btn.textContent='...'; }
+  try{ await fcApiFetch(`/admin/payouts/${id}/pay`, {method:'POST'}); showToast('✅ পেআউট সম্পন্ন হয়েছে'); admLoadPayouts(); }
+  catch(err){ showToast('ব্যর্থ হয়েছে'); if(btn){ btn.disabled=false; btn.textContent='পে করুন'; } }
+}
+async function admPayAll(){
+  if(!confirm('সব পেন্ডিং টিচারকে একসাথে পেআউট করতে চান?')) return;
+  const btn = document.getElementById('admPayAllBtn');
+  if(btn){ btn.disabled=true; btn.textContent='প্রসেস হচ্ছে…'; }
+  try{
+    const res = await fcApiFetch('/admin/payouts/pay-all', {method:'POST'});
+    showToast(`✅ ${res.paid_count||0} জন টিচারকে পেআউট করা হয়েছে`);
+    admLoadPayouts();
+  }catch(err){ showToast('ব্যর্থ হয়েছে'); }
+  finally{ if(btn){ btn.disabled=false; btn.textContent='সব টিচারকে পেআউট করুন'; } }
+}
+
+async function admLoadReport(){
+  try{
+    const d = await fcApiFetch('/admin/report');
+    const set = (id,v) => { const e=document.getElementById(id); if(e) e.textContent=v; };
+    set('admRepBooks', Number(d.book_orders||0).toLocaleString());
+    set('admRepCourses', Number(d.course_enrollments||0).toLocaleString());
+    set('admRepMart', Number(d.mart_orders||0).toLocaleString());
+    const el = document.getElementById('admRevenueBreakdown');
+    if(el){
+      const rows = d.revenue_breakdown||[];
+      const colors = {course:'pf-teal',book:'pf-gold',mart:'pf-purple'};
+      const labels = {course:'কোর্স বিক্রয়',book:'বই বিক্রয়',mart:'মার্ট বিক্রয়'};
+      el.innerHTML = rows.length ? `<div style="display:flex;flex-direction:column;gap:12px;">${rows.map(r=>`
+        <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:.8rem;width:130px;color:var(--text2);">${labels[r.source]||escapeHtml(r.source)}</span><div class="prog-bar" style="flex:1"><div class="prog-fill ${colors[r.source]||'pf-teal'}" style="width:${r.pct}%"></div></div><span style="font-size:.78rem;font-weight:700;">${r.pct}%</span></div>
+      `).join('')}</div>` : '<div style="text-align:center;color:var(--text3);">কোনো ডেটা নেই</div>';
+    }
+  }catch(err){ console.warn('admLoadReport failed:', err.message); }
 }
 
 async function fcLoadContents(){
@@ -11333,6 +12104,7 @@ function showDash(role){
   const b=document.getElementById('dhub-'+role);
   if(b) b.classList.add('on');
   if(role==='teacher') setTimeout(renderTeacherDashboard, 80); // IMPROVEMENT 6
+  if(role==='admin') setTimeout(fcInit, 80);
 }
 
 // ══════════════════════════════════════════════════════
@@ -13642,17 +14414,50 @@ function renderCommPost(post, el){
   const parsed = commParseAttachments(post.text||'');
   const attachHtml = commRenderAttachments(parsed);
 
+  // Rich-post extras (feeling / location / live / tagged names)
+  const feelingLine = post.feeling ? `<div class="comm-post-feeling">— feeling ${escapeHtml(post.feeling)}</div>` : '';
+  const locationLine = post.location_tag ? ` · 📍 ${escapeHtml(post.location_tag)}` : '';
+  const liveBadge = post.is_live ? '<span class="comm-live-badge">🔴 LIVE</span> ' : '';
+  const taggedLine = (post.tagged_names && post.tagged_names.length) ? ` · with ${post.tagged_names.map(escapeHtml).join(', ')}` : '';
+  const musicLine = post.music_tag ? `<div style="font-size:.72rem;color:var(--text3);margin-top:4px;">🎵 ${escapeHtml(post.music_tag)}</div>` : '';
+
+  // Media (image/video)
+  let mediaHtml = '';
+  if(post.media_url && /^(data:(image|video)\/[a-z0-9.+-]+;base64,[A-Za-z0-9+\/=]+|https:\/\/[^\s"'<>]+)$/i.test(post.media_url)){
+    if(post.media_type === 'video'){
+      mediaHtml = `<video src="${post.media_url}" controls style="width:100%;max-height:360px;border-radius:10px;margin-top:8px;background:#000;"></video>`;
+    } else {
+      mediaHtml = `<img src="${post.media_url}" style="width:100%;max-height:360px;object-fit:cover;border-radius:10px;margin-top:8px;" loading="lazy">`;
+    }
+  }
+
+  // Event card
+  let eventHtml = '';
+  if(post.event_title){
+    const d = post.event_date ? new Date(post.event_date) : null;
+    const day = d ? d.getDate() : '--';
+    const mon = d ? d.toLocaleDateString('bn-BD',{month:'short'}) : '';
+    eventHtml = `<div class="comm-post-event">
+      <div class="comm-post-event-date">${day}<br>${mon}</div>
+      <div><div style="font-weight:700;font-size:.8rem;">📅 ${escapeHtml(post.event_title)}</div>${post.event_place?`<div style="font-size:.7rem;color:var(--text3);">${escapeHtml(post.event_place)}</div>`:''}</div>
+    </div>`;
+  }
+
   el.innerHTML = `
     <div class="comm-post-hd">
       <div class="comm-av">${escapeHtml(post.av||'আ')}</div>
       <div style="flex:1;min-width:0;">
-        <div class="comm-post-name">${escapeHtml(post.author)}${parsed.feeling?` <span class="comm-feeling-inline">— অনুভব করছেন ${escapeHtml(parsed.feeling)}</span>`:''}</div>
-        <div class="comm-post-meta">${timeAgo(post.created_at||post.ts||Date.now())} · ${escapeHtml(groupName)}${parsed.loc?` · 📍 ${escapeHtml(parsed.loc)}`:''}</div>
+        <div class="comm-post-name">${liveBadge}${escapeHtml(post.author)}${taggedLine}${parsed.feeling?` <span class="comm-feeling-inline">— অনুভব করছেন ${escapeHtml(parsed.feeling)}</span>`:''}</div>
+        <div class="comm-post-meta">${timeAgo(post.created_at||post.ts||Date.now())} · ${escapeHtml(groupName)}${locationLine}${parsed.loc?` · 📍 ${escapeHtml(parsed.loc)}`:''}</div>
+        ${feelingLine}
       </div>
     </div>
     <div class="comm-post-body">
       <span class="comm-post-tag" style="background:${getTagColor(post.tag)}22;color:${getTagColor(post.tag)};">#${escapeHtml(post.tag||'সাধারণ')}</span><br>
       ${escapeHtml(parsed.clean).replace(/\n/g,'<br>')}
+      ${musicLine}
+      ${mediaHtml}
+      ${eventHtml}
     </div>
     ${attachHtml}
     <!-- Reaction summary row -->
@@ -13997,8 +14802,212 @@ const _commBaseGo=go;
 go=function(id,back){
   _commBaseGo(id,back);
   if(id==='community') setTimeout(initCommunity,80);
+  _composerUpdateFabVisibility(id);
 };
 if(document.getElementById('page-community')?.classList.contains('active')) initCommunity();
+
+// ══════════════════════════════════════════════════════
+// ✍️ UNIVERSAL POST COMPOSER — single reusable instance,
+// callable from every wing (Academy, Teachers, Publications,
+// Mart, Blog, Research, Careers, News, Community, AI,
+// Higher Study, Kids). Posts always go into the shared
+// comm_posts feed, tagged with origin_wing so each wing
+// can show its own relevant posts without duplicating UI.
+// ══════════════════════════════════════════════════════
+const FAB_WINGS = ['academy','teachers','publications','mart','blog','research','careers','news','community','ai','higherstudy','kids'];
+const WING_LABELS = {academy:'Academy',teachers:'Teachers',publications:'Publications',mart:'Mart',blog:'Blog',research:'Research',careers:'Careers',news:'News',community:'Community',ai:'AI',higherstudy:'Higher Study',kids:'Kids'};
+const FEELINGS = [
+  {e:'😊',l:'খুশি'},{e:'😍',l:'উচ্ছ্বসিত'},{e:'😢',l:'দুঃখিত'},{e:'😤',l:'চাপে আছি'},
+  {e:'🤔',l:'ভাবছি'},{e:'💪',l:'অনুপ্রাণিত'},{e:'📚',l:'পড়ছি'},{e:'🎉',l:'উদযাপন করছি'},
+  {e:'😴',l:'ক্লান্ত'},{e:'🙏',l:'কৃতজ্ঞ'},{e:'😎',l:'আত্মবিশ্বাসী'},{e:'🔥',l:'মোটিভেটেড'},
+];
+
+let _composerWing = 'community';
+let _composerState = {}; // { media_url, media_type, feeling, location_tag, music_tag, event_title, event_date, event_place, tagged_names:[], is_live }
+
+function _composerCurrentWing(){
+  const active = document.querySelector('.page.active');
+  const id = active ? active.id.replace('page-','') : 'community';
+  return FAB_WINGS.includes(id) ? id : 'community';
+}
+
+function _composerUpdateFabVisibility(pageId){
+  const fab = document.getElementById('composerFab');
+  if(!fab) return;
+  fab.style.display = FAB_WINGS.includes(pageId) ? 'flex' : 'none';
+  if(fab.style.display==='flex'){ fab.style.alignItems='center'; fab.style.justifyContent='center'; }
+}
+
+function openComposer(wing, panelToOpen){
+  _composerWing = wing || _composerCurrentWing();
+  _composerState = { tagged_names: [] };
+  document.getElementById('composerInput').value = '';
+  document.getElementById('composerAttachPreview').innerHTML = '';
+  document.getElementById('composerWingLabel').textContent = '· ' + (WING_LABELS[_composerWing]||'Community') + '-এ';
+  document.getElementById('composerLiveBtn').classList.remove('on');
+  document.querySelectorAll('.comm-attach-panel').forEach(p=>p.classList.remove('open'));
+  document.getElementById('composerFeelingGrid').innerHTML = FEELINGS.map(f=>
+    `<div class="comm-feeling-chip" onclick="composerAttachFeeling('${f.e}','${f.l}')">${f.e} ${f.l}</div>`
+  ).join('');
+  const modal = document.getElementById('composerModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  if(panelToOpen) setTimeout(()=>composerTogglePanel(panelToOpen), 50);
+  setTimeout(()=>document.getElementById('composerInput')?.focus(), 100);
+}
+
+function closeComposer(){
+  document.getElementById('composerModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function composerTogglePanel(type){
+  document.querySelectorAll('.comm-attach-panel').forEach(p=>{
+    if(p.id === 'composerPanel-'+type) p.classList.toggle('open');
+    else p.classList.remove('open');
+  });
+}
+
+function composerRenderPreview(){
+  const el = document.getElementById('composerAttachPreview');
+  const chips = [];
+  if(_composerState.feeling) chips.push(`<span class="comm-attach-tag">😊 ${_composerState.feeling} <button onclick="delete _composerState.feeling;composerRenderPreview()">✕</button></span>`);
+  if(_composerState.location_tag) chips.push(`<span class="comm-attach-tag">📍 ${_composerState.location_tag} <button onclick="delete _composerState.location_tag;composerRenderPreview()">✕</button></span>`);
+  if(_composerState.music_tag) chips.push(`<span class="comm-attach-tag">🎵 ${_composerState.music_tag} <button onclick="delete _composerState.music_tag;composerRenderPreview()">✕</button></span>`);
+  if(_composerState.event_title) chips.push(`<span class="comm-attach-tag">📅 ${_composerState.event_title} <button onclick="delete _composerState.event_title;composerRenderPreview()">✕</button></span>`);
+  if(_composerState.tagged_names && _composerState.tagged_names.length) chips.push(`<span class="comm-attach-tag">🏷️ ${_composerState.tagged_names.join(', ')} <button onclick="_composerState.tagged_names=[];composerRenderPreview()">✕</button></span>`);
+  if(_composerState.is_live) chips.push(`<span class="comm-attach-tag" style="background:var(--red);color:#fff;">🔴 LIVE</span>`);
+
+  let mediaHtml = '';
+  if(_composerState.media_url){
+    mediaHtml = `<div class="comm-media-preview">
+      ${_composerState.media_type==='video' ? `<video src="${_composerState.media_url}" controls></video>` : `<img src="${_composerState.media_url}">`}
+      <button class="comm-media-remove" onclick="delete _composerState.media_url;delete _composerState.media_type;composerRenderPreview()">✕</button>
+    </div>`;
+  }
+  el.innerHTML = (chips.length ? `<div class="comm-attach-tags">${chips.join('')}</div>` : '') + mediaHtml;
+}
+
+// Photo/Video — local preview + client-side image compression (canvas resize)
+function composerHandleMediaSelect(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  if(file.size > 5*1024*1024){ showToast('⚠️ ফাইল ৫MB এর বেশি — ছোট ফাইল বেছে নিন'); event.target.value=''; return; }
+  const isVideo = file.type.startsWith('video/');
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    if(isVideo){
+      _composerState.media_url = e.target.result;
+      _composerState.media_type = 'video';
+      composerRenderPreview();
+      composerTogglePanel('media');
+    } else {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const maxW = 1280;
+        const scale = Math.min(1, maxW/img.width);
+        canvas.width = img.width*scale;
+        canvas.height = img.height*scale;
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+        _composerState.media_url = canvas.toDataURL('image/jpeg', 0.72);
+        _composerState.media_type = 'image';
+        composerRenderPreview();
+        composerTogglePanel('media');
+      };
+      img.src = e.target.result;
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function composerAttachMusic(){
+  const v = document.getElementById('composerMusicInput').value.trim();
+  if(!v){ showToast('গানের নাম লিখুন'); return; }
+  _composerState.music_tag = v;
+  composerRenderPreview();
+  composerTogglePanel('music');
+}
+
+function composerAttachFeeling(emoji, label){
+  _composerState.feeling = `${emoji} ${label}`;
+  composerRenderPreview();
+  composerTogglePanel('feeling');
+}
+
+function composerAttachEvent(){
+  const title = document.getElementById('composerEventTitle').value.trim();
+  const date = document.getElementById('composerEventDate').value;
+  const place = document.getElementById('composerEventPlace').value.trim();
+  if(!title){ showToast('ইভেন্টের নাম লিখুন'); return; }
+  _composerState.event_title = title;
+  _composerState.event_date = date || null;
+  _composerState.event_place = place || null;
+  composerRenderPreview();
+  composerTogglePanel('event');
+}
+
+function composerAttachLocation(){
+  const v = document.getElementById('composerLocationInput').value.trim();
+  if(!v){ showToast('স্থানের নাম লিখুন'); return; }
+  _composerState.location_tag = v;
+  composerRenderPreview();
+  composerTogglePanel('location');
+}
+
+function composerAttachTags(){
+  const v = document.getElementById('composerTagInput').value.trim();
+  if(!v){ showToast('নাম লিখুন'); return; }
+  _composerState.tagged_names = v.split(',').map(s=>s.trim()).filter(Boolean);
+  composerRenderPreview();
+  composerTogglePanel('tag');
+  showToast('ট্যাগ করা ব্যক্তিরা নোটিফিকেশন পাবেন');
+}
+
+function composerToggleLive(){
+  _composerState.is_live = !_composerState.is_live;
+  document.getElementById('composerLiveBtn').classList.toggle('on', _composerState.is_live);
+  composerRenderPreview();
+  if(_composerState.is_live){
+    showToast('🔴 এই পোস্টে LIVE ব্যাজ যুক্ত হবে — এটি এখনো রিয়েল-টাইম ভিডিও স্ট্রিমিং না, শুধু একটি স্ট্যাটাস ব্যাজ');
+  }
+}
+
+async function composerSubmit(){
+  const text = document.getElementById('composerInput').value.trim();
+  if(!text && !_composerState.media_url && !_composerState.event_title){
+    showToast('কিছু লিখুন বা যোগ করুন তারপর পোস্ট করুন');
+    return;
+  }
+  const tag = (text.match(/#(\S+)/)||[])[1] || (WING_LABELS[_composerWing]||'সাধারণ');
+  const btn = document.getElementById('composerSubmitBtn');
+  btn.textContent = 'পোস্ট হচ্ছে…'; btn.disabled = true;
+
+  const payload = {
+    id: 'p'+Date.now(),
+    author: MY_NAME,
+    av: MY_AV,
+    group_id: 'g-bcs',
+    tag,
+    text: text || '',
+    user_key: MY_KEY,
+    origin_wing: _composerWing,
+    ..._composerState,
+  };
+
+  const res = await SB.post('comm_posts', payload);
+  btn.textContent = 'পোস্ট করুন →'; btn.disabled = false;
+
+  if(res){
+    closeComposer();
+    AppState.addCoin(10);
+    showToast(`✅ +10 🪙 পোস্ট করার জন্য! (${WING_LABELS[_composerWing]||'Community'}) সবাই দেখতে পাচ্ছে`);
+    commFilterTag = null;
+    if(document.getElementById('page-community')?.classList.contains('active')) await commFetchPosts();
+  } else {
+    showToast('পোস্ট করা যায়নি — Supabase-এ নতুন কলাম যোগ করা আছে কিনা যাচাই করুন (দেখুন: comm_posts_migration.sql)');
+  }
+}
 
 function openArticle(id){
   const art = NEWS_ARTICLES.find(a=>a.id===id);
@@ -14300,12 +15309,339 @@ if('IntersectionObserver' in window){
 // ══════════════════════════════════════════════════════
 const isMobile = () => window.innerWidth <= 768;
 
+// ══════════════════════════════════════════════════════
+// 🎓 EFFECTIVE TUITION HUB WING
+// Separate Node/Express + PostGIS service (own login/JWT). Set TUITION_API_BASE
+// to the deployed URL of that service (no trailing /api). While empty, the wing
+// shows setup guidance instead of fake listings.
+// ══════════════════════════════════════════════════════
+const TUITION_API_BASE = '';
+const TUH_SUBJECTS = ['Bangla','English','General Math','Higher Math','Physics','Chemistry','Biology','ICT','Accounting','Finance','Economics','Science','Arabic / Quran'];
+const TUH_LEVELS = ['Class 1-5','Class 6-8','Class 9','Class 10','HSC 1st Year','HSC 2nd Year','Admission','University'];
+const TUH_MEDIUMS = ['Bangla Medium','English Medium','English Version'];
+const TUH_TIMES = ['Morning','Afternoon','Evening','Flexible'];
+const tuh = {tab:'tuition', items:[], total:0, page:1, cursor:null, geo:null, token:null, user:null, kind:'requirement',
+  inited:false, seq:0, fSubj:new Set(), fLvl:new Set(), rqSubj:new Set(), avSubj:new Set(), avLvl:new Set(), avMed:new Set(['Bangla Medium'])};
+
+function tuhBase(){ return String(window.TUITION_API_BASE || TUITION_API_BASE || '').replace(/\/+$/,''); }
+function tuhLoadAuth(){ try{ tuh.token=localStorage.getItem('tuh_token')||null; tuh.user=JSON.parse(localStorage.getItem('tuh_user')||'null'); }catch(e){ tuh.token=null; tuh.user=null; } }
+function tuhSaveAuth(){ try{ if(tuh.token){ localStorage.setItem('tuh_token',tuh.token); localStorage.setItem('tuh_user',JSON.stringify(tuh.user)); } else { localStorage.removeItem('tuh_token'); localStorage.removeItem('tuh_user'); } }catch(e){} }
+async function tuhApi(path, opts){
+  opts = opts || {};
+  const base = tuhBase();
+  if(!base){ const e=new Error('NOT_CONFIGURED'); e.code='NC'; throw e; }
+  const h = {};
+  if(opts.body) h['Content-Type']='application/json';
+  if(opts.auth && tuh.token) h['Authorization']='Bearer '+tuh.token;
+  let r;
+  try{ r = await fetch(base+'/api'+path,{method:opts.method||'GET',headers:h,body:opts.body?JSON.stringify(opts.body):undefined}); }
+  catch(e){ const x=new Error('সার্ভারে সংযোগ করা যাচ্ছে না'); x.code='NET'; throw x; }
+  let j=null; try{ j = await r.json(); }catch(e){}
+  if(!r.ok){
+    const x = new Error((j && j.error) || ('ত্রুটি '+r.status)); x.status=r.status;
+    if(r.status===401 && opts.auth) tuhLogout(true);
+    throw x;
+  }
+  return j;
+}
+const tuhTaka = n => '৳'+String(Math.round(Number(n)||0)).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+function tuhBudget(rt,a,b){ const u = rt==='hourly'?'ঘণ্টা':rt==='weekly'?'সপ্তাহ':'মাস'; return (Number(a)===Number(b)?tuhTaka(a):tuhTaka(a)+' – '+tuhTaka(b))+' / '+u; }
+function tuhAgo(iso){ const d=(Date.now()-new Date(iso).getTime())/86400000; if(!isFinite(d)) return ''; if(d<1) return 'আজ'; return Math.floor(d)+' দিন আগে'; }
+const tuhE = escapeHtml;
+const tuhG = id => document.getElementById(id);
+const tuhNum = id => { const v=tuhG(id).value; return v===''?undefined:Number(v); };
+
+function tuhChips(boxId, list, set, max, onChange){
+  const box = tuhG(boxId); if(!box) return;
+  box.innerHTML = list.map((x,i)=>`<span class="tuh-chip${set.has(x)?' on':''}" data-i="${i}">${tuhE(x)}</span>`).join('');
+  box.onclick = ev => {
+    const c = ev.target.closest('.tuh-chip'); if(!c) return;
+    const v = list[Number(c.dataset.i)];
+    if(set.has(v)) set.delete(v); else { if(max && set.size>=max){ showToast('সর্বোচ্চ '+max+'টি বাছাই করা যাবে'); return; } set.add(v); }
+    c.classList.toggle('on', set.has(v));
+    if(onChange) onChange();
+  };
+}
+
+function tuhInit(){
+  if(tuh.inited){ tuhRenderUser(); tuhBanner(); return; }
+  tuh.inited = true;
+  tuhLoadAuth();
+  tuhChips('tuhFSubj', TUH_SUBJECTS, tuh.fSubj, 12);
+  tuhChips('tuhFLvl', TUH_LEVELS, tuh.fLvl, 12);
+  tuhChips('rqSubj', TUH_SUBJECTS, tuh.rqSubj, 8);
+  tuhChips('avSubj', TUH_SUBJECTS, tuh.avSubj, 12);
+  tuhChips('avLvl', TUH_LEVELS, tuh.avLvl, 10);
+  tuhChips('avMed', TUH_MEDIUMS, tuh.avMed, 3);
+  tuhG('rqLevel').innerHTML = TUH_LEVELS.map(x=>`<option>${tuhE(x)}</option>`).join('');
+  tuhG('rqMedium').innerHTML = TUH_MEDIUMS.map(x=>`<option>${tuhE(x)}</option>`).join('');
+  tuhG('rqTime').innerHTML = '<option value="">—</option>'+TUH_TIMES.map(x=>`<option>${tuhE(x)}</option>`).join('');
+  tuhAddArea();
+  tuhRenderUser(); tuhBanner(); tuhTab('tuition');
+}
+function tuhBanner(){
+  const b = tuhG('tuhBanner'); if(!b) return;
+  b.innerHTML = tuhBase() ? '' : '<div class="tuh-banner">⚙️ <b>Tuition Hub সার্ভার এখনও সংযুক্ত নয়।</b> ডেপ্লয় করা API-এর URL ফাইলের <code>TUITION_API_BASE</code> লাইনে বসালেই সার্চ, ফিড ও পোস্টিং চালু হবে। ততক্ষণ কোনো নমুনা লিস্টিং দেখানো হচ্ছে না।</div>';
+}
+function tuhRenderUser(){
+  const el = tuhG('tuhUserBar'); if(!el) return;
+  el.innerHTML = tuh.user
+    ? `👤 ${tuhE(tuh.user.name)} (${tuhE(tuh.user.role)}) <button class="tuh-btn alt sm" onclick="tuhLogout()">লগআউট</button>`
+    : '<button class="tuh-btn alt sm" onclick="tuhAuthModal()">🔑 Tuition Hub লগইন / রেজিস্টার</button>';
+  tuhPostGate();
+}
+function tuhLogout(silent){ tuh.token=null; tuh.user=null; tuhSaveAuth(); tuhRenderUser(); if(!silent) showToast('লগআউট হয়েছে'); if(tuh.tab==='mine') tuhMine(); }
+
+function tuhTab(t){
+  tuh.tab = t;
+  document.querySelectorAll('#page-tuition .tuh-bar > .tuh-tab[data-tab]').forEach(b=>b.classList.toggle('on', b.dataset.tab===t));
+  const search = (t==='tuition'||t==='tutors'||t==='feed');
+  tuhG('tuhPaneSearch').style.display = search?'':'none';
+  tuhG('tuhPanePost').style.display = t==='post'?'':'none';
+  tuhG('tuhPaneMine').style.display = t==='mine'?'':'none';
+  if(search){
+    document.querySelectorAll('#tuhPaneSearch .tuh-f-only').forEach(e=>e.style.display = t==='feed'?'none':'');
+    tuhG('tuhQLbl').textContent = t==='feed' ? 'কীওয়ার্ড (বা নিচে লোকেশন)' : 'কীওয়ার্ড';
+    tuhG('tuhGenderLbl').textContent = t==='tuition' ? 'আমি (টিউটর) — জেন্ডার' : 'টিউটরের জেন্ডার';
+    tuhG('tuhRadius').max = t==='feed' ? 500 : 50;
+    tuhG('tuhFeedHint').textContent = t==='feed' ? 'ফিড দেখতে কীওয়ার্ড অথবা লোকেশন লাগবে — প্রাসঙ্গিকতা + দূরত্ব + নতুনত্ব অনুযায়ী সাজানো।' : '';
+    tuhSearch(true);
+  }
+  if(t==='post') tuhPostGate();
+  if(t==='mine') tuhMine();
+}
+
+function tuhSetGeo(){
+  if(tuh.geo){ tuh.geo=null; tuhG('tuhGeoBtn').textContent='📍 আমার লোকেশন'; showToast('লোকেশন ফিল্টার বন্ধ'); return; }
+  tuhLocate((lat,lng)=>{ tuh.geo={lat,lng}; tuhG('tuhGeoBtn').textContent='📍 লোকেশন সেট ✓ (বন্ধ করুন)'; if(tuhG('tuhSort').value==='newest'&&tuh.tab!=='feed') tuhG('tuhSort').value='distance'; tuhSearch(true); });
+}
+function tuhLocate(cb){
+  if(!navigator.geolocation){ showToast('এই ব্রাউজারে লোকেশন সাপোর্ট নেই'); return; }
+  navigator.geolocation.getCurrentPosition(p=>cb(+p.coords.latitude.toFixed(6), +p.coords.longitude.toFixed(6)), ()=>showToast('লোকেশন পাওয়া যায়নি — অনুমতি দিন বা হাতে লিখুন'), {timeout:10000});
+}
+function tuhLocateInto(latId,lngId){ tuhLocate((a,b)=>{ tuhG(latId).value=a; tuhG(lngId).value=b; }); }
+function tuhReset(){
+  ['tuhQ','tuhRate','tuhBMin','tuhBMax','tuhDMin','tuhDMax','tuhHMin','tuhHMax','tuhGender'].forEach(i=>tuhG(i).value='');
+  tuhG('tuhSort').value='newest'; tuhG('tuhRadius').value='5';
+  tuh.fSubj.clear(); tuh.fLvl.clear(); tuh.geo=null; tuhG('tuhGeoBtn').textContent='📍 আমার লোকেশন';
+  tuhChips('tuhFSubj', TUH_SUBJECTS, tuh.fSubj, 12); tuhChips('tuhFLvl', TUH_LEVELS, tuh.fLvl, 12);
+  tuhSearch(true);
+}
+
+function tuhParams(){
+  const p = new URLSearchParams();
+  const add=(k,v)=>{ if(v!==undefined && v!=='' && !Number.isNaN(v)) p.set(k,v); };
+  add('q', tuhG('tuhQ').value.trim());
+  if(tuh.geo){ add('lat',tuh.geo.lat); add('lng',tuh.geo.lng); add('radius_km', tuhNum('tuhRadius')); }
+  return p;
+}
+async function tuhSearch(reset){
+  if(!tuhBase()){ tuhG('tuhList').innerHTML='<div class="tuh-empty">⚙️ সার্ভার সংযুক্ত হলে এখানে ফলাফল দেখা যাবে।</div>'; tuhG('tuhMore').innerHTML=''; return; }
+  const my = ++tuh.seq, tab = tuh.tab;
+  if(reset){ tuh.items=[]; tuh.page=1; tuh.cursor=null; tuh.total=0; tuhG('tuhList').innerHTML='<div class="tuh-empty">লোড হচ্ছে…</div>'; tuhG('tuhMore').innerHTML=''; }
+  try{
+    let res, path;
+    const p = tuhParams();
+    if(tab==='feed'){
+      if(!p.get('q') && !p.get('lat')){ tuhG('tuhList').innerHTML='<div class="tuh-empty">ফিডের জন্য একটি কীওয়ার্ড লিখুন অথবা “📍 আমার লোকেশন” চালু করুন।</div>'; return; }
+      p.set('limit','20'); if(tuh.cursor) p.set('cursor',tuh.cursor);
+      res = await tuhApi('/feed?'+p.toString());
+      if(my!==tuh.seq) return;
+      tuh.items = tuh.items.concat(res.data||[]); tuh.cursor = res.nextCursor||null;
+    } else {
+      if(tuhG('tuhRate').value) p.set('rate_type',tuhG('tuhRate').value);
+      if(tuhG('tuhGender').value) p.set('gender',tuhG('tuhGender').value);
+      [['budget_min','tuhBMin'],['budget_max','tuhBMax'],['days_min','tuhDMin'],['days_max','tuhDMax'],['hours_min','tuhHMin'],['hours_max','tuhHMax']].forEach(([k,i])=>{ const v=tuhNum(i); if(v!==undefined) p.set(k,v); });
+      if(tuh.fSubj.size) p.set('subject',[...tuh.fSubj].join(','));
+      if(tuh.fLvl.size) p.set('class_level',[...tuh.fLvl].join(','));
+      let sort = tuhG('tuhSort').value; if(sort==='distance' && !tuh.geo) sort='newest'; p.set('sort',sort);
+      p.set('page',tuh.page); p.set('limit','20');
+      res = await tuhApi((tab==='tuition'?'/tuition-posts?':'/tutor-posts?')+p.toString());
+      if(my!==tuh.seq) return;
+      tuh.items = tuh.items.concat(res.data||[]); tuh.total = (res.meta&&Number(res.meta.total))||tuh.items.length;
+    }
+    tuhRenderList();
+  }catch(e){
+    if(my!==tuh.seq) return;
+    tuhG('tuhList').innerHTML = `<div class="tuh-empty">⚠️ ${tuhE(e.code==='NC'?'সার্ভার সংযুক্ত নয়':e.message)}</div>`; tuhG('tuhMore').innerHTML='';
+  }
+}
+function tuhMoreClick(){ if(tuh.tab!=='feed') tuh.page++; tuhSearch(false); }
+function tuhRenderList(){
+  const L = tuhG('tuhList'), more = tuhG('tuhMore');
+  if(!tuh.items.length){ L.innerHTML='<div class="tuh-empty">কোনো ফলাফল পাওয়া যায়নি। ফিল্টার বদলে আবার চেষ্টা করুন।</div>'; more.innerHTML=''; return; }
+  L.innerHTML = tuh.items.map((it,i)=> tuh.tab==='tutors' ? tuhTutorCard(it,i) : tuhTuitionCard(it,i)).join('');
+  const hasMore = tuh.tab==='feed' ? !!tuh.cursor : tuh.items.length < tuh.total;
+  more.innerHTML = hasMore ? '<button class="tuh-btn alt" onclick="tuhMoreClick()">আরও দেখুন</button>' : '';
+}
+function tuhTuitionCard(p,i){
+  const g = p.preferred_gender==='male'?'👨 পুরুষ টিউটর':p.preferred_gender==='female'?'👩 মহিলা টিউটর':'';
+  return `<div class="tuh-card"><h4>${tuhE(p.title)}</h4>
+  <div>${(p.subjects||[]).map(s=>`<span class="tuh-tag">${tuhE(s)}</span>`).join('')}</div>
+  <div class="tuh-meta"><span>🎓 ${tuhE(p.class_level)} · ${tuhE(p.medium)}</span>${p.area_name?`<span>📍 ${tuhE(p.area_name)}</span>`:''}${p.distance_km!=null?`<span>↔ ${tuhE(p.distance_km)} কি.মি.</span>`:''}</div>
+  <div class="tuh-meta"><span>📅 ${tuhE(p.days_per_week)} দিন/সপ্তাহ</span><span>⏱ ${tuhE(p.hours_per_session)} ঘণ্টা</span>${p.preferred_time?`<span>🕐 ${tuhE(p.preferred_time)}</span>`:''}${g?`<span>${g}</span>`:''}</div>
+  <div class="tuh-price">${tuhE(tuhBudget(p.rate_type,p.budget_min,p.budget_max))}</div>
+  <div style="display:flex;gap:8px;align-items:center;margin-top:auto;"><button class="tuh-btn sm" onclick="tuhDetail(${i})">বিস্তারিত</button><button class="tuh-btn alt sm" onclick="tuhApply(${i})">আবেদন (টিউটর)</button><span style="margin-left:auto;font-size:.68rem;color:var(--text3);">${tuhE(tuhAgo(p.created_at))}</span></div></div>`;
+}
+function tuhTutorCard(a,i){
+  const areas = (a.areas||[]).map(x=>`${tuhE(x.place_name)} (${tuhE(x.radius_km)} কি.মি.)`).join(' · ');
+  const range=(x,y,u)=> Number(x)===Number(y)?`${tuhE(x)} ${u}`:`${tuhE(x)}–${tuhE(y)} ${u}`;
+  return `<div class="tuh-card"><h4>${tuhE(a.headline)}</h4>
+  <div class="tuh-meta"><span>👩‍🏫 ${tuhE(a.tutor_name)}${a.is_verified?' ✅':''}</span>${a.institution?`<span>🏫 ${tuhE(a.institution)}</span>`:''}${a.qualification?`<span>🎓 ${tuhE(a.qualification)}</span>`:''}${a.experience_years?`<span>${tuhE(a.experience_years)} বছরের অভিজ্ঞতা</span>`:''}</div>
+  <div>${(a.subjects||[]).map(s=>`<span class="tuh-tag">${tuhE(s)}</span>`).join('')}</div>
+  <div class="tuh-meta"><span>📚 ${(a.class_levels||[]).map(tuhE).join(', ')}</span><span>${(a.mediums||[]).map(tuhE).join(', ')}</span>${a.online_available?'<span>💻 অনলাইন</span>':''}${a.distance_km!=null?`<span>↔ ${tuhE(a.distance_km)} কি.মি.</span>`:''}</div>
+  <div class="tuh-meta"><span>📅 ${range(a.days_per_week_min,a.days_per_week_max,'দিন/সপ্তাহ')}</span><span>⏱ ${range(a.hours_per_session_min,a.hours_per_session_max,'ঘণ্টা')}</span></div>
+  ${areas?`<div class="tuh-meta"><span>📍 ${areas}</span></div>`:''}
+  <div class="tuh-price">${tuhE(tuhBudget(a.rate_type,a.rate_min,a.rate_max))}</div>
+  <div style="font-size:.68rem;color:var(--text3);">${tuhE(tuhAgo(a.created_at))}</div></div>`;
+}
+
+// ── modal ──
+function tuhOpenModal(html){ tuhG('tuhModalBody').innerHTML=html; tuhG('tuhModal').classList.add('open'); }
+function tuhCloseModal(){ tuhG('tuhModal').classList.remove('open'); }
+async function tuhDetail(i){
+  const p = tuh.items[i]; if(!p) return;
+  tuhOpenModal('<div class="tuh-empty">লোড হচ্ছে…</div>');
+  let d = p;
+  try{ d = await tuhApi('/tuition-posts/'+encodeURIComponent(p.id)); }catch(e){}
+  tuhOpenModal(`<h3 style="margin-bottom:8px;">${tuhE(d.title)}</h3>
+  <div>${(d.subjects||[]).map(s=>`<span class="tuh-tag">${tuhE(s)}</span>`).join('')}</div>
+  <div class="tuh-meta" style="margin:8px 0;"><span>🎓 ${tuhE(d.class_level)} · ${tuhE(d.medium)}</span>${d.area_name?`<span>📍 ${tuhE(d.area_name)}</span>`:''}<span>📅 ${tuhE(d.days_per_week)} দিন/সপ্তাহ</span><span>⏱ ${tuhE(d.hours_per_session)} ঘণ্টা</span>${d.start_date?`<span>শুরু: ${tuhE(String(d.start_date).slice(0,10))}</span>`:''}</div>
+  <div class="tuh-price" style="margin-bottom:8px;">${tuhE(tuhBudget(d.rate_type,d.budget_min,d.budget_max))}</div>
+  ${d.description?`<p style="font-size:.86rem;line-height:1.7;white-space:pre-wrap;">${tuhE(d.description)}</p>`:''}
+  <div style="margin-top:14px;"><button class="tuh-btn" onclick="tuhApply(${i})">এই টিউশনে আবেদন করুন</button></div>`);
+}
+function tuhApply(i){
+  const p = tuh.items[i]; if(!p) return;
+  if(!tuh.token){ tuhAuthModal('আবেদনের আগে টিউটর হিসেবে লগইন করুন'); return; }
+  if(tuh.user.role!=='tutor'){ showToast('শুধু টিউটর অ্যাকাউন্ট আবেদন করতে পারে'); return; }
+  tuhOpenModal(`<h3 style="margin-bottom:10px;">আবেদন: ${tuhE(p.title)}</h3><label class="tuh-lbl">কভার নোট (ঐচ্ছিক)</label><textarea class="tuh-in" id="tuhCover" maxlength="1000"></textarea><div style="margin-top:12px;"><button class="tuh-btn" id="tuhApplyBtn" onclick="tuhApplySend(${i})">আবেদন পাঠান</button></div><div class="tuh-msg" id="tuhApplyMsg"></div>`);
+}
+async function tuhApplySend(i){
+  const p = tuh.items[i], btn=tuhG('tuhApplyBtn'), msg=tuhG('tuhApplyMsg'); btn.disabled=true; msg.className='tuh-msg'; msg.textContent='';
+  try{ const note=tuhG('tuhCover').value.trim(); await tuhApi('/tuition-posts/'+encodeURIComponent(p.id)+'/apply',{method:'POST',auth:true,body: note?{cover_note:note}:{}}); msg.className='tuh-msg ok'; msg.textContent='✅ আবেদন পাঠানো হয়েছে'; }
+  catch(e){ msg.textContent=e.message; btn.disabled=false; }
+}
+
+// ── auth ──
+function tuhAuthModal(note){
+  tuhOpenModal(`<h3 style="margin-bottom:4px;">🎓 Tuition Hub অ্যাকাউন্ট</h3><p style="font-size:.74rem;color:var(--text3);margin-bottom:10px;">${tuhE(note||'এই উইং-এর আলাদা লগইন — মূল সাইটের অ্যাকাউন্ট থেকে স্বতন্ত্র।')}</p>
+  <div class="tuh-bar"><button class="tuh-tab on" id="tuhAL" onclick="tuhAuthMode('login')">লগইন</button><button class="tuh-tab" id="tuhAR" onclick="tuhAuthMode('register')">রেজিস্টার</button></div>
+  <div id="tuhAReg" style="display:none;"><label class="tuh-lbl">নাম</label><input class="tuh-in" id="tuhName" maxlength="100"><label class="tuh-lbl" style="margin-top:8px;">ফোন</label><input class="tuh-in" id="tuhPhone" maxlength="20">
+  <label class="tuh-lbl" style="margin-top:8px;">আমি</label><select class="tuh-in" id="tuhRole"><option value="guardian">অভিভাবক</option><option value="student">শিক্ষার্থী</option><option value="tutor">টিউটর</option></select>
+  <label class="tuh-lbl" style="margin-top:8px;">জেন্ডার (টিউটরদের জন্য প্রযোজ্য)</label><select class="tuh-in" id="tuhGen"><option value="">বলতে চাই না</option><option value="male">পুরুষ</option><option value="female">মহিলা</option><option value="other">অন্য</option></select></div>
+  <label class="tuh-lbl" style="margin-top:8px;">ইমেইল</label><input class="tuh-in" id="tuhEmail" type="email" autocomplete="email">
+  <label class="tuh-lbl" style="margin-top:8px;">পাসওয়ার্ড (কমপক্ষে ৮ অক্ষর)</label><input class="tuh-in" id="tuhPass" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')tuhAuthSubmit()">
+  <div style="margin-top:12px;"><button class="tuh-btn" id="tuhASub" onclick="tuhAuthSubmit()">লগইন</button></div><div class="tuh-msg" id="tuhAMsg"></div>`);
+  tuh.authMode='login';
+}
+function tuhAuthMode(m){ tuh.authMode=m; tuhG('tuhAReg').style.display = m==='register'?'':'none'; tuhG('tuhAL').classList.toggle('on',m==='login'); tuhG('tuhAR').classList.toggle('on',m==='register'); tuhG('tuhASub').textContent = m==='login'?'লগইন':'রেজিস্টার'; }
+async function tuhAuthSubmit(){
+  const msg=tuhG('tuhAMsg'), btn=tuhG('tuhASub'); msg.className='tuh-msg'; msg.textContent=''; btn.disabled=true;
+  const email=tuhG('tuhEmail').value.trim(), password=tuhG('tuhPass').value;
+  try{
+    let r;
+    if(tuh.authMode==='register'){
+      const body={name:tuhG('tuhName').value.trim(),email,phone:tuhG('tuhPhone').value.trim(),password,role:tuhG('tuhRole').value};
+      if(tuhG('tuhGen').value) body.gender=tuhG('tuhGen').value;
+      r = await tuhApi('/auth/register',{method:'POST',body});
+    } else r = await tuhApi('/auth/login',{method:'POST',body:{email,password}});
+    tuh.token=r.token; tuh.user=r.user; tuhSaveAuth(); tuhCloseModal(); tuhRenderUser(); showToast('স্বাগতম, '+r.user.name);
+    if(tuh.tab==='mine') tuhMine();
+  }catch(e){ msg.textContent = e.code==='NC'?'সার্ভার সংযুক্ত নয়':e.message; btn.disabled=false; }
+}
+
+// ── posting ──
+function tuhPostKind(k){ tuh.kind=k; tuhG('tuhKReq').classList.toggle('on',k==='requirement'); tuhG('tuhKAv').classList.toggle('on',k==='availability'); tuhPostGate(); }
+function tuhPostGate(){
+  const g = tuhG('tuhPostGate'); if(!g) return;
+  const need = tuh.kind==='requirement' ? ['guardian','student'] : ['tutor'];
+  let ok = !!tuh.user && need.includes(tuh.user.role);
+  if(!tuh.user) g.innerHTML='<div class="tuh-banner">পোস্ট করতে আগে <a style="text-decoration:underline;cursor:pointer;" onclick="tuhAuthModal()">লগইন / রেজিস্টার</a> করুন।</div>';
+  else if(!ok) g.innerHTML=`<div class="tuh-banner">এই ধরনের পোস্ট শুধু ${tuh.kind==='requirement'?'অভিভাবক/শিক্ষার্থী':'টিউটর'} অ্যাকাউন্ট দিতে পারে। আপনার অ্যাকাউন্ট: ${tuhE(tuh.user.role)}।</div>`;
+  else g.innerHTML='';
+  tuhG('tuhFormReq').style.display = tuh.kind==='requirement'?'':'none';
+  tuhG('tuhFormAv').style.display = tuh.kind==='availability'?'':'none';
+  tuhG('tuhFormReq').style.opacity = tuhG('tuhFormAv').style.opacity = ok?'1':'.55';
+}
+function tuhAddArea(){
+  const box=tuhG('avAreas'); if(box.children.length>=5){ showToast('সর্বোচ্চ ৫টি এলাকা'); return; }
+  const d=document.createElement('div'); d.className='tuh-area';
+  d.innerHTML='<input class="tuh-in a-name" placeholder="এলাকার নাম" maxlength="150"><input class="tuh-in a-lat" type="number" step="any" placeholder="Lat"><input class="tuh-in a-lng" type="number" step="any" placeholder="Lng"><input class="tuh-in a-rad" type="number" min="0.5" max="50" step="0.5" value="3" title="রেডিয়াস (কি.মি.)"><span style="display:flex;gap:4px;"><button class="tuh-btn alt sm" type="button" data-act="loc">📍</button><button class="tuh-btn alt sm" type="button" data-act="del">✕</button></span>';
+  d.addEventListener('click',ev=>{ const b=ev.target.closest('button'); if(!b) return;
+    if(b.dataset.act==='del'){ if(box.children.length>1) d.remove(); }
+    else tuhLocate((a,c)=>{ d.querySelector('.a-lat').value=a; d.querySelector('.a-lng').value=c; }); });
+  box.appendChild(d);
+}
+function tuhPostResult(msgId, r){
+  const m=tuhG(msgId); m.className='tuh-msg ok';
+  m.textContent = r.status==='pending' ? '✅ জমা হয়েছে — মডারেশন শেষে প্রকাশিত হবে।' : '✅ পোস্ট প্রকাশিত হয়েছে।';
+}
+async function tuhSubmitReq(){
+  const m=tuhG('rqMsg'), btn=tuhG('rqSubmit'); m.className='tuh-msg'; m.textContent='';
+  const body={ title:tuhG('rqTitle').value.trim(), subjects:[...tuh.rqSubj], class_level:tuhG('rqLevel').value, medium:tuhG('rqMedium').value,
+    lat:tuhNum('rqLat'), lng:tuhNum('rqLng'), days_per_week:tuhNum('rqDays'), hours_per_session:tuhNum('rqHours'),
+    rate_type:tuhG('rqRate').value, budget_min:tuhNum('rqBMin'), budget_max:tuhNum('rqBMax'), preferred_gender:tuhG('rqGender').value };
+  const opt={description:'rqDesc',area_name:'rqArea',formatted_address:'rqAddr',preferred_time:'rqTime',start_date:'rqStart'};
+  Object.keys(opt).forEach(k=>{ const v=tuhG(opt[k]).value.trim(); if(v) body[k]=v; });
+  if(body.title.length<5) return void(m.textContent='শিরোনাম কমপক্ষে ৫ অক্ষর');
+  if(!body.subjects.length) return void(m.textContent='কমপক্ষে একটি বিষয় বাছাই করুন');
+  if(body.lat===undefined||body.lng===undefined) return void(m.textContent='লোকেশন (Lat/Lng) দিন — “📍 বর্তমান লোকেশন” চাপুন');
+  if(body.budget_min===undefined||body.budget_max===undefined||body.budget_max<body.budget_min) return void(m.textContent='বাজেট সঠিকভাবে দিন (সর্বোচ্চ ≥ সর্বনিম্ন)');
+  btn.disabled=true;
+  try{ const r=await tuhApi('/tuition-posts',{method:'POST',auth:true,body}); tuhPostResult('rqMsg',r); }
+  catch(e){ m.textContent = e.code==='NC'?'সার্ভার সংযুক্ত নয়':(e.status===401?'আগে লগইন করুন':e.message); }
+  btn.disabled=false;
+}
+async function tuhSubmitAv(){
+  const m=tuhG('avMsg'), btn=tuhG('avSubmit'); m.className='tuh-msg'; m.textContent='';
+  const areas=[...document.querySelectorAll('#avAreas .tuh-area')].map(d=>({place_name:d.querySelector('.a-name').value.trim(),lat:parseFloat(d.querySelector('.a-lat').value),lng:parseFloat(d.querySelector('.a-lng').value),radius_km:parseFloat(d.querySelector('.a-rad').value)}));
+  const body={ headline:tuhG('avHead').value.trim(), subjects:[...tuh.avSubj], class_levels:[...tuh.avLvl], mediums:[...tuh.avMed], online_available:tuhG('avOnline').checked,
+    days_per_week_min:tuhNum('avDMin'), days_per_week_max:tuhNum('avDMax'), hours_per_session_min:tuhNum('avHMin'), hours_per_session_max:tuhNum('avHMax'),
+    rate_type:tuhG('avRate').value, rate_min:tuhNum('avRMin'), rate_max:tuhNum('avRMax'), areas };
+  const d=tuhG('avDesc').value.trim(); if(d) body.description=d;
+  if(body.headline.length<5) return void(m.textContent='হেডলাইন কমপক্ষে ৫ অক্ষর');
+  if(!body.subjects.length||!body.class_levels.length||!body.mediums.length) return void(m.textContent='বিষয়, শ্রেণি ও মাধ্যম বাছাই করুন');
+  if(body.rate_min===undefined||body.rate_max===undefined||body.rate_max<body.rate_min) return void(m.textContent='রেট সঠিকভাবে দিন (সর্বোচ্চ ≥ সর্বনিম্ন)');
+  if(body.days_per_week_max<body.days_per_week_min||body.hours_per_session_max<body.hours_per_session_min) return void(m.textContent='দিন/ঘণ্টার সর্বোচ্চ মান ন্যূনতমের চেয়ে কম হতে পারে না');
+  if(areas.some(a=>!a.place_name||Number.isNaN(a.lat)||Number.isNaN(a.lng)||Number.isNaN(a.radius_km))) return void(m.textContent='প্রতিটি এলাকার নাম, Lat/Lng ও রেডিয়াস দিন');
+  btn.disabled=true;
+  try{ const r=await tuhApi('/tutor-posts',{method:'POST',auth:true,body}); tuhPostResult('avMsg',r); }
+  catch(e){ m.textContent = e.code==='NC'?'সার্ভার সংযুক্ত নয়':(e.status===401?'আগে লগইন করুন':e.message); }
+  btn.disabled=false;
+}
+
+// ── my posts ──
+async function tuhMine(){
+  const b=tuhG('tuhMineBody');
+  if(!tuh.user){ b.innerHTML='<div class="tuh-banner">আপনার পোস্ট দেখতে <a style="text-decoration:underline;cursor:pointer;" onclick="tuhAuthModal()">লগইন করুন</a>।</div>'; return; }
+  const isTutor = tuh.user.role==='tutor';
+  b.innerHTML='<div class="tuh-empty">লোড হচ্ছে…</div>';
+  try{
+    const r = await tuhApi(isTutor?'/tutor-posts/mine':'/tuition-posts/mine',{auth:true});
+    tuh.mine = r.data||[]; tuh.mineTutor = isTutor;
+    if(!tuh.mine.length){ b.innerHTML='<div class="tuh-empty">এখনও কোনো পোস্ট নেই।</div>'; return; }
+    const st={active:'চালু',pending:'মডারেশনে',filled:'পূর্ণ',cancelled:'বাতিল',expired:'মেয়াদোত্তীর্ণ'};
+    b.innerHTML='<div class="tuh-grid">'+tuh.mine.map((p,i)=>{
+      const acts = p.status==='pending' ? '' : isTutor
+        ? `${p.status!=='active'?`<button class="tuh-btn sm" onclick="tuhSetStatus(${i},'active')">আবার চালু</button>`:''}${p.status==='active'?`<button class="tuh-btn alt sm" onclick="tuhSetStatus(${i},'cancelled')">বাতিল</button>`:''}`
+        : `${p.status!=='active'?`<button class="tuh-btn sm" onclick="tuhSetStatus(${i},'active')">আবার চালু</button>`:''}${p.status==='active'?`<button class="tuh-btn alt sm" onclick="tuhSetStatus(${i},'filled')">পূর্ণ হয়েছে</button><button class="tuh-btn alt sm" onclick="tuhSetStatus(${i},'cancelled')">বাতিল</button>`:''}`;
+      return `<div class="tuh-card"><h4>${tuhE(isTutor?p.headline:p.title)}</h4><div class="tuh-meta"><span>অবস্থা: <b>${tuhE(st[p.status]||p.status)}</b></span>${!isTutor?`<span>আবেদন: ${tuhE(p.applications)}</span>`:''}${p.expires_at?`<span>মেয়াদ: ${tuhE(String(p.expires_at).slice(0,10))}</span>`:''}</div><div style="display:flex;gap:8px;flex-wrap:wrap;">${acts}</div></div>`;
+    }).join('')+'</div>';
+  }catch(e){ b.innerHTML=`<div class="tuh-empty">⚠️ ${tuhE(e.code==='NC'?'সার্ভার সংযুক্ত নয়':e.message)}</div>`; }
+}
+async function tuhSetStatus(i,status){
+  const p=tuh.mine[i]; if(!p) return;
+  try{ await tuhApi((tuh.mineTutor?'/tutor-posts/':'/tuition-posts/')+encodeURIComponent(p.id)+'/status',{method:'PATCH',auth:true,body:{status}}); showToast('আপডেট হয়েছে'); tuhMine(); }
+  catch(e){ showToast(e.message); }
+}
+
 // ── Page title map ──
 const PAGE_TITLES = {
   home:'Effective EduHub',academy:'Academy',teachers:'Teachers',publications:'Publications',
   mart:'Mart',blog:'Blogs',ai:'AI Tools',higherstudy:'Higher Study',
   coins:'Gold Coins',institutional:'Institutional',certifications:'Exams & Certificates',
-  community:'Community',media:'Media',creator:'Creator',research:'Research',
+  community:'Community',media:'Media',creator:'Creator',research:'Research',tuition:'Tuition Hub',
   careers:'Careers',news:'News',blueprint:'Blueprint',join:'Join Effective EduHub',dashboard:'আমার প্রোফাইল',
   'bcs-prelim':'BCS Preliminary প্রস্তুতি','bank-jobs':'Bank Job প্রস্তুতি','hsc-prep':'HSC প্রস্তুতি','ssc-prep':'SSC প্রস্তুতি','class8-jsc':'Class 8 & JSC প্রস্তুতি',
   'class7-prep':'Class 7 প্রস্তুতি','class6-prep':'Class 6 প্রস্তুতি','class5-psc':'Class 5 & PSC প্রস্তুতি'
@@ -14388,6 +15724,7 @@ const SEARCH_INDEX = [
   {i:'✍️',n:'Blogs',s:'নিবন্ধ, অভিজ্ঞতা, Tutorial',p:'blog'},
   {i:'💼',n:'Careers',s:'চাকরি, ইন্টার্নশিপ, Freelance',p:'careers'},
   {i:'🔬',n:'Research',s:'গবেষণাপত্র, প্রকল্প, Publication',p:'research'},
+  {i:'🎓',n:'Tuition Hub',s:'টিউটর খুঁজুন, টিউশন খুঁজুন, লোকেশন ম্যাচিং',p:'tuition'},
   {i:'🪙',n:'Gold Coins',s:'পুরস্কার, Streak, Leaderboard',p:'coins'},
   {i:'👥',n:'Community',s:'Study Rooms, Q&A, Forum, Events',p:'community'},
   {i:'📺',n:'Media',s:'ভিডিও, পডকাস্ট, Shorts, Livestream',p:'media'},
